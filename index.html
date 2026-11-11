@@ -71,4 +71,76 @@ else if(k.includes("sıkıldım")) cevap="Sıkıldıysan 'oyun' yaz, sayı tahmi
 else if(k.includes("yoruldum")) cevap="Kıyamam, neden yoruldun? Bugün ne yaptın?";
 else if(k.includes("üzgün")||k.includes("mutsuz")) cevap="Üzülme, buradayım. Anlat, dinlerim. Ne oldu?";
 else if(k.includes("mutlu")||k.includes("iyiyim")) cevap="Ohh sevindim! Neden mutlusun, anlat bakalım";
+else if(k.includes("teşekkür")) cevap="Rica ederim"+(<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Çıt Chat - Süper Zeka</title>
+<style>
+body{margin:0;font-family:Arial;background:#e8f5e9}
+header{background:#4CAF50;color:white;padding:15px;text-align:center;font-size:22px;font-weight:bold}
+#chat{height:70vh;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px;padding-bottom:90px}
+.msg{max-width:80%;padding:10px 14px;border-radius:15px;word-wrap:break-word}
+.user{background:#DCF8C6;align-self:flex-end}
+.bot{background:white;align-self:flex-start}
+#box{display:flex;padding:10px;background:white;position:fixed;bottom:0;left:0;right:0;box-sizing:border-box;z-index:99}
+#inp{flex:1;padding:12px;border-radius:20px;border:1px solid #ccc;outline:none;font-size:16px}
+#btn{background:#4CAF50;color:white;border:none;padding:12px 20px;border-radius:20px;margin-left:8px;font-size:16px;font-weight:bold}
+</style>
+</head>
+<body>
+<header>🐦 Çıt Chat - Süper Zeka</header>
+<div id="chat"></div>
+<div id="box"><input id="inp" placeholder="Bir şey yaz..."><button id="btn" type="button">Gönder</button></div>
+<script>
+let chat=document.getElementById("chat");
+let inp=document.getElementById("inp");
+let btn=document.getElementById("btn");
+let userName=""; let favTeam=""; let favGame=""; let puan=0;
+let oyunModu=""; let tutulanSayi=0; let matematikCevap=0; let ingilizceCevap="";
+function addMsg(tip,who){let d=document.createElement("div");d.className="msg "+who;d.innerText=tip;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+function rastgeleSec(l){return l[Math.floor(Math.random()*l.length)];}
+function send(){
+let y=inp.value.trim(); if(!y) return;
+addMsg(y,"user"); inp.value=""; inp.focus();
+let k=y.toLowerCase();
+let cevap="";
+if(oyunModu=="sayi"){
+  let tahmin=parseInt(y);
+  if(tahmin==tutulanSayi){ puan+=10; cevap="BİLDİN!! 🎉 +10 puan! Puanın: "+puan+" Bir daha için 'oyun' yaz!"; oyunModu=""; }
+  else if(tahmin<tutulanSayi){ cevap="Daha BÜYÜK söyle! Tekrar dene:"; }
+  else { cevap="Daha KÜÇÜK söyle! Tekrar dene:"; }
+  setTimeout(function(){addMsg(cevap,"bot")},400); return;
+}
+if(oyunModu=="matematik"){
+  if(parseInt(y)==matematikCevap){ puan+=10; cevap="DOĞRU! +10 puan! Puanın: "+puan+" Başka soru için 'matematik sor' yaz!"; }
+  else { cevap="Olmadı be, doğru cevap "+matematikCevap+" idi. 'matematik sor' yaz tekrar dene!"; }
+  oyunModu=""; setTimeout(function(){addMsg(cevap,"bot")},400); return;
+}
+if(oyunModu=="ingilizce"){
+  if(k==ingilizceCevap){ puan+=10; cevap="Perfect! +10 puan! Puanın: "+puan+" Devamı için 'ingilizce' yaz!"; }
+  else { cevap="Olmadı, doğrusu '"+ingilizceCevap+"' idi. Bir daha dene!"; }
+  oyunModu=""; setTimeout(function(){addMsg(cevap,"bot")},400); return;
+}
+if(!userName && (k.includes("adım")||k.includes("ben "))){
+  let kelimeler=y.split(" "); userName=kelimeler[kelimeler.length-1];
+  cevap="Memnun oldum "+userName+"! Seni hatırlayacağım. Hangi takımlısın?";
+}
+else if(k.includes("selam")||k.includes("merhaba")||k.includes("hey")) cevap=rastgeleSec(["Selam"+(userName?" "+userName:"")+"! Hoş geldin. Bugün nasıl geçti?","Heyy hoş geldin! Naber, ne yapıyorsun?","Selam! Seni görmek çok güzel, bugün ne yaptın?"]);
+else if(k.includes("nasılsın")||k.includes("naber")) cevap="İyiyim, sen sorunca daha iyi oldum. Sen nasılsın? Puanın: "+puan;
+else if(k.includes("kimsin")||k.includes("adın ne")) cevap="Ben Çıt Chat'im. Süper Zeka oldum! Adını, takımını, oyununu hatırlıyorum.";
+else if(k.includes("en sevdiğim")||k.includes("hatırlıyor musun")) cevap="Tabii! Adın "+(userName||"bilmiyorum")+", takımın "+(favTeam||"henüz söylemedin")+", sevdiğin oyun "+(favGame||"henüz söylemedin")+". Puanın "+puan;
+else if(k.includes("galatasaray")||k.includes("fenerbahçe")||k.includes("beşiktaş")||k.includes("trabzon")){ favTeam=y; cevap="Vay "+y+"lısın! Takımını not ettim. En sevdiğin futbolcu kim?"; }
+else if(k.includes("roblox")||k.includes("minecraft")||k.includes("brawl")){ favGame=y; cevap="Oo "+y+" seviyorsun, not ettim!"; }
+else if(k.includes("oyun")||k.includes("oynayalım")){ tutulanSayi=Math.floor(Math.random()*10)+1; oyunModu="sayi"; cevap="Hadi oynayalım! 1 ile 10 arasında bir sayı tuttum, tahmin et!"; }
+else if(k.includes("bilmece")) cevap="Dinle: Hangi ayda 28 gün vardır?";
+else if(k.includes("şubat")) cevap="Bilemedin! Bütün aylarda 28 gün vardır!";
+else if(k.includes("puan")) cevap="Puanın: "+puan+" Daha çok puan için oyun oyna, matematik sor!";
+else if(k.includes("matematik")||k.includes("soru sor")){ let a=Math.floor(Math.random()*10)+1; let b=Math.floor(Math.random()*10)+1; matematikCevap=a+b; oyunModu="matematik"; cevap="Matematik sorusu: "+a+" + "+b+" kaç eder?"; }
+else if(k.includes("ingilizce")||k.includes("english")){ let kelimeler=[["kedi","cat"],["köpek","dog"],["kuş","bird"],["elma","apple"],["kitap","book"]]; let sec=rastgeleSec(kelimeler); ingilizceCevap=sec[1]; oyunModu="ingilizce"; cevap="İngilizce dersi! '"+sec[0]+"' İngilizce ne demek?"; }
+else if(k.includes("sıkıldım")) cevap="Sıkıldıysan 'oyun' yaz, sayı tahmin oynayalım! Ya da 'matematik sor' yaz!";
+else if(k.includes("yoruldum")) cevap="Kıyamam, neden yoruldun? Bugün ne yaptın?";
+else if(k.includes("üzgün")||k.includes("mutsuz")) cevap="Üzülme, buradayım. Anlat, dinlerim. Ne oldu?";
+else if(k.includes("mutlu")||k.includes("iyiyim")) cevap="Ohh sevindim! Neden mutlusun, anlat bakalım";
 else if(k.includes("teşekkür")) cevap="Rica ederim"+(
