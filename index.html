@@ -1,84 +1,41 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Çıt Chat</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#ffe8c9;height:100vh;display:flex;flex-direction:column}
-header{background:#111;color:white;padding:10px 12px;display:flex;align-items:center;gap:10px;border-radius:0 0 20px 20px}
-header img{width:52px;height:52px;border-radius:50%;border:3px solid #ff7a00;object-fit:cover;background:white}
-header h2{font-size:22px}
-header p{font-size:12px;color:#ff9d3c}
-.spacer{flex:1}
-#chat{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
-.msg{max-width:75%;padding:12px 14px;border-radius:16px;font-size:18px;font-weight:bold;line-height:1.3}
-.left{background:#111;color:white;align-self:flex-start}
-.right{background:#ff7a00;color:white;align-self:flex-end}
-.timer{font-size:12px;color:#ff9d3c;font-weight:normal;display:block;margin-top:4px}
-.seen{font-size:12px;text-align:right;color:#555;margin-top:2px}
-footer{padding:10px;background:#ffe8c9}
-.inputBox{background:white;border:2px solid #111;border-radius:30px;display:flex;align-items:center;padding:6px 6px 6px 12px;gap:8px}
-.inputBox input{flex:1;border:none;outline:none;font-size:17px}
-.inputBox button{border:none;cursor:pointer;font-size:20px;background:none}
-.send{background:#ff7a00 !important;color:white;width:42px;height:42px;border-radius:50%;font-size:22px}
-.note{text-align:center;font-size:12px;color:#b35a00;margin-top:6px}
-</style>
-</head>
-<body>
-<header>
-<span style="font-size:26px">‹</span>
-<img src="https://cdn-icons-png.flaticon.com/512/616/616430.png">
-<div><h2>Çıt</h2><p>Çevrimiçi • Mesajlar 60sn sonra silinir</p></div>
-<div class="spacer"></div><span style="font-size:22px">📞 •••</span>
-</header>
-
-<div id="chat">
-<div><div class="msg left">Merhaba! Ben Çıt 🐦<br>Yaz, çıtla, 60 saniyede silinsin!<span class="timer">⏱ 60 sn sonra silinecek</span></div></div>
-</div>
-
-<footer>
-<div class="inputBox">
-<span>📷</span>
-<input id="inp" placeholder="Mesaj yaz...">
-<span>🎤</span>
-<button class="send" onclick="send()">➤</button>
-</div>
-<p class="note">Tüm mesajlar 60 saniye sonra otomatik silinir 🔒</p>
-</footer>
-
-<script>
-let chat=document.getElementById('chat');
-let inp=document.getElementById('inp');
-function addMsg(text,side){
-  let wrap=document.createElement('div');
-  let d=document.createElement('div');
-  d.className='msg '+side;
-  d.innerHTML=text+'<span class="timer">⏱ 60 sn sonra silinecek</span>';
-  wrap.appendChild(d);
-  if(side=='right'){
-    let s=document.createElement('div'); s.className='seen'; s.innerText='Görüldü • ⏱ 60 sn'; wrap.appendChild(s);
-  }
-  chat.appendChild(wrap);
-  chat.scrollTop=chat.scrollHeight;
-  let left=60;
-  let iv=setInterval(()=>{
-    left--;
-    d.querySelector('.timer').innerText='⏱ '+left+' sn sonra silinecek';
-    if(left<=0){clearInterval(iv); wrap.remove();}
-  },1000);
-  return wrap;
-}
-function send(){
-  let t=inp.value.trim(); if(!t) return;
-  addMsg(t,'right'); inp.value='';
-  setTimeout(()=>{
-    let cevaplar=["Çok temiz ve hızlı 😊","Evet çok sevdim! Konuş, çıtla, silinsin fikri harika!","Anladım, devam et 😄","Valla harika olmuş bu ya! 🐦"];
-    addMsg(cevaplar[Math.floor(Math.random()*cevaplar.length)],'left');
-  },1000);
-}
-inp.addEventListener('keydown',e=>{if(e.key==='Enter') send();});
-</script>
-</body>
-</html>
+<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cit AI SON</title><style>*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#e8f5e9;height:100dvh;display:flex;flex-direction:column}header{background:#111;color:#fff;padding:8px 15px;display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid #FFD700;flex-shrink:0}.head-txt{line-height:1.2}.head-txt b{font-size:20px}.head-txt span{font-size:12px;color:#4CAF50}#chat{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px}.row{display:flex;gap:8px;align-items:flex-start;max-width:92%}.row.user{flex-direction:row-reverse;align-self:flex-end}.row.bot{align-self:flex-start}.avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid #FFD700}.msg{max-width:86%;padding:12px 14px;border-radius:16px;line-height:1.5;white-space:pre-wrap}.user .msg{background:#DCF8C6}.bot .msg{background:#fff}.msg img{width:100%;border-radius:12px;margin-top:8px}#hiz{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#fff;border-top:1px solid #ddd}#hiz button{background:#E8F5E9;border:1px solid #4CAF50;padding:12px 15px;border-radius:20px;white-space:nowrap;font-weight:bold;font-size:15px}#box{display:flex;padding:10px;background:#fff;border-top:2px solid #111;gap:8px;padding-bottom:20px}#inp{flex:1;padding:16px;border-radius:25px;border:2px solid #111;font-size:17px;outline:none}#btn{background:#111;color:#fff;border:none;padding:16px 24px;border-radius:25px;font-weight:bold;font-size:17px}</style></head><body><header><img class="logo" src="cit.png"><div class="head-txt"><b>CIT AI SON</b><br><span>● Çevrimiçi - Asiri Iyi</span></div></header><div id="chat"></div><div id="hiz"><button onclick="hizli('hava durumu')">📍 Benim Oranin Havasi</button><button onclick="hizli('film oner')">🎬 Film Oner</button><button onclick="hizli('Messi fotografi')">⚽ Messi</button><button onclick="hizli('Icardi fotografi')">🦁 Icardi</button><button onclick="hizli('Ronaldo fotografi')">⚽ Ronaldo</button><button onclick="hizli('Osimhen fotografi')">🔥 Osimhen</button><button onclick="hizli('oyun')">🎮 Oyun</button><button onclick="hizli('quiz')">🧠 Quiz</button><button onclick="hizli('bilmece')">🧩 Bilmece</button><button onclick="hizli('sarki oner')">🎵 Sarki</button><button onclick="hizli('fikra')">😂 Fikra</button><button onclick="hizli('motivasyon')">💪 Motivasyon</button></div><div id="box"><input id="inp" type="text" placeholder="Buraya yaz..."><button id="btn" onclick="gonder()">Gonder</button></div><script>
+var ad="";var puan=0;var mod="";var sayi=0;var mat=0;var bil="";var quizCevap="";var sonFilm=-1;var sonSarki=-1;
+var isimMap={messi:"Lionel Messi",ronaldo:"Cristiano Ronaldo",icardi:"Mauro Icardi",osimhen:"Victor Osimhen",neymar:"Neymar",mbappe:"Kylian Mbappe"};
+var filmler=["TURK FILMI: Recep Ivedik 1 - Kahkaha garantili!","TURK FILMI: Hababam Sinifi - Efsane!","TURK FILMI: Ailecek Saskiniz - Cok eglenceli!","TURK FILMI: 7. Kogustaki Mucize - Cok duygusal!","TURK FILMI: Bergen - Muzikleri efsane!","TURK FILMI: Muslum - Cok duygusal!","TURK FILMI: Kardesim Benim - Kardeslik filmi!","TURK FILMI: Dugun Dernek - Karnin agriyacak!","TURK FILMI: G.O.R.A - Cem Yilmaz uzayda!","TURK FILMI: Eyvah Eyvah - Ata Demirer!","TURK FILMI: Organize Isler - Cok komik!","TURK FILMI: Babam ve Oglum - En duygusal!","TURK FILMI: Tosun Pasa - Kemal Sunal efsanesi!","TURK FILMI: Sut Kardesler - Kahkaha krizi!","Orumcek Adam Eve Donus Yok - 3 Orumcek Adam!","Aslan Kral - Simbanin hikayesi!","Harry Potter Serisi - Buyu dunyasi!","Buz Devri - Scrat cok komik!","Hizli ve Ofkeli - Araba + aksiyon!","Avatar 2 - Gorsel solen!","Oyuncak Hikayesi 4 - Woody + Buzz!","Kayip Balik Nemo - Deniz macerasi!","Kung Fu Panda - Po cok komik!","Ters Yuz 2 - Duygular geri dondu!","Shrek - Esek cok komik!","Minyonlar - Sari canavarlar!","Coco - Muzik + aile!","Moana - Deniz macerasi!","Minecraft Filmi - Steve macerasi!","Sonic 3 - Sonic cok hizli!","Karlar Ulkesi Frozen - Elsa + Anna!","Ejderhani Nasil Egitirsin - Dissiz cok tatli!","Super Mario Filmi - Mario + Luigi!","Yenilmezler Endgame - Tum kahramanlar!","Demir Adam - Tony Stark cok havali!","Evde Tek Basina - Kevin cok yaramaz!"];
+var sarkilar=["Semicenk - Geciyor Zaman","Tarkan - Simarik","Mert Demir - Atese Dustum","Sefo - Araba","Lvbel C5 - Sezen Aksu","Hadise - Sifir Tolerans","Aleyna Tilki - Cevapsiz Cinlama","Zeynep Bastik - Ara","Mabel Matiz - Antidepresan","Edis - Martilar","Simge - Askin Olayim","Duman - Her Seyi Yak"];
+function ekle(t,w){var c=document.getElementById("chat");var row=document.createElement("div");row.className="row "+w;if(w=="bot"){var av=document.createElement("img");av.className="avatar";av.src="cit.png";row.appendChild(av)}var d=document.createElement("div");d.className="msg";d.innerText=t;row.appendChild(d);c.appendChild(row);c.scrollTop=99999}
+function foto(t,u,a){var c=document.getElementById("chat");var row=document.createElement("div");row.className="row bot";var av=document.createElement("img");av.className="avatar";av.src="cit.png";row.appendChild(av);var d=document.createElement("div");d.className="msg";d.innerText=t;var i=document.createElement("img");i.src=u;d.appendChild(i);if(a){var p=document.createElement("div");p.innerText=a;d.appendChild(p)}row.appendChild(d);c.appendChild(row);c.scrollTop=99999}
+function sec(l){return l[Math.floor(Math.random()*l.length)]}
+function farkli(liste,son){var i;do{i=Math.floor(Math.random()*liste.length)}while(i==son);return{i:i,txt:liste[i]}}
+function hizli(t){document.getElementById("inp").value=t;gonder()}
+function cv(c){var ch=document.getElementById("chat");var row=document.createElement("div");row.className="row bot";var av=document.createElement("img");av.className="avatar";av.src="cit.png";row.appendChild(av);var y=document.createElement("div");y.className="msg";y.innerText="Cit yaziyor...";row.appendChild(y);ch.appendChild(row);ch.scrollTop=99999;setTimeout(function(){row.remove();ekle(c,"bot")},600)}
+function unlu(isim){var gercek=isimMap[isim.toLowerCase()]||isim;cv("Bakiyorum, "+gercek+" geliyor...");fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(gercek)).then(function(r){return r.json()}).then(function(j){if(j.thumbnail){foto("Iste "+gercek+"!",j.thumbnail.source,j.extract?j.extract.slice(0,220):"")}else{ekle("Fotograf bulunamadi!","bot")}}).catch(function(){ekle("Internet yavas!","bot")})}
+function havaGoster(lat,lon,isim){fetch("https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current=temperature_2m,relative_humidity_2m,weather_code&timezone=auto").then(function(r){return r.json()}).then(function(j){var kod=j.current.weather_code;var durum="Acik";if(kod>=1&&kod<=3)durum="Parcali Bulutlu";if(kod>=45)durum="Sisli";if(kod>=51)durum="Yagmurlu";if(kod>=71)durum="Karli";if(kod>=95)durum="Firtinali";ekle("📍 "+isim+"\n"+durum+"\nSicaklik: "+j.current.temperature_2m+" C\nNem: %"+j.current.relative_humidity_2m,"bot")}).catch(function(){ekle("Havayi alamadim!","bot")})}
+function hava(){cv("Konumuna bakiyorum... Izin Ver e bas!");if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(p){havaGoster(p.coords.latitude,p.coords.longitude,"Senin Oldugun Yer")},function(){havaGoster(41.01,28.97,"Istanbul")},{timeout:5000})}else{havaGoster(41.01,28.97,"Istanbul")}}
+function gonder(){var inp=document.getElementById("inp");var y=inp.value.trim();if(!y){return}ekle(y,"user");inp.value="";var k=y.toLowerCase();var c="";
+if(mod=="quiz"){if(k.indexOf(quizCevap)>=0){puan+=15;cv("DOGRU! +15 puan! Toplam: "+puan)}else{cv("Olmadi! Dogru: "+quizCevap)}mod="";return}
+if(mod=="sayi"){var t=parseInt(y);if(t==sayi){puan+=10;cv("BILDIN! +10 puan!");mod=""}else if(t<sayi){cv("Daha BUYUK soyle!")}else{cv("Daha KUCUK soyle!")}return}
+if(mod=="mat"){if(parseInt(y)==mat){puan+=10;cv("DOGRU! +10 puan!")}else{cv("Olmadi cevap "+mat)}mod="";return}
+if(mod=="bil"){if(k.indexOf(bil)>=0){puan+=10;cv("Bildin! +10 puan!")}else{cv("Bilemedin! Cevap: "+bil)}mod="";return}
+if(k.indexOf("adim")>=0){var pp=y.split(" ");ad=pp[pp.length-1];cv("Memnun oldum "+ad+"!");return}
+if(k.indexOf("hava")>=0){hava();return}
+if(k.indexOf("quiz")>=0){var sorular=[["Turkiye nin baskenti? A) Istanbul B) Ankara C) Izmir","ankara"],["En buyuk gezegen? A) Mars B) Jupiter C) Venus","jupiter"],["5 x 8 kac? A) 35 B) 40 C) 45","40"]];var s=sec(sorular);quizCevap=s[1];mod="quiz";cv("QUIZ!\n\n"+s[0]);return}
+if(k.indexOf("film")>=0){var f=farkli(filmler,sonFilm);sonFilm=f.i;cv("🎬 ONERIM: "+f.txt);return}
+if(k.indexOf("sarki")>=0){var sk=farkli(sarkilar,sonSarki);sonSarki=sk.i;cv("🎵 "+sk.txt);return}
+if(k.indexOf("foto")>=0){var isim=y.replace(/fotografi|fotograf|foto/gi,"").trim();if(!isim)isim="kedi";var kl=isim.toLowerCase();if(kl=="kedi"){foto("Iste kedi!","https://placecats.com/400/300");return}if(kl=="kopek"){foto("Iste kopek!","https://placedog.net/400/300");return}unlu(isim);return}
+if(k.indexOf("selam")>=0||k.indexOf("merhaba")>=0||k.indexOf("hey")>=0)c=sec(["Selam "+ad+"! Hos geldin!","Heyy "+ad+"! Naber?"]);
+else if(k.indexOf("nasilsin")>=0)c="Iyiyim "+ad+", sen nasilsin? Puanin: "+puan;
+else if(k.indexOf("kimsin")>=0)c="Ben Cit AI SON um! Hava durumunu konumuna gore soylerim!";
+else if(k.indexOf("oyun")>=0){sayi=Math.floor(Math.random()*20)+1;mod="sayi";c="Hadi! 1-20 arasi sayi tuttum!"}
+else if(k.indexOf("fikra")>=0)c=sec(["Temel: Ruyamda mac yapiyordum, uzatmalara gitti!","Nasrettin Hoca: Erkek adam sozunden donmez!"]);
+else if(k.indexOf("hikaye")>=0)c="Bir varmis bir yokmus... Kucuk kus Cit maceraya cikmis!";
+else if(k.indexOf("bilmece")>=0){var b=[["Hangi ayda 28 gun vardir?","butun"],["Hangi kus uc am az?","penguen"]];var s2=sec(b);bil=s2[1];mod="bil";c="Bilmece! "+s2[0]}
+else if(k.indexOf("puan")>=0)c="Puanin: "+puan;
+else if(k.indexOf("matematik")>=0){var a=Math.floor(Math.random()*30)+1;var bb=Math.floor(Math.random()*20)+1;mat=a+bb;mod="mat";c="Matematik! "+a+" + "+bb+" kac?"}
+else if(k.indexOf("motivasyon")>=0)c=sec(["Pes etme!","Sen yaparsin!","Devam et!"]);
+else if(k.indexOf("tesekkur")>=0)c="Rica ederim "+ad+"!";
+else if(k.indexOf("bay bay")>=0)c="Gorusuruz "+ad+"!";
+else c=sec(["Vay be anlat biraz daha!","Hadi ya gercekten mi?","Ooo ilginc!"]);
+cv(c)}
+ekle("Selam! Ben Cit AI SON! En iyi halim!\n\n📍 Hava durumu yaz - SENIN oldugun yerin havasini soyleyeyim\n🎬 Film oner yaz - Hep farkli film, Turk filmi de var\n⚽ Messi / Icardi / Ronaldo fotografi yaz\n🎮 Oyun - 🧠 Quiz - 🧩 Bilmece - 🎵 Sarki\n\nHadi dene! Alttan bir butona bas!","bot")
+</script></body></html>
