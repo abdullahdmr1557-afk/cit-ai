@@ -6,18 +6,42 @@
 🎮 Oyun - 🧠 Quiz - 🧩 Bilmece - 🎵 Sarki
 
 Hadi dene! Alttan bir butona bas!</div></div><div id="hiz"><button onclick="hizli('hava durumu')">📍 Benim Oranin Havasi</button><button onclick="hizli('film oner')">🎬 Film Oner</button><button onclick="hizli('Messi fotografi')">⚽ Messi</button><button onclick="hizli('Icardi fotografi')">🦁 Icardi</button><button onclick="hizli('Ronaldo fotografi')">⚽ Ronaldo</button><button onclick="hizli('Osimhen fotografi')">🔥 Osimhen</button><button onclick="hizli('oyun')">🎮 Oyun</button><button onclick="hizli('quiz')">🧠 Quiz</button><button onclick="hizli('bilmece')">🧩 Bilmece</button><button onclick="hizli('sarki oner')">🎵 Sarki</button><button onclick="hizli('fikra')">😂 Fikra</button><button onclick="hizli('motivasyon')">💪 Motivasyon</button></div><div id="box"><input id="inp" type="text" placeholder="Buraya yaz..."><button id="btn" onclick="gonder()">Gonder</button></div><script>
-var ad="";
-var puan=0;
-var mod="";
-var sayi=0;
-var mat=0;
-var bil="";
-var quizCevap="";
-var sonFilm=-1;
-var sonSarki=-1;
-var isimMap={messi:"Lionel Messi",ronaldo:"Cristiano Ronaldo",icardi:"Mauro Icardi",mrbeast:"MrBeast",osimhen:"Victor Osimhen",neymar:"Neymar",mbappe:"Kylian Mbappe",muslera:"Fernando Muslera",tarkan:"Tarkan",hadise:"Hadise"};
-var filmler=["TURK FILMI: Recep Ivedik 1 - Kahkaha garantili! En komigi!","TURK FILMI: Hababam Sinifi - Efsane! Inek Saban cok komik!","TURK FILMI: Ailecek Saskiniz - Murat Boz, cok eglenceli aile filmi!","TURK FILMI: 7. Kogustaki Mucize - Cok duygusal, aglayabilirsin!","TURK FILMI: Bergen - Gercek hayat hikayesi, muzikleri efsane!","TURK FILMI: Muslum - Muslum Gursesin hayati!","TURK FILMI: Kardesim Benim - Burak Ozcivit, kardeslik filmi!","TURK FILMI: Dugun Dernek - Koy dugunu, gulmekten karnin agriyacak!","TURK FILMI: G.O.R.A - Cem Yilmaz uzayda! En komik!","TURK FILMI: Eyvah Eyvah - Ata Demirer, hem komik hem muzikli!","TURK FILMI: Organize Isler - Yilmaz Erdogan, cok komik!","TURK FILMI: Babam ve Oglum - En duygusal Turk filmi!","TURK FILMI: Tosun Pasa - Kemal Sunal efsanesi!","TURK FILMI: Sut Kardesler - Kemal Sunal + Sener Sen!","TURK FILMI: Neşeli Gunler - Tursu kavgasi efsanesi!","TURK FILMI: Zugarte - Aile filmi!","Orumcek Adam Eve Donus Yok - 3 Orumcek Adam bir arada!","Aslan Kral - Simbanin hikayesi, cok duygusal!","Harry Potter Serisi - Buyu dunyasi, 8 film var!","Buz Devri - Scrat cok komik!","Hizli ve Ofkeli - Araba + aksiyon!","Avatar 2 Suyun Yolu - Gorsel solen!","Oyuncak Hikayesi 4 - Woody + Buzz!","Kayip Balik Nemo - Deniz macerasi!","Kung Fu Panda - Po cok komik!","Ters Yuz 2 - Duygular geri dondu!","Shrek - Esek cok komik!","Minyonlar - Sari canavarlar!","Coco - Muzik + aile, cok duygusal!","Moana - Deniz macerasi!","Minecraft Filmi - Steve macerasi!","Sonic 3 - Sonic cok hizli!","Karlar Ulkesi Frozen - Elsa + Anna!","Ejderhani Nasil Egitirsin - Dissiz cok tatli!","Super Mario Filmi - Mario + Luigi!","Galaksinin Koruyuculari - Groot cok komik!","Yenilmezler Endgame - Tum kahramanlar bir arada!","Demir Adam - Tony Stark cok havali!","Kaptan Amerika - Kahramanlik filmi!","Evde Tek Basina - Kevin cok yaramaz!","Kara Sovalye Batman - En iyi Batman filmi!","Spider-Man Into the Spider-Verse - Cizgi film efsanesi!"];
-var sarkilar=["Semicenk - Geciyor Zaman","Tarkan - Simarik - Ac dans et!","Mert Demir - Atese Dustum","Sefo - Araba","Lvbel C5 - Sezen Aksu","Hadise - Sifir Tolerans","Aleyna Tilki - Cevapsiz Cinlama","Zeynep Bastik - Ara","Mabel Matiz - Antidepresan","Edis - Martilar","Simge - Askin Olayim","Duman - Her Seyi Yak","Manga - Bir Kadin Cizeceksin","Ceza - Suspus","Sagopa Kajmer - Galiba"];
+var ad="";var puan=0;var mod="";var sayi=0;var mat=0;var bil="";var quizCevap="";var sonFilm=-1;var sonSarki=-1;
+var isimMap={messi:"Lionel Messi",ronaldo:"Cristiano Ronaldo",icardi:"Mauro Icardi",osimhen:"Victor Osimhen",neymar:"Neymar",mbappe:"Kylian Mbappe"};
+var filmler=["TURK FILMI: Recep Ivedik 1 - Kahkaha garantili!","TURK FILMI: Hababam Sinifi - Efsane!","TURK FILMI: Ailecek Saskiniz - Cok eglenceli!","TURK FILMI: 7. Kogustaki Mucize - Cok duygusal!","TURK FILMI: Bergen - Muzikleri efsane!","TURK FILMI: Muslum - Cok duygusal!","TURK FILMI: Kardesim Benim - Kardeslik filmi!","TURK FILMI: Dugun Dernek - Karnin agriyacak!","TURK FILMI: G.O.R.A - Cem Yilmaz uzayda!","TURK FILMI: Eyvah Eyvah - Ata Demirer!","TURK FILMI: Organize Isler - Cok komik!","TURK FILMI: Babam ve Oglum - En duygusal!","TURK FILMI: Tosun Pasa - Kemal Sunal efsanesi!","TURK FILMI: Sut Kardesler - Kahkaha krizi!","Orumcek Adam Eve Donus Yok - 3 Orumcek Adam!","Aslan Kral - Simbanin hikayesi!","Harry Potter Serisi - Buyu dunyasi!","Buz Devri - Scrat cok komik!","Hizli ve Ofkeli - Araba + aksiyon!","Avatar 2 - Gorsel solen!","Oyuncak Hikayesi 4 - Woody + Buzz!","Kayip Balik Nemo - Deniz macerasi!","Kung Fu Panda - Po cok komik!","Ters Yuz 2 - Duygular geri dondu!","Shrek - Esek cok komik!","Minyonlar - Sari canavarlar!","Coco - Muzik + aile!","Moana - Deniz macerasi!","Minecraft Filmi - Steve macerasi!","Sonic 3 - Sonic cok hizli!","Karlar Ulkesi Frozen - Elsa + Anna!","Ejderhani Nasil Egitirsin - Dissiz cok tatli!","Super Mario Filmi - Mario + Luigi!","Yenilmezler Endgame - Tum kahramanlar!","Demir Adam - Tony Stark cok havali!","Evde Tek Basina - Kevin cok yaramaz!"];
+var sarkilar=["Semicenk - Geciyor Zaman","Tarkan - Simarik","Mert Demir - Atese Dustum","Sefo - Araba","Lvbel C5 - Sezen Aksu","Hadise - Sifir Tolerans","Aleyna Tilki - Cevapsiz Cinlama","Zeynep Bastik - Ara","Mabel Matiz - Antidepresan","Edis - Martilar","Simge - Askin Olayim","Duman - Her Seyi Yak"];
 function ekle(t,w){var c=document.getElementById("chat");var d=document.createElement("div");d.className="msg "+w;d.innerText=t;c.appendChild(d);c.scrollTop=99999}
-function foto(t,u,a){var c=document.getElementById("chat");var d=document.createElement("div");d.className="msg bot";d.innerText=t;var i=document.createElement("img");i.src=u;d.appendChild(i);if(a){var p=document.createElement("div");p.innerText=a;p.style.fontSize="13px";d.appendChild(p)}c.appendChild(d);c.scrollTop=99999}
-function sec(l){return l[Math.floor(Math.random
+function foto(t,u,a){var c=document.getElementById("chat");var d=document.createElement("div");d.className="msg bot";d.innerText=t;var i=document.createElement("img");i.src=u;d.appendChild(i);if(a){var p=document.createElement("div");p.innerText=a;d.appendChild(p)}c.appendChild(d);c.scrollTop=99999}
+function sec(l){return l[Math.floor(Math.random()*l.length)]}
+function farkli(liste,son){var i;do{i=Math.floor(Math.random()*liste.length)}while(i==son);return{i:i,txt:liste[i]}}
+function hizli(t){document.getElementById("inp").value=t;gonder()}
+function cv(c){var ch=document.getElementById("chat");var y=document.createElement("div");y.className="msg bot";y.innerText="Cit yaziyor...";ch.appendChild(y);ch.scrollTop=99999;setTimeout(function(){y.remove();ekle(c,"bot")},600)}
+function unlu(isim){var gercek=isimMap[isim.toLowerCase()]||isim;cv("Bakiyorum, "+gercek+" geliyor...");fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(gercek)).then(function(r){return r.json()}).then(function(j){if(j.thumbnail){foto("Iste "+gercek+"!",j.thumbnail.source,j.extract?j.extract.slice(0,220):"")}else{ekle("Fotograf bulunamadi!","bot")}}).catch(function(){ekle("Internet yavas!","bot")})}
+function havaGoster(lat,lon,isim){fetch("https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current=temperature_2m,relative_humidity_2m,weather_code&timezone=auto").then(function(r){return r.json()}).then(function(j){var kod=j.current.weather_code;var durum="Acik";if(kod>=1&&kod<=3)durum="Parcali Bulutlu";if(kod>=45)durum="Sisli";if(kod>=51)durum="Yagmurlu";if(kod>=71)durum="Karli";if(kod>=95)durum="Firtinali";ekle("📍 "+isim+"\n"+durum+"\nSicaklik: "+j.current.temperature_2m+" C\nNem: %"+j.current.relative_humidity_2m,"bot")}).catch(function(){ekle("Havayi alamadim!","bot")})}
+function hava(){cv("Konumuna bakiyorum... Izin Ver e bas!");if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(p){havaGoster(p.coords.latitude,p.coords.longitude,"Senin Oldugun Yer")},function(){havaGoster(41.01,28.97,"Istanbul")},{timeout:5000})}else{havaGoster(41.01,28.97,"Istanbul")}}
+function gonder(){var inp=document.getElementById("inp");var y=inp.value.trim();if(!y){return}ekle(y,"user");inp.value="";var k=y.toLowerCase();var c="";
+if(mod=="quiz"){if(k.indexOf(quizCevap)>=0){puan+=15;cv("DOGRU! +15 puan! Toplam: "+puan)}else{cv("Olmadi! Dogru: "+quizCevap)}mod="";return}
+if(mod=="sayi"){var t=parseInt(y);if(t==sayi){puan+=10;cv("BILDIN! +10 puan!");mod=""}else if(t<sayi){cv("Daha BUYUK soyle!")}else{cv("Daha KUCUK soyle!")}return}
+if(mod=="mat"){if(parseInt(y)==mat){puan+=10;cv("DOGRU! +10 puan!")}else{cv("Olmadi cevap "+mat)}mod="";return}
+if(mod=="bil"){if(k.indexOf(bil)>=0){puan+=10;cv("Bildin! +10 puan!")}else{cv("Bilemedin! Cevap: "+bil)}mod="";return}
+if(k.indexOf("adim")>=0){var pp=y.split(" ");ad=pp[pp.length-1];cv("Memnun oldum "+ad+"!");return}
+if(k.indexOf("hava")>=0){hava();return}
+if(k.indexOf("quiz")>=0){var sorular=[["Turkiye nin baskenti? A) Istanbul B) Ankara C) Izmir","ankara"],["En buyuk gezegen? A) Mars B) Jupiter C) Venus","jupiter"],["5 x 8 kac? A) 35 B) 40 C) 45","40"]];var s=sec(sorular);quizCevap=s[1];mod="quiz";cv("QUIZ!\n\n"+s[0]);return}
+if(k.indexOf("film")>=0){var f=farkli(filmler,sonFilm);sonFilm=f.i;cv("🎬 ONERIM: "+f.txt);return}
+if(k.indexOf("sarki")>=0){var sk=farkli(sarkilar,sonSarki);sonSarki=sk.i;cv("🎵 "+sk.txt);return}
+if(k.indexOf("foto")>=0){var isim=y.replace(/fotografi|fotograf|foto/gi,"").trim();if(!isim)isim="kedi";var kl=isim.toLowerCase();if(kl=="kedi"){foto("Iste kedi!","https://placecats.com/400/300");return}if(kl=="kopek"){foto("Iste kopek!","https://placedog.net/400/300");return}unlu(isim);return}
+if(k.indexOf("selam")>=0||k.indexOf("merhaba")>=0||k.indexOf("hey")>=0)c=sec(["Selam "+ad+"! Hos geldin!","Heyy "+ad+"! Naber?"]);
+else if(k.indexOf("nasilsin")>=0)c="Iyiyim "+ad+", sen nasilsin? Puanin: "+puan;
+else if(k.indexOf("kimsin")>=0)c="Ben Cit AI SON um! Hava durumunu konumuna gore soylerim!";
+else if(k.indexOf("oyun")>=0){sayi=Math.floor(Math.random()*20)+1;mod="sayi";c="Hadi! 1-20 arasi sayi tuttum!"}
+else if(k.indexOf("fikra")>=0)c=sec(["Temel: Ruyamda mac yapiyordum, uzatmalara gitti!","Nasrettin Hoca: Erkek adam sozunden donmez!"]);
+else if(k.indexOf("hikaye")>=0)c="Bir varmis bir yokmus... Kucuk kus Cit maceraya cikmis!";
+else if(k.indexOf("bilmece")>=0){var b=[["Hangi ayda 28 gun vardir?","butun"],["Hangi kus uc am az?","penguen"]];var s2=sec(b);bil=s2[1];mod="bil";c="Bilmece! "+s2[0]}
+else if(k.indexOf("puan")>=0)c="Puanin: "+puan;
+else if(k.indexOf("matematik")>=0){var a=Math.floor(Math.random()*30)+1;var bb=Math.floor(Math.random()*20)+1;mat=a+bb;mod="mat";c="Matematik! "+a+" + "+bb+" kac?"}
+else if(k.indexOf("motivasyon")>=0)c=sec(["Pes etme!","Sen yaparsin!","Devam et!"]);
+else if(k.indexOf("tesekkur")>=0)c="Rica ederim "+ad+"!";
+else if(k.indexOf("bay bay")>=0)c="Gorusuruz "+ad+"!";
+else c=sec(["Vay be anlat biraz daha!","Hadi ya gercekten mi?","Ooo ilginc!"]);
+cv(c)}
+</script></body></html>
