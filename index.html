@@ -1,34 +1,6 @@
-<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Çıt AI Pro Max</title><style>body{margin:0;font-family:Arial;background:#e8f5e9}header{background:#111;color:#fff;padding:14px;text-align:center;font-size:21px;font-weight:bold}#chat{height:70vh;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px;padding-bottom:110px}.msg{max-width:84%;padding:11px 14px;border-radius:16px;line-height:1.45}.user{background:#DCF8C6;align-self:flex-end}.bot{background:#fff;align-self:flex-start}.msg img{width:100%;border-radius:12px;margin-top:6px}#box{display:flex;padding:10px;background:#fff;position:fixed;bottom:0;left:0;right:0}#inp{flex:1;padding:13px;border-radius:22px;border:1px solid #ccc;font-size:16px}#btn{background:#111;color:#fff;border:none;padding:12px 20px;border-radius:22px;margin-left:8px;font-weight:bold}#hiz{display:flex;gap:6px;padding:8px;overflow-x:auto;background:#fff;position:fixed;bottom:66px;left:0;right:0}#hiz button{background:#E8F5E9;border:1px solid #4CAF50;padding:7px 12px;border-radius:20px;white-space:nowrap;font-weight:bold}</style></head><body><header>🐦 Çıt AI PRO MAX</header><div id="chat"></div><div id="hiz"><button onclick="hizli('Messi fotoğrafı')">⚽ Messi</button><button onclick="hizli('Ronaldo fotoğrafı')">⚽ Ronaldo</button><button onclick="hizli('Icardi fotoğrafı')">🦁 Icardi</button><button onclick="hizli('MrBeast fotoğrafı')">🌟 MrBeast</button><button onclick="hizli('hava durumu')">🌦️ Hava</button><button onclick="hizli('film öner')">🎬 Film</button><button onclick="hizli('oyun')">🎮 Oyun</button></div><div id="box"><input id="inp" placeholder="Yaz... Örn: Messi fotoğrafı"><button id="btn">Gönder</button></div><script>
-var chat=document.getElementById("chat"),inp=document.getElementById("inp"),btn=document.getElementById("btn"),ad="",puan=0,mod="",sayi=0,mat=0,bil="",og={};
-try{var k2=JSON.parse(localStorage.getItem("cit"));if(k2){ad=k2.ad||"";puan=k2.puan||0;og=k2.og||{}}}catch(e){}
-function kay(){localStorage.setItem("cit",JSON.stringify({ad:ad,puan:puan,og:og}))}
-function ekle(t,w){var d=document.createElement("div");d.className="msg "+w;d.innerText=t;chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
-function foto(t,u,a){var d=document.createElement("div");d.className="msg bot";d.innerText=t;var i=document.createElement("img");i.src=u;d.appendChild(i);if(a){var p=document.createElement("div");p.innerText=a;p.style.fontSize="13px";d.appendChild(p)}chat.appendChild(d);chat.scrollTop=chat.scrollHeight}
-function sec(l){return l[Math.floor(Math.random()*l.length)]}
-function hizli(t){inp.value=t;gonder()}
-function cv(c){var y=document.createElement("div");y.className="msg bot";y.innerText="Çıt yazıyor...";chat.appendChild(y);setTimeout(function(){y.remove();ekle(c,"bot")},500)}
-async function unlu(isim){cv("Bakıyorum, "+isim+" geliyor...");try{var r=await fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(isim));var j=await r.json();if(j.thumbnail){foto("İşte "+isim+"! 🌟",j.thumbnail.source,j.extract?j.extract.slice(0,220)+"...":"")}else{foto("İşte fotoğraf:","https://picsum.photos/400/300?r="+Math.random())}}catch(e){foto("İşte fotoğraf:","https://picsum.photos/400/300?r="+Math.random())}}
-async function hava(){cv("Havaya bakıyorum...");try{var r=await fetch("https://api.open-meteo.com/v1/forecast?latitude=41&longitude=28.9&current=temperature_2m,weather_code&timezone=Europe%2FIstanbul");var j=await r.json();ekle("İstanbul: "+j.current.temperature_2m+"°C 🌦️","bot")}catch(e){ekle("Hava güzel gibi!","bot")}}
-function gonder(){var y=inp.value.trim();if(!y)return;ekle(y,"user");inp.value="";var k=y.toLowerCase();var c="";
-if(k.indexOf("öğret:")>=0){var p=y.split(":");var s=p[1].trim().toLowerCase();var v=p[2]?p[2].trim():"";if(s&&v){og[s]=v;kay();cv("Öğrendim! ✅ Artık '"+s+"' dersen '"+v+"' diyeceğim.")}else{cv("Şöyle yaz: öğret: en sevdiğim renk ? kırmızı")}return}
-for(var a2 in og){if(k.indexOf(a2)>=0){cv(og[a2]);return}}
-if(mod=="sayi"){var t=parseInt(y);if(t==sayi){puan+=10;kay();c="BİLDİN! 🎉 +10 Puanın: "+puan;mod=""}else if(t<sayi){c="Daha BÜYÜK söyle!"}else{c="Daha KÜÇÜK söyle!"}cv(c);return}
-if(mod=="mat"){if(parseInt(y)==mat){puan+=10;kay();c="DOĞRU! 🧠 +10 Puanın: "+puan}else{c="Olmadı cevap "+mat+" idi."}mod="";cv(c);return}
-if(mod=="bil"){if(k.indexOf(bil)>=0){puan+=10;kay();c="Bildin! 🧩 +10"}else{c="Bilemedin! Cevap: "+bil}mod="";cv(c);return}
-if(!ad&&k.indexOf("adım")>=0){var pp=y.split(" ");ad=pp[pp.length-1];kay();c="Memnun oldum "+ad+"! Seni artık hep hatırlayacağım!";cv(c);return}
-if(k.indexOf("hava")>=0){hava();return}
-if(k.indexOf("film")>=0){c=sec(["🎬 Örümcek Adam - Eve Dönüş Yok, efsane!","🎬 Aslan Kral, çok duygusal!","🎬 Harry Potter serisi, büyü dünyası!"]);cv(c);return}
-if(k.indexOf("şarkı")>=0||k.indexOf("müzik")>=0){c=sec(["🎵 Semicenk - Geçiyor Zaman","🎵 Tarkan - Şımarık aç dans et!","🎵 Mert Demir - Ateşe Düştüm"]);cv(c);return}
-if(k.indexOf("foto")>=0){var isim=y.replace(/fotoğrafı|fotoğraf|foto/gi,"").trim();if(!isim)isim="kedi";if(isim.toLowerCase()=="kedi"){foto("İşte kedi! 🐱","https://placecats.com/400/300");return}if(isim.toLowerCase()=="köpek"){foto("İşte köpek! 🐶","https://placedog.net/400/300");return}unlu(isim);return}
-if(k.indexOf("selam")>=0||k.indexOf("merhaba")>=0)c=sec(["Selam "+ad+"! Hoş geldin, ne yapıyorsun?","Heyy "+ad+"! Seni görmek güzel."]);
-else if(k.indexOf("nasılsın")>=0)c="İyiyim, sen nasılsın? Puanın: "+puan;
-else if(k.indexOf("kimsin")>=0)c="Ben Çıt AI PRO MAX'im! 'Messi fotoğrafı' yaz dene!";
-else if(k.indexOf("benim hakkımda")>=0)c="Adın "+(ad||"bilmem")+", puanın "+puan+", öğrettiklerin: "+(Object.keys(og).length?Object.keys(og).join(", "):"yok");
-else if(k.indexOf("oyun")>=0){sayi=Math.floor(Math.random()*10)+1;mod="sayi";c="Hadi! 🎮 1-10 arası sayı tuttum!"}
-else if(k.indexOf("fıkra")>=0)c=sec(["Temel: En sevdiğim ders teneffüs! 😂","Nasrettin Hoca: Erkek adam sözünden dönmez! 😂"]);
-else if(k.indexOf("hikaye")>=0)c="Bir varmış bir yokmuş... Küçük kuş Çıt arkadaşlarıyla maceraya çıkmış. En büyük güç arkadaşlıkmış. ❤️";
-else if(k.indexOf("bilmece")>=0){var b=[["Hangi ayda 28 gün vardır?","bütün"],["Hangi kuş uçamaz?","penguen"]];var s=sec(b);bil=s[1];mod="bil";c="Bilmece! 🧩 "+s[0]}
-else if(k.indexOf("puan")>=0)c="Puanın: "+puan+" ⭐";
-else if(k.indexOf("matematik")>=0){var a=Math.floor(Math.random()*20)+1,bb=Math.floor(Math.random()*10)+1;mat=a+bb;mod="mat";c="Matematik! 🧠 "+a+" + "+bb+" kaç?"}
-else if(k.indexOf("moral")>=0||k.indexOf("üzgün")>=0)c="Üzülme "+ad+", buradayım. Sen çok değerlisin. ❤️";
-else if(k.indexOf("teşekkür")>=0)c="Rica eder
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;background:#e8f5e9}header{background:#111;color:#fff;padding:15px;text-align:center}#chat{padding:15px}.msg{background:#fff;padding:10px;border-radius:10px;margin:5px}</style></head><body><header>🐦 TEST</header><div id="chat"></div><script>
+var chat=document.getElementById("chat");
+function ekle(t){var d=document.createElement("div");d.className="msg";d.innerText=t;chat.appendChild(d)}
+ekle("Selam! Bu mesaj çıkıyorsa kod çalışıyor demektir!");
+ekle("Şimdi bana Hey yaz, bak cevap vereceğim");
+</script></body></html>
