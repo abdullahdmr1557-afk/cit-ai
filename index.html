@@ -1,6 +1,8 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:Arial;background:#e8f5e9}header{background:#111;color:#fff;padding:15px;text-align:center}#chat{padding:15px}.msg{background:#fff;padding:10px;border-radius:10px;margin:5px}</style></head><body><header>🐦 TEST</header><div id="chat"></div><script>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="background:#e8f5e9;font-family:Arial"><h2 style="text-align:center">🐦 TEST</h2><div id="chat" style="padding:15px"></div><script>
+alert("Kod çalıştı mı? Bu yazı çıktı mı?");
 var chat=document.getElementById("chat");
-function ekle(t){var d=document.createElement("div");d.className="msg";d.innerText=t;chat.appendChild(d)}
-ekle("Selam! Bu mesaj çıkıyorsa kod çalışıyor demektir!");
-ekle("Şimdi bana Hey yaz, bak cevap vereceğim");
+var d=document.createElement("div");
+d.style.background="white";d.style.padding="15px";d.style.borderRadius="10px";
+d.innerText="Selam! Bu mesaj çıkıyorsa kod çalışıyor demektir!";
+chat.appendChild(d);
 </script></body></html>
