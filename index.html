@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Çıt Chat V5 MEGA</title>
+<title>Çıt Chat V5.1 FIX</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial;background:#ffe8c9;height:100dvh;display:flex;flex-direction:column}
 :root{--main:#ff7a00;--bg:#ffe8c9}
 header{background:#111;color:#fff;padding:10px 12px;display:flex;align-items:center;gap:10px}
 .logo{width:48px;height:48px;border-radius:50%;border:3px solid var(--main);background:#fff;object-fit:cover}
 .topbtn{background:var(--main);border:none;color:#fff;padding:8px 11px;border-radius:20px;font-weight:bold}
-#list,#chatPage,#profile,#callPage{flex:1;display:flex;flex-direction:column;overflow:hidden}
-#chatPage,#profile,#callPage{display:none}
+#list{flex:1;display:flex;flex-direction:column;overflow-y:auto}
+#chatPage,#profile,#callPage{flex:1;display:none;flex-direction:column;overflow:hidden}
 .stories{display:flex;gap:12px;padding:12px;background:#fff;overflow-x:auto}
 .story{text-align:center;font-size:11px;font-weight:bold;cursor:pointer}
 .story img{width:56px;height:56px;border-radius:50%;border:3px solid var(--main);object-fit:cover;background:#fff;display:block;margin-bottom:4px}
 .search{margin:10px;background:#fff;border-radius:20px;padding:10px 14px;display:flex;gap:8px}
 .search input{border:none;outline:none;flex:1;font-size:15px}
-.person{background:#fff;margin:6px 10px;border-radius:16px;padding:10px;display:flex;gap:12px;align-items:center;cursor:pointer}
-.person img{width:52px;height:52px;border-radius:50%;border:2px solid var(--main);background:#fff;object-fit:cover}
-.person b{font-size:17px}.person p{font-size:13px;color:#666;margin-top:2px}
+.person{background:#fff;margin:6px 10px;border-radius:16px;padding:10px;display:flex;gap:12px;align-items:center;cursor:pointer;touch-action:manipulation;position:relative;z-index:5}
+.person img{width:52px;height:52px;border-radius:50%;border:2px solid var(--main);background:#fff;object-fit:cover;pointer-events:none}
+.person div{pointer-events:none}
+.openBtn{background:var(--main);color:#fff;border:none;padding:10px 14px;border-radius:20px;font-weight:bold;cursor:pointer;pointer-events:auto}
 .badge{background:var(--main);color:#fff;border-radius:50%;width:22px;height:22px;text-align:center;line-height:22px;font-size:12px}
 .chatHead{background:#111;color:#fff;padding:8px 12px;display:flex;align-items:center;gap:10px}
 #chat{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px}
@@ -57,7 +58,7 @@ header{background:#111;color:#fff;padding:10px 12px;display:flex;align-items:cen
 </head>
 <body id="body">
 <div id="list">
-<header><img class="logo" src="cit.png"><div style="flex:1"><b style="font-size:22px">Çıt Chat V5 MEGA</b><br><span style="font-size:12px;color:#ff9d3c">● Puan: <span id="puanTop">0</span> • <span id="seviyeTop" class="level">Çırak 🐣</span></span></div><button class="topbtn" onclick="dark()">🌙</button><button class="topbtn" onclick="tema()">🎨</button></header>
+<header><img class="logo" src="cit.png"><div style="flex:1"><b style="font-size:22px">Çıt Chat V5.1 FIX</b><br><span style="font-size:12px;color:#ff9d3c">● Puan: <span id="puanTop">0</span> • <span id="seviyeTop" class="level">Çırak 🐣</span></span></div><button class="topbtn" onclick="dark()">🌙</button><button class="topbtn" onclick="tema()">🎨</button></header>
 <div class="stories">
 <div class="story" onclick="alert('Çıt hikayesi: Bugün çok eğlendim! 🐦')"><img src="cit.png">Çıt</div>
 <div class="story" onclick="alert('Kanka hikayesi: Maç var! ⚽')"><img src="https://cdn-icons-png.flaticon.com/512/616/616430.png">Kanka</div>
@@ -66,12 +67,12 @@ header{background:#111;color:#fff;padding:10px 12px;display:flex;align-items:cen
 </div>
 <div class="search">🔍 <input id="searchInp" oninput="ara()" placeholder="Sohbet ara..."></div>
 <div id="persons">
-<div class="person" onclick="openChat('Çıt','cit.png')"><img src="cit.png"><div style="flex:1"><b>Çıt 🐦 📌</b><p>Her şey var! Hava, film, oyun, foto, anket!</p></div><div class="badge">2</div></div>
-<div class="person" onclick="openChat('Kanka','https://cdn-icons-png.flaticon.com/512/616/616430.png')"><img src="https://cdn-icons-png.flaticon.com/512/616/616430.png"><div style="flex:1"><b>Kanka</b><p>Maç ne zaman?</p></div><span style="font-size:12px;color:#888">12:30</span></div>
-<div class="person" onclick="openGroup()"><img src="https://cdn-icons-png.flaticon.com/512/194/194938.png"><div style="flex:1"><b>Aile Grubu 👨‍👩‍👦 • 4 kişi</b><p>Annem: Yemeğe gel!</p></div><span style="font-size:12px;color:#888">11:20</span></div>
-<div class="person" onclick="openChat('Oyun Botu','https://cdn-icons-png.flaticon.com/512/616/616408.png')"><img src="https://cdn-icons-png.flaticon.com/512/616/616408.png"><div style="flex:1"><b>Oyun Botu 🎮</b><p>Quiz, bilmece, sayı oyunu!</p></div><span style="font-size:12px;color:#888">10:00</span></div>
+<div class="person" onclick="openChat('Çıt','cit.png')"><img src="cit.png"><div style="flex:1"><b>Çıt 🐦 📌</b><p>Her şey var! Hava, film, oyun, foto, anket!</p></div><button class="openBtn" onclick="event.stopPropagation();openChat('Çıt','cit.png')">AÇ ➤</button></div>
+<div class="person" onclick="openChat('Kanka','https://cdn-icons-png.flaticon.com/512/616/616430.png')"><img src="https://cdn-icons-png.flaticon.com/512/616/616430.png"><div style="flex:1"><b>Kanka</b><p>Maç ne zaman?</p></div><button class="openBtn" onclick="event.stopPropagation();openChat('Kanka','https://cdn-icons-png.flaticon.com/512/616/616430.png')">AÇ ➤</button></div>
+<div class="person" onclick="openGroup()"><img src="https://cdn-icons-png.flaticon.com/512/194/194938.png"><div style="flex:1"><b>Aile Grubu 👨‍👩‍👦 • 4 kişi</b><p>Annem: Yemeğe gel!</p></div><button class="openBtn" onclick="event.stopPropagation();openGroup()">AÇ ➤</button></div>
+<div class="person" onclick="openChat('Oyun Botu','https://cdn-icons-png.flaticon.com/512/616/616408.png')"><img src="https://cdn-icons-png.flaticon.com/512/616/616408.png"><div style="flex:1"><b>Oyun Botu 🎮</b><p>Quiz, bilmece, sayı oyunu!</p></div><button class="openBtn" onclick="event.stopPropagation();openChat('Oyun Botu','https://cdn-icons-png.flaticon.com/512/616/616408.png')">AÇ ➤</button></div>
 </div>
-<p style="text-align:center;color:#b35a00;font-size:13px;margin-top:10px">V5 MEGA • Önceki her şey + Yeniler 🔒<br>Mesaja tıkla = Cevapla • Çift tık = ❤️ • Uzun bas = ⭐ Kaydet</p>
+<p style="text-align:center;color:#b35a00;font-size:13px;margin-top:10px">V5.1 FIX • Tıklama sorunu düzeltildi!<br>Karta veya AÇ butonuna bas!</p>
 </div>
 
 <div id="chatPage">
@@ -84,9 +85,108 @@ header{background:#111;color:#fff;padding:10px 12px;display:flex;align-items:cen
 <div id="emojis"><span onclick="addEmoji('😂')">😂</span><span onclick="addEmoji('❤️')">❤️</span><span onclick="addEmoji('🔥')">🔥</span><span onclick="addEmoji('🐦')">🐦</span><span onclick="addEmoji('⚽')">⚽</span><span onclick="addEmoji('😎')">😎</span><span onclick="addEmoji('👍')">👍</span><span onclick="addEmoji('😮')">😮</span><span onclick="addEmoji('🎮')">🎮</span><span onclick="addEmoji('🥳')">🥳</span></div>
 <div id="stickers"><span onclick="sendSticker('🐦💥')">🐦💥</span><span onclick="sendSticker('🔥🐦🔥')">🔥🐦🔥</span><span onclick="sendSticker('😎🐦')">😎🐦</span><span onclick="sendSticker('🐦❤️')">🐦❤️</span><span onclick="sendSticker('🦁👑')">🦁👑</span><span onclick="sendSticker('⚽🚀')">⚽🚀</span><span onclick="sendSticker('🎮🏆')">🎮🏆</span></div>
 <div id="box"><button class="iconBtn" onclick="document.getElementById('file').click()">📷</button><input type="file" id="file" accept="image/*" hidden onchange="sendPhoto(event)"><button class="iconBtn" onclick="toggleEmoji()">😀</button><button class="iconBtn" onclick="toggleSticker()">😜</button><input id="inp" placeholder="Mesaj yaz..."><button class="iconBtn" onclick="sendVoice()">🎤</button><button class="iconBtn sendBtn" onclick="gonder()">➤</button></div>
-<p class="note">V5 MEGA • Önceki her şey + Yeniler! • 60 sn'de silinir 🔒</p>
+<p class="note">V5.1 FIX • 60 sn'de silinir 🔒</p>
 </div>
 
 <div id="profile">
 <div class="profTop"><span style="float:left;font-size:26px;cursor:pointer" onclick="hideProfile()">‹</span><img src="cit.png" id="pImg"><h2 id="pName" style="margin:10px 0 4px">Çıt</h2><p style="color:#ff9d3c">● Çevrimiçi • Puan: <span id="puanProf">0</span> • <span id="seviyeProf">Çırak 🐣</span></p></div>
-<div style="padding:16px;text-align:center"><p style="font-weight:bold">🐦 Çıt Hakkında</p><p style="color:#555;line-height:1.5">Yaz, çıtla, 60 saniyede silinsin!<br>Hava, film, şarkı, oyun, foto, anket, konum - hepsi var!</p><button class="profBtn" onclick="hideProfile()">💬 Mesaj Gönder</button><button class="profBtn" style="background:#111" onclick="startCall(false)">📞 Ara</button><button class="profBtn" style="background:#111" onclick="startCall(true)">🎥 Görün
+<div style="padding:16px;text-align:center"><p style="font-weight:bold">🐦 Çıt Hakkında</p><p style="color:#555;line-height:1.5">Yaz, çıtla, 60 saniyede silinsin!<br>Hava, film, şarkı, oyun, foto, anket, konum - hepsi var!</p><button class="profBtn" onclick="hideProfile()">💬 Mesaj Gönder</button><button class="profBtn" style="background:#111" onclick="startCall(false)">📞 Ara</button><button class="profBtn" style="background:#111" onclick="startCall(true)">🎥 Görüntülü Ara</button></div>
+</div>
+
+<div id="callPage">
+<div class="callTop"><img src="cit.png" id="callImg"><h2 id="callName">Çıt</h2><p id="callStatus" style="color:#ff9d3c">Aranıyor... 🐦</p><p id="callTime" style="font-size:28px;font-weight:bold">00:00</p></div>
+<div class="callBtns"><button style="background:#fff" onclick="alert('🔇 Sessize alındı!')">🔇</button><button style="background:#fff" onclick="alert('🎥 Kamera açıldı!')">🎥</button><button style="background:#fff" onclick="alert('🔊 Hoparlör açıldı!')">🔊</button><button style="background:#ff3b30;color:#fff" onclick="endCall()">📞</button></div>
+</div>
+
+<script>
+var chat=document.getElementById("chat");var cur="Çıt";var replyTo="";var ad="";var puan=0;var mod="";var sayi=0;var mat=0;var bil="";var quizCevap="";var sonFilm=-1;var sonSarki=-1;var temaIdx=0;var callInt=null;var callSec=0;
+var isimMap={messi:"Lionel Messi",ronaldo:"Cristiano Ronaldo",icardi:"Mauro Icardi",osimhen:"Victor Osimhen",neymar:"Neymar",mbappe:"Kylian Mbappe"};
+var filmler=["TÜRK FİLMİ: Recep İvedik 1 - Kahkaha garantili!","TÜRK FİLMİ: Hababam Sınıfı - Efsane!","TÜRK FİLMİ: Ailecek Şaşkınız - Çok eğlenceli!","TÜRK FİLMİ: 7. Koğuştaki Mucize - Çok duygusal!","TÜRK FİLMİ: Bergen - Müzikleri efsane!","TÜRK FİLMİ: Müslüm - Çok duygusal!","TÜRK FİLMİ: Kardeşim Benim - Kardeşlik filmi!","TÜRK FİLMİ: Düğün Dernek - Karnın ağrıyacak!","TÜRK FİLMİ: G.O.R.A - Cem Yılmaz uzayda!","TÜRK FİLMİ: Eyvah Eyvah - Ata Demirer!","TÜRK FİLMİ: Organize İşler - Çok komik!","TÜRK FİLMİ: Babam ve Oğlum - En duygusal!","TÜRK FİLMİ: Tosun Paşa - Kemal Sunal efsanesi!","TÜRK FİLMİ: Süt Kardeşler - Kahkaha krizi!","Örümcek Adam Eve Dönüş Yok - 3 Örümcek Adam!","Aslan Kral - Simba'nın hikayesi!","Harry Potter Serisi - Büyü dünyası!","Buz Devri - Scrat çok komik!","Hızlı ve Öfkeli - Araba + aksiyon!","Avatar 2 - Görsel şölen!","Oyuncak Hikayesi 4 - Woody + Buzz!","Kayıp Balık Nemo - Deniz macerası!","Kung Fu Panda - Po çok komik!","Ters Yüz 2 - Duygular geri döndü!","Shrek - Eşek çok komik!","Minyonlar - Sarı canavarlar!","Coco - Müzik + aile!","Moana - Deniz macerası!","Minecraft Filmi - Steve macerası!","Sonic 3 - Sonic çok hızlı!","Karlar Ülkesi Frozen - Elsa + Anna!","Ejderhanı Nasıl Eğitirsin - Dişsiz çok tatlı!","Süper Mario Filmi - Mario + Luigi!","Yenilmezler Endgame - Tüm kahramanlar!","Demir Adam - Tony Stark çok havalı!","Evde Tek Başına - Kevin çok yaramaz!"];
+var sarkilar=["Semicenk - Geçiyor Zaman","Tarkan - Şımarık","Mert Demir - Ateşe Düştüm","Sefo - Araba","Lvbel C5 - Sezen Aksu","Hadise - Sıfır Tolerans","Aleyna Tilki - Cevapsız Çınlama","Zeynep Bastık - Ara","Mabel Matiz - Antidepresan","Edis - Martılar","Simge - Aşkın Olayım","Duman - Her Şeyi Yak"];
+function seviye(){if(puan>=100)return "Efsane 👑";if(puan>=50)return "Usta 🔥";if(puan>=20)return "Pro 😎";return "Çırak 🐣"}
+function guncellePuan(){var s=seviye();document.getElementById("puanTop").innerText=puan;document.getElementById("puanHead").innerText=puan;document.getElementById("puanProf").innerText=puan;document.getElementById("seviyeTop").innerText=s;document.getElementById("seviyeHead").innerText=s;document.getElementById("seviyeProf").innerText=s}
+function dark(){document.getElementById("body").classList.toggle("dark")}
+function tema(){var t=[["#ff7a00","#ffe8c9"],["#4CAF50","#e8f5e9"],["#9C27B0","#f3e5f5"],["#2196F3","#e3f2fd"]];temaIdx=(temaIdx+1)%t.length;document.documentElement.style.setProperty("--main",t[temaIdx][0]);document.documentElement.style.setProperty("--bg",t[temaIdx][1]);document.getElementById("body").style.background=t[temaIdx][1];}
+function ara(){var q=document.getElementById("searchInp").value.toLowerCase();document.querySelectorAll(".person").forEach(function(p){p.style.display=p.innerText.toLowerCase().indexOf(q)>=0?"flex":"none"})}
+function hizli(t){document.getElementById("inp").value=t;gonder()}
+function openChat(name,img){
+  cur=name;
+  document.getElementById("list").style.display="none";
+  var cp=document.getElementById("chatPage");cp.style.display="flex";
+  document.getElementById("profile").style.display="none";
+  document.getElementById("callPage").style.display="none";
+  document.getElementById("cName").innerText=name;
+  document.getElementById("cImg").src=img;
+  document.getElementById("pName").innerText=name;
+  document.getElementById("pImg").src=img;
+  chat.innerHTML="";
+  ekle("Selam! Ben Çıt 🐦 V5.1 FIX!\n\n📍 Hava • 🎬 Film • 🎵 Şarkı\n⚽ Messi / Icardi / Ronaldo foto\n🎮 Oyun • 🧠 Quiz • 🧩 Bilmece\n📊 Anket • 📍 Konum • 🎨 Tema\n📞 Arama • 🎥 Görüntülü • 😜 Sticker\n\nPuanın: "+puan+" • Seviyen: "+seviye()+"\nHadi dene! Alttan butona bas!","bot");
+}
+function openGroup(){cur="Aile Grubu";document.getElementById("list").style.display="none";document.getElementById("chatPage").style.display="flex";document.getElementById("cName").innerText="Aile Grubu 👨‍👩‍👦";document.getElementById("cImg").src="https://cdn-icons-png.flaticon.com/512/194/194938.png";chat.innerHTML="";ekle("Annem: Yemeğe gelin! 🍽️","bot");setTimeout(function(){ekle("Babam: Tamam geliyorum 😄","bot")},800);setTimeout(function(){ekle("Kardeşim: Ben de geliyorum! 🥳","bot")},1600)}
+function back(){document.getElementById("chatPage").style.display="none";document.getElementById("list").style.display="flex"}
+function showProfile(){document.getElementById("chatPage").style.display="none";document.getElementById("profile").style.display="flex"}
+function hideProfile(){document.getElementById("profile").style.display="none";document.getElementById("chatPage").style.display="flex"}
+function toggleEmoji(){var e=document.getElementById("emojis");e.style.display=e.style.display=="flex"?"none":"flex";document.getElementById("stickers").style.display="none"}
+function toggleSticker(){var e=document.getElementById("stickers");e.style.display=e.style.display=="flex"?"none":"flex";document.getElementById("emojis").style.display="none"}
+function addEmoji(em){document.getElementById("inp").value+=em;toggleEmoji()}
+function sendSticker(s){ekle(s+"  😜 STICKER","user");setTimeout(function(){cv("Sticker çok komik! 😂😜")},700)}
+function sendVoice(){var sn=Math.floor(Math.random()*20)+3;ekle("🎤 Sesli Mesaj • 0:"+sn+" sn • Oynat ▶","user");setTimeout(function(){cv("Sesin çok güzel! 😊🎤")},800)}
+function startCall(video){document.getElementById("chatPage").style.display="none";document.getElementById("profile").style.display="none";document.getElementById("callPage").style.display="flex";document.getElementById("callName").innerText=cur+(video?" • 🎥 Görüntülü":" • 📞 Sesli");document.getElementById("callStatus").innerText="Aranıyor... 🐦";callSec=0;setTimeout(function(){document.getElementById("callStatus").innerText="● Bağlandı! Konuşuyorsun...";callInt=setInterval(function(){callSec++;var m=Math.floor(callSec/60);var s=callSec%60;document.getElementById("callTime").innerText=(m<10?"0"+m:m)+":"+(s<10?"0"+s:s)},1000)},1500)}
+function endCall(){clearInterval(callInt);document.getElementById("callPage").style.display="none";document.getElementById("chatPage").style.display="flex";ekle("📞 Arama sona erdi • Süre: "+document.getElementById("callTime").innerText,"bot")}
+function sec(l){return l[Math.floor(Math.random()*l.length)]}
+function farkli(liste,son){var i;do{i=Math.floor(Math.random()*liste.length)}while(i==son);return{i:i,txt:liste[i]}}
+function ekle(t,w,isImg){
+  var row=document.createElement("div");row.className="row "+w;
+  var clicks=0;row.onclick=function(){clicks++;setTimeout(function(){if(clicks==1){replyTo=t;document.getElementById("inp").placeholder="↩️ Cevaplanıyor: "+t.slice(0,20)+"...";document.getElementById("inp").focus();}clicks=0},250);if(clicks==2){row.querySelector(".msg").innerHTML+=" ❤️";}};
+  row.oncontextmenu=function(e){e.preventDefault();alert("⭐ Mesaj kaydedildi!");row.querySelector(".msg").innerHTML+=" ⭐";return false};
+  if(w=="bot"){var av=document.createElement("img");av.className="avatar";av.src=document.getElementById("cImg").src;row.appendChild(av)}
+  var d=document.createElement("div");d.className="msg";
+  var replyHtml=replyTo?"<span class='replyBox'>↩️ "+replyTo.slice(0,30)+"</span>":"";
+  if(isImg){d.innerHTML=replyHtml+"📸 Fotoğraf<span class='timer'>⏱ 60 sn • ✓✓</span>";var im=document.createElement("img");im.src=t;d.appendChild(im);}
+  else{d.innerHTML=replyHtml+t.replace(/\n/g,"<br>")+'<span class="timer">⏱ 60 sn • ✓✓ Mavi Tik</span>';}
+  replyTo="";row.appendChild(d);chat.appendChild(row);chat.scrollTop=99999;
+  var left=60;var timerEl=row.querySelector(".timer");
+  var iv=setInterval(function(){left--;if(timerEl)timerEl.innerText="⏱ "+left+" sn • ✓✓";if(left<=0){clearInterval(iv);row.remove();}},1000);
+}
+function cv(c){document.getElementById("typing").style.display="block";document.getElementById("typingName").innerText=cur;setTimeout(function(){document.getElementById("typing").style.display="none";ekle(c,"bot")},700)}
+function foto(t,u,a){var row=document.createElement("div");row.className="row bot";var av=document.createElement("img");av.className="avatar";av.src=document.getElementById("cImg").src;row.appendChild(av);var d=document.createElement("div");d.className="msg";d.innerHTML=t+'<span class="timer">⏱ 60 sn • ✓✓</span>';var i=document.createElement("img");i.src=u;d.appendChild(i);if(a){var p=document.createElement("div");p.innerText=a.slice(0,220);d.appendChild(p)}row.appendChild(d);chat.appendChild(row);chat.scrollTop=99999;var left=60;var te=row.querySelector(".timer");var iv=setInterval(function(){left--;if(te)te.innerText="⏱ "+left+" sn • ✓✓";if(left<=0){clearInterval(iv);row.remove();}},1000)}
+function unlu(isim){var gercek=isimMap[isim.toLowerCase()]||isim;cv("Bakıyorum, "+gercek+" geliyor...");fetch("https://en.wikipedia.org/api/rest_v1/page/summary/"+encodeURIComponent(gercek)).then(function(r){return r.json()}).then(function(j){if(j.thumbnail){foto("İşte "+gercek+"!",j.thumbnail.source,j.extract)}else{ekle("Fotoğraf bulunamadı!","bot")}}).catch(function(){ekle("İnternet yavaş!","bot")})}
+function havaGoster(lat,lon,isim){fetch("https://api.open-meteo.com/v1/forecast?latitude="+lat+"&longitude="+lon+"&current=temperature_2m,relative_humidity_2m,weather_code&timezone=auto").then(function(r){return r.json()}).then(function(j){var kod=j.current.weather_code;var durum="Açık";if(kod>=1&&kod<=3)durum="Parçalı Bulutlu";if(kod>=45)durum="Sisli";if(kod>=51)durum="Yağmurlu";if(kod>=71)durum="Karlı";if(kod>=95)durum="Fırtınalı";ekle("📍 "+isim+"\n"+durum+"\nSıcaklık: "+j.current.temperature_2m+" C\nNem: %"+j.current.relative_humidity_2m,"bot")}).catch(function(){ekle("Havayı alamadım!","bot")})}
+function hava(){cv("Konumuna bakıyorum... İzin Ver'e bas!");if(navigator.geolocation){navigator.geolocation.getCurrentPosition(function(p){havaGoster(p.coords.latitude,p.coords.longitude,"Senin Olduğun Yer")},function(){havaGoster(41.01,28.97,"İstanbul")},{timeout:5000})}else{havaGoster(41.01,28.97,"İstanbul")}}
+function sendPhoto(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(){ekle(r.result,"user",true);setTimeout(function(){cv("Vay be çok güzel foto! 🔥❤️")},800)};r.readAsDataURL(f)}
+function anketYap(){var row=document.createElement("div");row.className="row bot";var av=document.createElement("img");av.className="avatar";av.src=document.getElementById("cImg").src;row.appendChild(av);var d=document.createElement("div");d.className="msg";d.innerHTML="📊 ANKET: Maç ne zaman olsun?<div class='poll'><button onclick=\"alert('✅ Cumartesi oyu verdin!')\">🗓️ Cumartesi</button><button onclick=\"alert('✅ Pazar oyu verdin!')\">🗓️ Pazar</button><button onclick=\"alert('✅ Bugün oyu verdin!')\">⚡ Bugün</button></div><span class='timer'>⏱ 60 sn • ✓✓</span>";row.appendChild(d);chat.appendChild(row);chat.scrollTop=99999}
+function gonder(){
+  var inp=document.getElementById("inp");var y=inp.value.trim();if(!y)return;
+  ekle(y,"user");inp.value="";inp.placeholder="Mesaj yaz...";var k=y.toLowerCase();
+  if(k.indexOf("anket")>=0){anketYap();return}
+  if(k.indexOf("konum")>=0){cv("Konumun gönderiliyor...");setTimeout(function(){ekle("📍 Konum: İstanbul, Türkiye\nHaritada göster 🗺️","bot")},800);return}
+  if(k.indexOf("çevir")>=0||k.indexOf("cevir")>=0){cv("Çeviriyorum... Hello! I am Çıt! 🐦");return}
+  if(mod=="quiz"){if(k.indexOf(quizCevap)>=0){puan+=15;guncellePuan();cv("DOĞRU! +15 puan! Toplam: "+puan+" • Seviyen: "+seviye())}else{cv("Olmadı! Doğru: "+quizCevap)}mod="";return}
+  if(mod=="sayi"){var t=parseInt(y);if(t==sayi){puan+=10;guncellePuan();cv("BİLDİN! +10 puan! Seviyen: "+seviye());mod=""}else if(t<sayi){cv("Daha BÜYÜK söyle!")}else{cv("Daha KÜÇÜK söyle!")}return}
+  if(mod=="mat"){if(parseInt(y)==mat){puan+=10;guncellePuan();cv("DOĞRU! +10 puan!")}else{cv("Olmadı cevap "+mat)}mod="";return}
+  if(mod=="bil"){if(k.indexOf(bil)>=0){puan+=10;guncellePuan();cv("Bildin! +10 puan!")}else{cv("Bilemedin! Cevap: "+bil)}mod="";return}
+  if(k.indexOf("adim")>=0){var pp=y.split(" ");ad=pp[pp.length-1];cv("Memnun oldum "+ad+"!");return}
+  if(k.indexOf("hava")>=0){hava();return}
+  if(k.indexOf("quiz")>=0){var sorular=[["Türkiye'nin başkenti? A) İstanbul B) Ankara C) İzmir","ankara"],["En büyük gezegen? A) Mars B) Jüpiter C) Venüs","jupiter"],["5 x 8 kaç? A) 35 B) 40 C) 45","40"]];var s=sec(sorular);quizCevap=s[1];mod="quiz";cv("QUIZ!\n\n"+s[0]);return}
+  if(k.indexOf("film")>=0){var f=farkli(filmler,sonFilm);sonFilm=f.i;cv("🎬 ÖNERİM: "+f.txt);return}
+  if(k.indexOf("sarki")>=0||k.indexOf("şarkı")>=0){var sk=farkli(sarkilar,sonSarki);sonSarki=sk.i;cv("🎵 "+sk.txt);return}
+  if(k.indexOf("foto")>=0){var isim=y.replace(/fotoğrafı|fotografi|fotograf|foto/gi,"").trim();if(!isim)isim="kedi";var kl=isim.toLowerCase();if(kl=="kedi"){foto("İşte kedi!","https://placecats.com/400/300");return}if(kl=="köpek"||kl=="kopek"){foto("İşte köpek!","https://placedog.net/400/300");return}unlu(isim);return}
+  if(k.indexOf("taş")>=0||k.indexOf("kağıt")>=0||k.indexOf("makas")>=0){var sec2=["taş","kağıt","makas"];var pc=sec2[Math.floor(Math.random()*3)];cv("Ben "+pc+" dedim! "+(pc==k?"Berabere! 😅":((k.indexOf("taş")>=0&&pc=="makas")||(k.indexOf("kağıt")>=0&&pc=="taş")||(k.indexOf("makas")>=0&&pc=="kağıt")?"Kazandın! 🎉":"Ben kazandım! 😎")));return}
+  if(k.indexOf("selam")>=0||k.indexOf("merhaba")>=0||k.indexOf("hey")>=0){cv(sec(["Selam "+ad+"! Hoş geldin!","Heyy "+ad+"! Naber?"]));return}
+  if(k.indexOf("nasilsin")>=0||k.indexOf("nasılsın")>=0){cv("İyiyim "+ad+", sen nasılsın? Puanın: "+puan+" • Seviyen: "+seviye());return}
+  if(k.indexOf("kimsin")>=0){cv("Ben Çıt AI MEGA'yım! Hava, film, foto, oyun, anket, arama - hepsi bende!");return}
+  if(k.indexOf("oyun")>=0){sayi=Math.floor(Math.random()*20)+1;mod="sayi";cv("Hadi! 1-20 arası sayı tuttum!");return}
+  if(k.indexOf("fikra")>=0||k.indexOf("fıkra")>=0){cv(sec(["Temel: Rüyamda maç yapıyordum, uzatmalara gitti!","Nasrettin Hoca: Erkek adam sözünden dönmez!"]));return}
+  if(k.indexOf("hikaye")>=0){cv("Bir varmış bir yokmuş... Küçük kuş Çıt maceraya çıkmış!");return}
+  if(k.indexOf("bilmece")>=0){var b=[["Hangi ayda 28 gün vardır?","bütün"],["Hangi kuş uçamaz?","penguen"]];var s2=sec(b);bil=s2[1];mod="bil";cv("Bilmece! "+s2[0]);return}
+  if(k.indexOf("puan")>=0){cv("Puanın: "+puan+" • Seviyen: "+seviye());return}
+  if(k.indexOf("matematik")>=0){var a=Math.floor(Math.random()*30)+1;var bb=Math.floor(Math.random()*20)+1;mat=a+bb;mod="mat";cv("Matematik! "+a+" + "+bb+" kaç?");return}
+  if(k.indexOf("motivasyon")>=0){cv(sec(["Pes etme!","Sen yaparsın!","Devam et!"]));return}
+  if(k.indexOf("tesekkur")>=0||k.indexOf("teşekkür")>=0){cv("Rica ederim "+ad+"!");return}
+  if(k.indexOf("bay bay")>=0){cv("Görüşürüz "+ad+"!");return}
+  cv(sec(["Vay be anlat biraz daha!","Hadi ya gerçekten mi?","Ooo ilginç!"]));
+}
+document.getElementById("inp").addEventListener("keydown",function(e){if(e.key==="Enter")gonder()});
+</script>
+</body>
+                 </html>
