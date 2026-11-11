@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Çıt Chat - Ayşe</title>
+<title>Çıt Chat</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
 body{background:#ffe8c9;height:100vh;display:flex;flex-direction:column}
 header{background:#111;color:white;padding:10px 12px;display:flex;align-items:center;gap:10px;border-radius:0 0 20px 20px}
-header img{width:52px;height:52px;border-radius:50%;border:3px solid #ff7a00;object-fit:cover}
+header img{width:52px;height:52px;border-radius:50%;border:3px solid #ff7a00;object-fit:cover;background:white}
 header h2{font-size:22px}
 header p{font-size:12px;color:#ff9d3c}
 .spacer{flex:1}
@@ -22,63 +22,4 @@ footer{padding:10px;background:#ffe8c9}
 .inputBox{background:white;border:2px solid #111;border-radius:30px;display:flex;align-items:center;padding:6px 6px 6px 12px;gap:8px}
 .inputBox input{flex:1;border:none;outline:none;font-size:17px}
 .inputBox button{border:none;cursor:pointer;font-size:20px;background:none}
-.send{background:#ff7a00 !important;color:white;width:42px;height:42px;border-radius:50%;font-size:22px}
-.note{text-align:center;font-size:12px;color:#b35a00;margin-top:6px}
-</style>
-</head>
-<body>
-<header>
-<span style="font-size:26px">‹</span>
-<img src="https://i.imgur.com/2tQZ8Qe.png">
-<div><h2>Ayşe</h2><p>Çevrimiçi • Mesajlar 60sn sonra silinir</p></div>
-<div class="spacer"></div><span style="font-size:22px">📞 •••</span>
-</header>
-
-<div id="chat">
-<div><div class="msg left">Merhaba!<br>Çıt Chat'i deniyor musun?<span class="timer">⏱ 60 sn sonra silinecek</span></div></div>
-</div>
-
-<footer>
-<div class="inputBox">
-<span>📷</span>
-<input id="inp" placeholder="Mesaj yaz...">
-<span>🎤</span>
-<button class="send" onclick="send()">➤</button>
-</div>
-<p class="note">Tüm mesajlar 60 saniye sonra otomatik silinir 🔒</p>
-</footer>
-
-<script>
-let chat=document.getElementById('chat');
-let inp=document.getElementById('inp');
-function addMsg(text,side){
-  let wrap=document.createElement('div');
-  let d=document.createElement('div');
-  d.className='msg '+side;
-  d.innerHTML=text+'<span class="timer">⏱ 60 sn sonra silinecek</span>';
-  wrap.appendChild(d);
-  if(side=='right'){
-    let s=document.createElement('div'); s.className='seen'; s.innerText='Görüldü • ⏱ 60 sn'; wrap.appendChild(s);
-  }
-  chat.appendChild(wrap);
-  chat.scrollTop=chat.scrollHeight;
-  let left=60;
-  let iv=setInterval(()=>{
-    left--;
-    d.querySelector('.timer').innerText='⏱ '+left+' sn sonra silinecek';
-    if(left<=0){clearInterval(iv); wrap.remove();}
-  },1000);
-  return wrap;
-}
-function send(){
-  let t=inp.value.trim(); if(!t) return;
-  addMsg(t,'right'); inp.value='';
-  setTimeout(()=>{
-    let cevaplar=["Çok temiz ve hızlı 😊","Evet çok sevdim! Konuş, çıtla, silinsin fikri harika!","Anladım, devam et 😄","Valla harika olmuş bu ya!"];
-    addMsg(cevaplar[Math.floor(Math.random()*cevaplar.length)],'left');
-  },1000);
-}
-inp.addEventListener('keydown',e=>{if(e.key==='Enter') send();});
-</script>
-</body>
-  </html>
+.send{background:#ff7a00 !important;color:white;width:42px;height:42px;border-radius:50%;
