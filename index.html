@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -7,10 +7,10 @@
 <style>
 body{margin:0;font-family:Arial;background:#111;color:white}
 header{background:#ff7a00;padding:15px;text-align:center;font-size:22px;font-weight:bold;color:black}
-header span{font-size:28px}
 #chat{padding:15px;height:60vh;overflow-y:auto}
 .msg{background:#222;padding:10px 14px;border-radius:15px;margin:8px 0;max-width:80%}
 .me{background:#ff7a00;color:black;margin-left:auto}
+.bot{background:#333;color:white}
 .small{font-size:11px;opacity:0.7}
 #box{display:flex;gap:8px;padding:12px;background:#000;position:fixed;bottom:0;left:0;right:0}
 input{flex:1;padding:12px;border-radius:20px;border:none;outline:none}
@@ -29,13 +29,23 @@ button{padding:12px 16px;border-radius:20px;border:none;background:#ff7a00;font-
 function send(){
   let t=document.getElementById('text');
   if(!t.value) return;
-  addMsg(t.value);
+  addMsg(t.value,'me');
+  let yazdigin = t.value.toLowerCase();
   t.value='';
+  setTimeout(()=>{
+    let cevap = "Anladım be 😄";
+    if(yazdigin.includes("selam") || yazdigin.includes("merhaba")) cevap = "Selam! Hoş geldin 🐦 Nasılsın?";
+    if(yazdigin.includes("nasılsın")) cevap = "İyiyim, sen nasılsın? Çıtlamaya hazır mısın?";
+    if(yazdigin.includes("naber")) cevap = "İyilik senden naber?";
+    if(yazdigin.includes("kimsin")) cevap = "Ben Çıt Chat'im! Konuş, çıtla, silinsin!";
+    if(yazdigin.includes("seviyorum")) cevap = "Ben de seni seviyorum ❤️";
+    addMsg(cevap,'bot');
+  },1000);
 }
-function addMsg(text){
+function addMsg(text,kim){
   let chat=document.getElementById('chat');
   let div=document.createElement('div');
-  div.className='msg me';
+  div.className='msg '+kim;
   div.innerHTML=text+'<br><span class="small">60 sn sonra silinecek</span>';
   chat.appendChild(div);
   chat.scrollTop=chat.scrollHeight;
