@@ -20,5 +20,20 @@ let adim="";
 function giris(){let v=document.getElementById('ad').value.trim();if(!v){alert("Önce adını yaz!");return}adim=v;document.getElementById('login').style.display='none';document.getElementById('list').style.display='block';}
 function ac(isim){document.getElementById('list').style.display='none';document.getElementById('chat').style.display='flex';document.getElementById('isim').innerText=isim;document.getElementById('msgs').innerHTML='<div class="msg other">Selam '+adim+'! Ben '+isim+' 😊</div>';}
 function geri(){document.getElementById('chat').style.display='none';document.getElementById('list').style.display='block';}
-function gonder(){let i=document.getElementById('mesaj'),t=i.value.trim();if(!t)return;let m=document.getElementById('msgs');m.innerHTML+='<div class="msg me">'+t+'</div>';i.value="";m.scrollTop=9999;setTimeout(()=>{m.innerHTML+='<div class="msg other">Aynen kral 😂 Çıt çıt 🐦</div>';m.scrollTop=9999;},700);}
+function gonder(){let i=document.getElementById('mesaj'),t=i.value.trim();if(!t)return;let m=document.getElementById('msgs');m.innerHTML+='<div class="msg me">'+t+'</div>';i.value="";m.scrollTop=9999;setTimeout(()=>{m.innerHTML+='<div class="msg other">function cevapVer(t){
+t=t.toLowerCase();
+if(t.includes("selam")||t.includes("merhaba")||t.includes("hey")) return "Selam "+adim+"! Hoş geldin kral 👑 Nasılsın?";
+if(t.includes("nasılsın")||t.includes("naber")) return "İyiyim kral, sen nasılsın? Bugün ne yaptın? 😊";
+if(t.includes("adın ne")||t.includes("ismin")) return "Benim adım Çıt! 🐦 Dünyanın en tatlı kuşuyum!";
+if(t.includes("seviyor")) return "Tabii ki seviyorum seni kral ❤️ Sen benim en iyi arkadaşımsın!";
+if(t.includes("sıkıldım")) return "Sıkıldıysan sana bir fıkra anlatayım mı? Ya da oyun oynayalım mı? 🎮";
+if(t.includes("fıkra")) return "Temel'e sormuşlar: En sevdiğin kuş ne? Demiş ki: Çıt! Çünkü hep konuşuyor 😂";
+if(t.includes("oyun")) return "Oyun mu? Ben taş-kağıt-makas çok iyi oynarım! Sen ne seçiyorsun? ✊✋✌️";
+if(t.includes("ders")||t.includes("okul")) return "Dersler nasıl gidiyor? Hangi dersi sevmiyorsun söyle bakayım 😅";
+if(t.includes("allah")||t.includes("amin")) return "Amin kral 🤲";
+if(t.includes("tamam")||t.includes("ok")) return "Anlaştık kral 🤝 Başka ne var?";
+if(t.includes("naber")||t.includes("ne yap")) return "Seninle konuşuyorum işte, daha ne olsun 🐦 Sen ne yapıyorsun?";
+let c=["Valla mı? Anlatsana merak ettim 👀","Hahaha çok komiksin ya 😂","Ciddi misin? Devam et!","Hmm ilginç... Biraz daha anlat","Aynen öyle bence de!","Ooo bak bu güzelmiş 🔥","Anladım kral, peki sonra ne oldu?"];
+return c[Math.floor(Math.random()*c.length)];
+  }</div>';m.scrollTop=9999;},700);}
 </script></body></html>
