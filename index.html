@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Çıt Chat - Konuş, Çıtla, Kazan!</title>
+<title>Çıt Chat - Gerçek Yapay Zeka!</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111}
@@ -39,15 +39,16 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111}
 .coinBar{background:#fff8d6;padding:11px;text-align:center;font-weight:900;border-bottom:2px solid #ffcc00;font-size:15px;position:sticky;top:72px;z-index:5}
 .coinBar small{display:block;font-size:11px;font-weight:600;color:#777}
 .messages{flex:1;padding:16px;display:flex;flex-direction:column;gap:10px;background:#fffaf5}
-.msg{max-width:80%;padding:11px 14px;border-radius:16px;font-size:15px;line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.msg{max-width:85%;padding:11px 14px;border-radius:16px;font-size:15px;line-height:1.5;box-shadow:0 1px 3px rgba(0,0,0,.06);white-space:pre-wrap}
 .msg.other{background:#fff;border:1px solid #eee;align-self:flex-start;border-bottom-left-radius:4px}
 .msg.me{background:#ff7a00;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
 .msg small{display:block;font-size:11px;opacity:.7;margin-top:4px}
 .inputBar{padding:12px;border-top:1px solid #eee;display:flex;gap:8px;background:#fff;position:sticky;bottom:0}
 .inputBar input{flex:1;padding:13px;border:2px solid #eee;border-radius:999px;font-size:15px;outline:none}
 .inputBar button{background:#ff7a00;color:#fff;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;cursor:pointer}
-.welcome{background:#111;color:#fff;padding:14px;border-radius:14px;text-align:center;font-size:14px}
+.welcome{background:#111;color:#fff;padding:14px;border-radius:14px;text-align:center;font-size:14px;line-height:1.6}
 .welcome b{color:#ffcc00}
+.typing{font-style:italic;opacity:.7}
 </style>
 </head>
 <body>
@@ -67,8 +68,8 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111}
 <div class="small">Devam ederek <b>Kullanım Koşulları</b>'nı kabul etmiş olursun.<br>Her mesaj <b>+5 Çıtcoin</b> kazandırır. Mesajların 24 saat sonra silinir.</div>
 </div>
 <div class="features">
+<div class="feat"><div>🤖</div><p>Gerçek<br>Yapay Zeka</p></div>
 <div class="feat"><div>🪙</div><p>Çıtcoin<br>Kazan</p></div>
-<div class="feat"><div>🔥</div><p>Anonim</p></div>
 <div class="feat"><div>⚡</div><p>Çok Hızlı</p></div>
 <div class="feat"><div>🛡️</div><p>Güvenli</p></div>
 </div>
@@ -78,17 +79,16 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111}
 
 <div class="wrap" id="chatScreen">
 <div class="chatHeader">
-<div class="avatar">🐦</div>
-<div style="flex:1"><h3>Genel Sohbet</h3><span>● Çevrimiçi - Herkes burada</span></div>
+<div class="avatar">🤖</div>
+<div style="flex:1"><h3>Çıt AI - Gerçek Yapay Zeka</h3><span>● Çevrimiçi - Sana cevap veriyor</span></div>
 <div style="font-size:22px">🔔</div>
 </div>
 <div class="coinBar">🪙 <span id="citcoin">0</span> Çıtcoin <small>Her mesaj +5 Çıtcoin • Günde ilk giriş +20 Çıtcoin</small></div>
 <div class="messages" id="mesajlar">
-<div class="welcome">Hoş geldin <b id="hosgeldinAd">Kral</b>! 👋<br>Giriş bonusu olarak <b>+20 Çıtcoin</b> kazandın! 🪙</div>
-<div class="msg other">Selam! Çıt Chat'e hoş geldin 🐦<small>Çıt Bot • şimdi</small></div>
+<div class="welcome">Hoş geldin <b id="hosgeldinAd">Kral</b>! 👋<br>Ben <b>Çıt AI</b> 🤖<br>Bana her şeyi sorabilirsin! Ders, oyun, espri, hikaye...<br>Giriş bonusu <b>+20 Çıtcoin</b> kazandın! 🪙</div>
 </div>
 <div class="inputBar">
-<input id="msgInput" placeholder="Mesaj yaz...">
+<input id="msgInput" placeholder="Çıt AI'ya bir şey sor...">
 <button id="sendBtn">➤</button>
 </div>
 </div>
@@ -107,31 +107,50 @@ chat.style.display = 'flex';
 document.getElementById('hosgeldinAd').textContent = ad;
 coinEkle(20);
 });
+
+async function gercekAIyaSor(soru){
+  var prompt = "Sen Çıt AI adında eğlenceli, samimi, Türkçe konuşan bir yapay zekasın. Kullanıcının adı Abdullah olabilir. Kısa, eğlenceli, samimi cevap ver. Emojiler kullan. Soru: " + soru;
+  try{
+    var res = await fetch("https://text.pollinations.ai/" + encodeURIComponent(prompt));
+    var txt = await res.text();
+    return txt;
+  }catch(e){
+    return "İnternette bir sorun oldu kral, tekrar dene! 😅";
+  }
+}
+
 var sendBtn = document.getElementById('sendBtn');
-function gonder(){
+async function gonder(){
 var input = document.getElementById('msgInput');
 var t = input.value.trim();
 if(!t) return;
 var d = document.createElement('div');
 d.className = 'msg me';
-d.innerHTML = t + '<small>Sen • şimdi</small>';
+d.innerHTML = t.replace(/</g,"&lt;") + '<small>Sen • şimdi</small>';
 document.getElementById('mesajlar').appendChild(d);
 input.value = '';
 coinEkle(5);
 input.focus();
-setTimeout(function(){
-var cevaplar = ['Aynen kral 😂','Çok iyi ya 🔥','Valla mı? 😅','Çıt Chat çok sardı! 🐦'];
-var r = cevaplar[Math.floor(Math.random()*cevaplar.length)];
+window.scrollTo(0, document.body.scrollHeight);
+
+var typing = document.createElement('div');
+typing.className = 'msg other typing';
+typing.id = 'typingMsg';
+typing.textContent = 'Çıt AI yazıyor... 🤖✍️';
+document.getElementById('mesajlar').appendChild(typing);
+window.scrollTo(0, document.body.scrollHeight);
+
+var cevap = await gercekAIyaSor(t);
+document.getElementById('typingMsg').remove();
 var b = document.createElement('div');
 b.className = 'msg other';
-b.innerHTML = r + '<small>Çıt Bot • şimdi</small>';
+b.innerHTML = cevap.replace(/</g,"&lt;") + '<small>Çıt AI • şimdi</small>';
 document.getElementById('mesajlar').appendChild(b);
 window.scrollTo(0, document.body.scrollHeight);
-}, 900);
 }
 sendBtn.addEventListener('click', gonder);
 document.getElementById('msgInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ gonder(); } });
 document.getElementById('kullaniciAdi').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ baslaBtn.click(); } });
 </script>
 </body>
-</html>
+  </html>
