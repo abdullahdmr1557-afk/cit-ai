@@ -62,4 +62,47 @@ body{background:#f0f2f5}
   <div class="bigBird">🐦</div>
   <h1>Çıt Chat</h1>
   <p>Arkadaşlarınla konuş, Çıt AI ile eğlen!</p>
-  
+  <div class="loginBox">
+<label>Adın ne? *</label>
+<input id="adInput" placeholder="Adını yazmadan giremezsin!" onkeydown="if(event.key==='Enter') girisYap()">
+<div id="hata">⚠️ Önce adını yaz kral!</div>
+<button type="button" onclick="girisYap()">🚀 Sohbete Başla</button>
+<small style="color:#888;font-size:12px;display:block;margin-top:10px">Adını yazman zorunlu!</small>
+</div>
+</div>
+
+<div id="listScreen">
+<div class="header"><h1>Sohbetler</h1><span>🔍 ⋮</span></div>
+<div class="coinBar"><span>🪙 Çıtcoin: <span id="coinSayi">0</span></span><span onclick="marketAc()" style="cursor:pointer">🛒 Market</span></div>
+<div class="search"><input id="ara" placeholder="Ara" oninput="filtrele()"></div>
+<div class="kisilerBaslik">👥 Kişiler</div>
+<div class="list" id="liste"></div>
+<div class="fab-wrap">
+<div class="mini-bubble" onclick="arkadasEkleAc()">💬</div>
+<div class="fab" onclick="citAc()">🐦</div>
+</div>
+</div>
+
+<div id="chatScreen">
+<div class="chat-head">
+<span style="font-size:24px;cursor:pointer" onclick="geri()">←</span>
+<div class="avatar" id="cAvatar" style="width:42px;height:42px;font-size:20px">🐦</div>
+<div style="flex:1"><b id="cName">Çıt AI</b><br><small id="cStatus">çevrimiçi</small></div>
+</div>
+<div class="roomBox" id="roomBox" style="display:none">Oda Kodu: <b id="roomKod"></b></div>
+<div class="msgs" id="msgs"></div>
+<div class="inputBar">
+<input id="mesajInput" placeholder="Mesaj yaz..." onkeydown="if(event.key==='Enter') gonder()">
+<button onclick="gonder()">➤</button>
+</div>
+</div>
+
+<div id="ekleModal">
+<div class="modalBox">
+<h3>💬 Kişi Ekle</h3>
+<input id="yeniAd" placeholder="Kişinin adı">
+<input id="yeniKod" placeholder="Oda Kodu (örn: abdullah123)">
+<button onclick="arkadasKaydet()">✅ Ekle ve Sohbete Başla</button>
+<button class="iptal" onclick="document.getElementById('ekleModal').style.display='none'">Vazgeç</button>
+</div>
+</div>
