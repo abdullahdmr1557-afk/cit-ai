@@ -3,101 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cit Mesaj</title>
+<title>
+  Cit Mesaj
+</title>
 <style>
-*{box-sizing:border-box;font-family:Arial}
-body{margin:0;background:#F6F6F6}
-#ust{padding:18px 16px 8px 16px;background:white;display:flex;justify-content:space-between;align-items:center}
-#ust h1{margin:0;font-size:32px}
-#ust span{font-size:24px;cursor:pointer}
-#aramaKutu{background:white;padding:0 16px 10px 16px}
-#aramaKutu input{width:100%;background:#F0F0F0;border:none;padding:12px 14px;border-radius:12px;font-size:16px;outline:none}
-#yeniBtn{margin:12px 16px;background:#25D366;color:white;border:none;padding:13px;border-radius:12px;width:calc(100% - 32px);font-weight:bold;font-size:16px;cursor:pointer}
-#bos{padding:40px 20px;text-align:center;color:#888}
-#bos div{font-size:60px}
-#bos b{color:#333;font-size:18px}
-.kisi{display:flex;align-items:center;gap:12px;background:white;padding:12px 16px;border-bottom:1px solid #f0f0f0;cursor:pointer}
-.kisi img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#FFE0B2;display:flex;align-items:center;justify-content:center;font-size:26px}
-.kisi .orta{flex:1;min-width:0}
-.kisi .orta b{font-size:17px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kisi .orta span{font-size:14px;color:#666;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
-.kisi .sag{text-align:right;font-size:12px;color:#888;flex-shrink:0}
-.kisi .sil{color:red;font-size:20px;margin-left:6px}
-#citBtn{position:fixed;right:18px;bottom:22px;width:72px;height:72px;background:#FF8A3C;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 8px 20px rgba(255,138,60,0.5);cursor:pointer;border:4px solid #FFE0B2;z-index:99}
-#chatEkrani{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#FFF8E1;flex-direction:column;z-index:100}
-#chatUst{background:white;padding:12px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
-#chatUst .avatar{width:44px;height:44px;border-radius:50%;background:#FFE0B2;display:flex;align-items:center;justify-content:center;font-size:24px}
-#chatUst b{flex:1;font-size:17px}
-#chatUst button{background:none;border:none;font-size:22px;cursor:pointer}
-#chatAlan{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
-.mesaj{padding:10px 12px;border-radius:14px;max-width:80%;font-size:15px;line-height:1.4;white-space:pre-wrap}
-.ben{background:#FFD54F;margin-left:auto;border-bottom-right-radius:4px}
-.onlar{background:white;border:1px solid #FFE0B2;border-bottom-left-radius:4px}
-#chatAlt{background:white;padding:10px;display:flex;gap:8px}
-#chatAlt input{flex:1;padding:12px;border:1px solid #ddd;border-radius:20px;outline:none;font-size:15px}
-#chatAlt button{background:#FF6D00;color:white;border:none;padding:12px 18px;border-radius:20px;font-weight:bold;cursor:pointer}
-</style>
-</head>
-<body>
 
-<div id="listeEkrani">
-  <div id="ust"><h1>Sohbetler</h1><span onclick="yeniKisi()">＋</span></div>
-  <div id="aramaKutu"><input id="ara" placeholder="🔍 Ara" oninput="listeyiCiz()"></div>
-  <button id="yeniBtn" onclick="yeniKisi()">＋ Yeni Sohbet Başlat</button>
-  <div id="liste"></div>
-  <div id="bos" style="display:none">
-    <div>💬</div>
-    <br><b>Henüz sohbet yok</b><br><br>
-    <span>Yukarıdaki <b>＋ Yeni Sohbet</b> butonuna bas,<br>kiminle konuşmak istiyorsan onu ekle kral 👑</span>
-  </div>
-</div>
-
-<div id="citBtn" onclick="citAc()">🦉</div>
-
-<div id="chatEkrani">
-  <div id="chatUst">
-    <button onclick="kapat()">←</button>
-    <div class="avatar" id="chatAvatar">👤</div>
-    <b id="chatIsim"></b>
-    <span>📞</span>
-  </div>
-  <div id="chatAlan"></div>
-  <div id="chatAlt">
-    <input id="chatGirdi" placeholder="Mesaj yaz...">
-    <button onclick="mesajGonder()">➤</button>
-  </div>
-</div>
-
-<script>
-var kisiler = JSON.parse(localStorage.getItem("cit_kisiler") || "[]");
-var mesajlar = JSON.parse(localStorage.getItem("cit_mesajlar") || "{}");
-var aktif = null;
-
-function kaydet(){
-  localStorage.setItem("cit_kisiler", JSON.stringify(kisiler));
-  localStorage.setItem("cit_mesajlar", JSON.stringify(mesajlar));
+* {
+  box-sizing: border-box;
+  font-family: Arial;
 }
 
-function harfAvatar(isim){
-  return isim.trim().charAt(0).toUpperCase();
+body {
+  margin: 0;
+  background: #F6F6F6;
 }
 
-function listeyiCiz(){
-  var liste = document.getElementById("liste");
-  var bos = document.getElementById("bos");
-  liste.innerHTML = "";
-  var arama = document.getElementById("ara").value.toLowerCase();
-  var filtreli = kisiler.filter(k=>k.isim.toLowerCase().includes(arama));
-  bos.style.display = filtreli.length===0 ? "block" : "none";
-  filtreli.forEach(function(k){
-    var div = document.createElement("div");
-    div.className = "kisi";
-    var sonMesaj = mesajlar[k.isim] && mesajlar[k.isim].length ? mesajlar[k.isim][mesajlar[k.isim].length-1].yazi : "Henüz mesaj yok, dokunup yaz kral";
-    div.innerHTML = '<div class="kisiImg" style="width:56px;height:56px;border-radius:50%;background:#FFE0B2;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">'+harfAvatar(k.isim)+'</div><div class="orta"><b>'+k.isim+'</b><span>'+sonMesaj+'</span></div><div class="sag">'+k.saat+'<br><span class="sil" onclick="event.stopPropagation();kisiSil(\''+k.isim+'\')">🗑️</span></div>';
-    div.onclick = function(){ sohbetAc(k.isim); };
-    liste.appendChild(div);
-  });
+#ust {
+  padding: 18px 16px 8px 16px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-function yeniKisi(){
-  var isim = prompt("Kiminle konuşmak istiyorsun kral
+#ust h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+#ust span {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#aramaKutu {
+  background: white;
+  padding: 0 16px 10px 16px;
+}
+
+#aramaKutu input {
+  width: 100%;
+  background: #F0F0F0;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+#yeniBtn {
+  margin: 12px 16px;
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 13px;
+  border-radius: 12px;
+  width: calc(100% - 32px);
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#bos {
+  padding: 40px 20px;
+  text-align: center;
+  color: #888;
+}
+
+#bos div {
+  font-size: 60px;
+}
+
+#bos b {
+  color: #333;
+  font-size: 18px;
+}
+
+.kisi {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: white;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+}
+
+.kisi .orta {
+  flex: 1;
+  min-width: 0;
+}
+
+.kisi .orta b {
+  font-size: 17px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kisi .orta span {
+  font-size: 14px;
+  color: #666;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.kisi .sag {
+  text-align: right;
+  font-size: 12px;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.kisi .sil {
+  color: red;
+  font-size: 20px;
+  margin-left: 6px;
+}
+
+#citBtn {
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  width: 72px;
+  height: 72px;
+  background: #FF8A3C;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  box-shadow: 0 8px 20px rgba(255,138,60,0.5);
+  cursor: pointer;
+  border: 4px solid #FFE0B2;
+  z-index: 99;
+}
+
+#chatEkrani {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #FFF8E1;
+  flex-direction: column;
+  z-index: 100;
+}
+
+#chatUst {
+  background: white;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
