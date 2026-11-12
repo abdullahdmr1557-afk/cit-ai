@@ -7,149 +7,15 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f0f2f5}
-
-/* ===== SEVDİĞİMİZ GİRİŞ EKRANI ===== */
 #loginScreen{position:fixed;inset:0;background:linear-gradient(180deg,#FF9F1C,#FF6B35);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;z-index:100;text-align:center;color:white}
 .onlineBadge{background:rgba(255,255,255,.22);padding:8px 16px;border-radius:20px;font-size:14px;font-weight:700;margin-bottom:18px}
-.onlineBadge i{width:9px;height:9px;background:#25D366;border-radius:50%;display:inline-block;margin-right:6px;box-shadow:0 0 0 3px rgba(37,211,102,.3)}
+.onlineBadge i{width:9px;height:9px;background:#25D366;border-radius:50%;display:inline-block;margin-right:6px}
 .bigBird{font-size:110px;background:white;width:160px;height:160px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 15px 35px rgba(0,0,0,.25);margin-bottom:12px}
-#loginScreen h1{font-size:52px;font-weight:900;letter-spacing:1px}
-#loginScreen p{opacity:.9;margin:8px 0 22px;font-size:15px;line-height:1.4}
+#loginScreen h1{font-size:52px;font-weight:900}
+#loginScreen p{opacity:.9;margin:8px 0 22px;font-size:15px}
 .loginBox{background:white;width:100%;max-width:360px;border-radius:22px;padding:20px;color:#333}
 .loginBox label{font-size:13px;font-weight:700;color:#888;text-align:left;display:block;margin-bottom:6px}
 .loginBox input{width:100%;padding:14px;border-radius:12px;border:1px solid #ddd;font-size:16px;outline:none;margin-bottom:12px}
 .loginBox button{width:100%;padding:14px;border:none;border-radius:12px;background:#111;color:white;font-weight:800;font-size:16px;cursor:pointer}
-.loginBox small{color:#888;font-size:12px;display:block;margin-top:10px}
-
-/* ===== SOHBETLER ===== */
 #listScreen{display:none}
-.header{padding:16px 16px 8px;display:flex;justify-content:space-between;align-items:center;background:white}
-.header h1{font-size:32px;font-weight:800}
-.search{background:white;padding:0 16px 12px;position:relative}
-.search input{width:100%;padding:12px 12px 12px 40px;border:none;background:#f0f2f5;border-radius:20px;font-size:16px;outline:none}
-.search:before{content:"🔍";position:absolute;left:30px;top:10px}
-.list{background:white}
-.item{display:flex;padding:12px 16px;gap:12px;align-items:center;cursor:pointer;border-bottom:1px solid #f0f0f0}
-.avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;color:white;font-weight:800}
-.item-info{flex:1;min-width:0}
-.item-info b{font-size:17px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.item-info p{font-size:14px;color:#666;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
-.item-right{text-align:right;flex-shrink:0}
-.item-right small{color:#888;font-size:12px;display:block}
-.badge{background:#25D366;color:white;border-radius:50%;width:20px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;margin-top:4px}
-.fab-wrap{position:fixed;right:18px;bottom:22px;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:10}
-.mini-bubble{width:38px;height:38px;border-radius:50% 50% 50% 4px;background:white;border:2px solid #25D366;box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#25D366;cursor:pointer}
-.fab{width:68px;height:68px;border-radius:50%;background:#FF9F1C;border:4px solid #fff;box-shadow:0 6px 20px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;font-size:36px;cursor:pointer}
-.topbar{background:#fff;padding:8px;display:flex;gap:8px}
-.topbar button{flex:1;padding:10px;border-radius:20px;border:1px solid #ddd;background:#fff;cursor:pointer;font-weight:700}
-.topbar button.active{background:#111;color:#fff}
-.coinBar{background:#FFF7E0;padding:8px 16px;display:flex;justify-content:space-between;font-weight:800;font-size:14px}
-.empty{text-align:center;padding:40px 20px;color:#888}
-#chatScreen{display:none;position:fixed;inset:0;background:#ece5dd;flex-direction:column;z-index:20}
-.chat-head{background:#fff;padding:10px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 5px rgba(0,0,0,.1)}
-.msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
-.msg{max-width:78%;padding:9px 12px;border-radius:14px;font-size:15px;line-height:1.4;box-shadow:0 1px 2px rgba(0,0,0,.1)}
-.me{align-self:flex-end;background:#d9fdd3;border-bottom-right-radius:4px}
-.other{align-self:flex-start;background:white;border-bottom-left-radius:4px}
-.inputBar{background:#fff;padding:8px;display:flex;gap:8px;align-items:center}
-.inputBar input{flex:1;padding:12px;border:none;background:#f0f2f5;border-radius:20px;outline:none;font-size:15px}
-.inputBar button{background:#25D366;border:none;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;color:white}
-.roomBox{background:#fff3d6;padding:10px;text-align:center;font-size:13px}
-#ekleModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:30;align-items:center;justify-content:center;padding:20px}
-.modalBox{background:white;width:100%;max-width:360px;border-radius:20px;padding:20px;text-align:center}
-.modalBox input{width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;margin-bottom:10px;font-size:15px;outline:none}
-.modalBox button{width:100%;padding:12px;border:none;border-radius:12px;background:#25D366;color:white;font-weight:800;font-size:15px;cursor:pointer}
-.modalBox .iptal{background:#eee;color:#333;margin-top:8px}
-</style>
-</head>
-<body>
-
-<!-- ===== GİRİŞ EKRANI - SEVDİĞİMİZ ===== -->
-<div id="loginScreen">
-  <div class="onlineBadge"><i></i> 1.240 çevrimiçi</div>
-  <div class="bigBird">🐦</div>
-  <h1>Çıt Chat</h1>
-  <p>Arkadaşlarınla konuş, Çıt AI ile eğlen!<br>Çıtcoin kazan, marketten hediye al!</p>
-  <div class="loginBox">
-    <label>Adın ne?</label>
-    <input id="adInput" placeholder="Adını yaz... (örn: Abdullah)">
-    <button onclick="girisYap()">🚀 Sohbete Başla</button>
-    <small>Adın sadece arkadaşlarına görünür. Şifresiz, kolay giriş.</small>
-  </div>
-  <p style="font-size:12px;opacity:.7;margin-top:16px">🪙 1.240 kişi şu an çevrimiçi • Sen de katıl!</p>
-</div>
-
-<!-- ===== SOHBETLER ===== -->
-<div id="listScreen">
-  <div class="header"><h1>Sohbetler</h1><span>🔍 ⋮</span></div>
-  <div class="coinBar"><span>🪙 Çıtcoin: <span id="coinSayi">0</span></span><span onclick="marketAc()" style="cursor:pointer">🛒 Market</span></div>
-  <div class="search"><input id="ara" placeholder="Ara" oninput="filtrele()"></div>
-  <div class="topbar">
-    <button id="btnAI" class="active" onclick="modDegis('ai')">🤖 Çıt AI</button>
-    <button id="btnArk" onclick="modDegis('ark')">👥 Kişiler</button>
-  </div>
-  <div class="list" id="liste"></div>
-  <div class="fab-wrap">
-    <div class="mini-bubble" onclick="arkadasEkleAc()">💬<span style="font-size:13px;margin-left:-13px;margin-top:-8px">+</span></div>
-    <div class="fab" onclick="citAc()">🐦</div>
-  </div>
-</div>
-
-<div id="chatScreen">
-  <div class="chat-head">
-    <span style="font-size:24px;cursor:pointer" onclick="geri()">←</span>
-    <div class="avatar" id="cAvatar" style="width:42px;height:42px;font-size:20px">🐦</div>
-    <div style="flex:1"><b id="cName">Çıt AI</b><br><small id="cStatus">çevrimiçi</small></div>
-    <span>🔍 ⋮</span>
-  </div>
-  <div class="roomBox" id="roomBox" style="display:none">Oda Kodu: <b id="roomKod"></b></div>
-  <div class="msgs" id="msgs"></div>
-  <div class="inputBar">
-    <input id="mesajInput" placeholder="Mesaj yaz..." onkeydown="if(event.key==='Enter') gonder()">
-    <button onclick="gonder()">➤</button>
-  </div>
-</div>
-
-<div id="ekleModal">
-  <div class="modalBox">
-    <h3>💬 Kişi Ekle</h3>
-    <p>Sadece senin eklediğin kişiler burada görünür.</p>
-    <input id="yeniAd" placeholder="Kişinin adı">
-    <input id="yeniKod" placeholder="Oda Kodu (örn: abdullah123)">
-    <button onclick="arkadasKaydet()">✅ Ekle ve Sohbete Başla</button>
-    <button class="iptal" onclick="document.getElementById('ekleModal').style.display='none'">Vazgeç</button>
-  </div>
-</div>
-
-<script>
-let ad = localStorage.getItem('cit_ad') || '';
-let coin = parseInt(localStorage.getItem('cit_coin')||'0');
-let aktifKisi=null, aktifMod='ai', odaKodu=localStorage.getItem('cit_oda')||'abdullah123', eventSource=null;
-
-// Eğer daha önce giriş yaptıysan, direkt Sohbetler'e git
-if(ad){
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('listScreen').style.display='block';
-}
-function girisYap(){
-  let v = document.getElementById('adInput').value.trim();
-  if(!v){ alert('Adını yaz kral!'); return; }
-  ad = v; localStorage.setItem('cit_ad', ad);
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('listScreen').style.display='block';
-  listele();
-}
-let ornekIsimler = ['aile grubu','elif','elif design','mert','kerem','ayşe','ayse','aile'];
-let kayitli = JSON.parse(localStorage.getItem('cit_kisiler')||'null') || [];
-kayitli = kayitli.filter(k => !ornekIsimler.includes(k.isim.toLowerCase()) && !['aile','elif','mert','kerem'].includes(k.id));
-let kisiler = [{id:'cit', isim:'Çıt AI 🐦', avatar:'🐦', renk:'#FF9F1C', son:'Selam! Ben Çıt, nasılsın? 😊', saat:'Şimdi', tip:'ai'}, ...kayitli];
-
-function coinGuncelle(){ document.getElementById('coinSayi').textContent=coin; localStorage.setItem('cit_coin', coin); }
-function marketAc(){ alert('🛒 Çıtcoin Marketi\n\n🪙 Coinin: '+coin+'\n\n🎩 Çıt\'a Şapka = 20 coin\n🎨 Pembe Tema = 50 coin\n👑 Kral Rozeti = 100 coin'); }
-function kaydetKisiler(){ let sadeceKisiler = kisiler.filter(k=>k.id!=='cit'); localStorage.setItem('cit_kisiler', JSON.stringify(sadeceKisiler)); }
-function modDegis(m){ aktifMod=m; document.getElementById('btnAI').className=m==='ai'?'active':''; document.getElementById('btnArk').className=m==='ark'?'active':''; listele(); }
-function listele(){
-  let filtreli = kisiler.filter(k=> aktifMod==='ai' ? k.tip==='ai' : true);
-  if(filtreli.length===0){ document.getElementById('liste').innerHTML = `<div class="empty"><b>Henüz kişi yok</b><br><br>Alttaki minik baloncuğa bas,<br>kendi kişini ekle 👇</div>`; return; }
-  let html=''; filtreli.forEach(k=>{ html+=`<div class="item" onclick="sohbetAc('${k.id}')"><div class="avatar" style="background:${k.renk}">${k.avatar}</div><div class="item-info"><b>${k.isim}</b><p>${k.son}</p></div><div class="item-right"><small>${k.saat}</small></div></div>`; });
-  document.getElementById('
+.header{padding:16px 16px 8
