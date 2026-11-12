@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>
-  Cit Mesaj
+  Çıt Chat
 </title>
 <style>
 
@@ -15,133 +15,254 @@
 
 body {
   margin: 0;
-  background: #F6F6F6;
+  background: #FFF8E1;
 }
 
-#ust {
-  padding: 18px 16px 8px 16px;
+/* GİRİŞ EKRANI */
+
+#girisEkrani {
+  min-height: 100vh;
   background: white;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
 }
 
-#ust h1 {
+.logoKutu {
+  width: 140px;
+  height: 140px;
+  background: #FF7A00;
+  border-radius: 35px;
+  border-bottom-right-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+  position: relative;
+}
+
+.logoKutu:after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  right: 25px;
+  width: 30px;
+  height: 30px;
+  background: #FF7A00;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+#girisEkrani h1 {
+  font-size: 48px;
+  margin: 20px 0 5px 0;
+  color: #111;
+}
+
+.slogan {
+  color: #FF7A00;
+  font-weight: bold;
+  font-size: 22px;
   margin: 0;
-  font-size: 32px;
 }
 
-#ust span {
-  font-size: 24px;
-  cursor: pointer;
+.altYazi {
+  color: #333;
+  font-size: 14px;
+  margin: 15px 0 25px 0;
+  line-height: 1.5;
 }
 
-#aramaKutu {
-  background: white;
-  padding: 0 16px 10px 16px;
-}
-
-#aramaKutu input {
+#girisEkrani input {
   width: 100%;
-  background: #F0F0F0;
-  border: none;
-  padding: 12px 14px;
+  max-width: 340px;
+  padding: 15px;
+  border: 2px solid #111;
   border-radius: 12px;
   font-size: 16px;
   outline: none;
 }
 
-#yeniBtn {
-  margin: 12px 16px;
-  background: #25D366;
+#baslaBtn {
+  width: 100%;
+  max-width: 340px;
+  background: #FF7A00;
   color: white;
   border: none;
-  padding: 13px;
+  padding: 16px;
   border-radius: 12px;
-  width: calc(100% - 32px);
+  font-size: 22px;
   font-weight: bold;
-  font-size: 16px;
+  margin-top: 15px;
   cursor: pointer;
 }
 
-#bos {
-  padding: 40px 20px;
-  text-align: center;
-  color: #888;
-}
-
-#bos div {
-  font-size: 60px;
-}
-
-#bos b {
+.kosul {
+  font-size: 13px;
+  margin-top: 20px;
   color: #333;
-  font-size: 18px;
+}
+
+.kosul b {
+  color: #FF7A00;
+}
+
+/* SOHBET LİSTESİ */
+
+#listeEkrani {
+  display: none;
+  background: white;
+  min-height: 100vh;
+  padding-bottom: 90px;
+}
+
+#listeUst {
+  padding: 16px 16px 5px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#listeUst h1 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+}
+
+#listeUst .ikonlar {
+  font-size: 24px;
+  display: flex;
+  gap: 14px;
+}
+
+#araKutu {
+  margin: 12px 16px;
+  background: #F1F1F1;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #999;
+}
+
+#araKutu input {
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 16px;
+  flex: 1;
 }
 
 .kisi {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: white;
   padding: 12px 16px;
-  border-bottom: 1px solid #f0f0f0;
   cursor: pointer;
+}
+
+.kisi:active {
+  background: #FFF3E6;
+}
+
+.kisi .avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+  background: #FFE0B2;
 }
 
 .kisi .orta {
   flex: 1;
   min-width: 0;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 10px;
 }
 
 .kisi .orta b {
-  font-size: 17px;
   display: block;
+  font-size: 17px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .kisi .orta span {
-  font-size: 14px;
-  color: #666;
+  color: #555;
+  font-size: 13px;
   display: block;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  margin-top: 2px;
 }
 
 .kisi .sag {
   text-align: right;
   font-size: 12px;
-  color: #888;
+  color: #999;
   flex-shrink: 0;
 }
 
-.kisi .sil {
-  color: red;
-  font-size: 20px;
-  margin-left: 6px;
+.rozet {
+  background: #22C55E;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-top: 4px;
 }
 
-#citBtn {
+#kusButon {
   position: fixed;
+  bottom: 20px;
   right: 18px;
-  bottom: 22px;
-  width: 72px;
-  height: 72px;
-  background: #FF8A3C;
+  width: 68px;
+  height: 68px;
+  background: #FF7A00;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 42px;
-  box-shadow: 0 8px 20px rgba(255,138,60,0.5);
+  font-size: 36px;
+  border: 3px solid white;
+  box-shadow: 0 8px 20px rgba(255,122,0,0.5);
   cursor: pointer;
-  border: 4px solid #FFE0B2;
-  z-index: 99;
+  z-index: 10;
 }
+
+#arti {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 30px;
+  height: 30px;
+  background: #111;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  border: 2px solid white;
+  line-height: 1;
+}
+
+/* CHAT EKRANI */
 
 #chatEkrani {
   display: none;
@@ -152,13 +273,242 @@ body {
   bottom: 0;
   background: #FFF8E1;
   flex-direction: column;
-  z-index: 100;
+  z-index: 20;
 }
 
 #chatUst {
-  background: white;
+  background: #111;
+  color: white;
   padding: 12px;
   display: flex;
   align-items: center;
   gap: 10px;
- 
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+#chatUst .miniLogo {
+  width: 48px;
+  height: 48px;
+  background: #FF7A00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  flex-shrink: 0;
+}
+
+#chatUst .isimKutu {
+  flex: 1;
+}
+
+#chatUst .isimKutu b {
+  font-size: 22px;
+  display: block;
+}
+
+#chatUst .isimKutu span {
+  font-size: 11px;
+  color: #FFB26B;
+}
+
+#chatUst button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#chatAlan {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mesaj {
+  padding: 12px 14px;
+  border-radius: 16px;
+  max-width: 80%;
+  font-size: 17px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  font-weight: bold;
+}
+
+.mesaj small {
+  display: block;
+  font-size: 11px;
+  font-weight: normal;
+  margin-top: 6px;
+}
+
+.gelen {
+  background: #111;
+  color: white;
+  border-bottom-left-radius: 4px;
+}
+
+.gelen small {
+  color: #FFB26B;
+}
+
+.giden {
+  background: #FF7A00;
+  color: white;
+  margin-left: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.giden small {
+  text-align: right;
+  color: white;
+}
+
+#chatAlt {
+  padding: 8px 10px 4px 10px;
+}
+
+#girdiKutu {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  padding: 6px 6px 6px 12px;
+  gap: 8px;
+}
+
+#girdiKutu input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px 0;
+}
+
+#girdiKutu button {
+  border: none;
+  background: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+#gonderBtn {
+  background: #FF7A00 !important;
+  color: white;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  font-size: 20px !important;
+}
+
+#uyari {
+  text-align: center;
+  font-size: 11px;
+  color: #FF7A00;
+  padding: 6px;
+  font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+
+<!-- GİRİŞ -->
+<div id="girisEkrani">
+  <div class="logoKutu">
+    🐦‍⬛
+  </div>
+  <h1>
+    Çıt Chat
+  </h1>
+  <p class="slogan">
+    Konuş, çıtla, silinsin!
+  </p>
+  <p class="altYazi">
+    Şifresiz. Mesajların okununca otomatik silinir.
+  </p>
+  <input
+    id="kullaniciAdi"
+    placeholder="👤  Kullanıcı adın"
+  >
+  <button
+    id="baslaBtn"
+    onclick="basla()"
+  >
+    Başla
+  </button>
+  <p class="kosul">
+    Devam ederek <b>Kullanım Koşulları</b> ve
+    <br>
+    <b>Gizlilik Politikası</b>'nı kabul etmiş olursun.
+  </p>
+</div>
+
+<!-- LİSTE -->
+<div id="listeEkrani">
+  <div id="listeUst">
+    <h1>
+      Sohbetler
+    </h1>
+    <div class="ikonlar">
+      <span>
+        🔍
+      </span>
+      <span>
+        ⋮
+      </span>
+    </div>
+  </div>
+  <div id="araKutu">
+    <span>
+      🔍
+    </span>
+    <input
+      id="araInput"
+      placeholder="Ara"
+      oninput="filtrele()"
+    >
+  </div>
+  <div id="liste">
+  </div>
+  <div
+    id="kusButon"
+    onclick="yeniKisi()"
+  >
+    🐦‍⬛
+    <div
+      id="arti"
+      onclick="yeniKisi(); event.stopPropagation()"
+    >
+      ＋
+    </div>
+  </div>
+</div>
+
+<!-- CHAT -->
+<div id="chatEkrani">
+  <div id="chatUst">
+    <button onclick="geri()">
+      ‹
+    </button>
+    <div class="miniLogo">
+      🐦‍⬛
+    </div>
+    <div class="isimKutu">
+      <b id="chatIsim">
+        Ayşe Yılmaz
+      </b>
+      <span>
+        Çevrimiçi • Mesajlar 60s sonra silinir
+      </span>
+    </div>
+    <span style="font-size:22px">
+      📞
+    </span>
+    <span style="font-size:22
