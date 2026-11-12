@@ -3,51 +3,294 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cit Chat V12</title>
+<title>
+Cit Chat V12
+</title>
 <style>
-body{font-family:Arial;background:#FFF8E1;margin:0;padding:0}
-#ust{width:100%;height:100px;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 2px 5px rgba(0,0,0,0.1)}
-#ust h1{margin:0;color:#FF6D00;font-size:28px}
-#ust p{margin:0;color:green;font-weight:bold;font-size:12px}
-#sayfa{max-width:600px;margin:0 auto;padding:15px;padding-bottom:190px}
-.mesaj{padding:12px;border-radius:15px;margin:10px 0;max-width:88%;word-wrap:break-word;white-space:pre-wrap}
-.kullanici{background:#FFD54F;margin-left:auto;text-align:right}
-.cit{background:white;border:1px solid #FFE0B2}
-.kaynak{font-size:11px;color:#20808d;margin-top:6px}
-#alt{position:fixed;bottom:0;left:0;right:0;background:white;padding:10px;display:flex;flex-direction:column;gap:8px;box-shadow:0 -2px 10px rgba(0,0,0,0.1)}
-#alt input{width:100%;padding:12px;border:1px solid #ccc;border-radius:10px;box-sizing:border-box;font-size:15px}
-.butonSatir{display:flex;gap:8px}
-.butonSatir button{flex:1;padding:12px;border:none;border-radius:10px;font-weight:bold;cursor:pointer;color:white}
+
+body {
+  font-family: Arial;
+  background: #FFF8E1;
+  margin: 0;
+  padding: 0;
+}
+
+#ust {
+  width: 100%;
+  height: 100px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#ust h1 {
+  margin: 0;
+  color: #FF6D00;
+  font-size: 28px;
+}
+
+#ust p {
+  margin: 0;
+  color: green;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+#sayfa {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 15px;
+  padding-bottom: 190px;
+}
+
+.mesaj {
+  padding: 12px;
+  border-radius: 15px;
+  margin: 10px 0;
+  max-width: 88%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.kullanici {
+  background: #FFD54F;
+  margin-left: auto;
+  text-align: right;
+}
+
+.cit {
+  background: white;
+  border: 1px solid #FFE0B2;
+}
+
+.kaynak {
+  font-size: 11px;
+  color: #20808d;
+  margin-top: 6px;
+}
+
+#alt {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+#alt input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
+.butonSatir {
+  display: flex;
+  gap: 8px;
+}
+
+.butonSatir button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
 </style>
 </head>
 <body>
-<div id="ust"><h1>🌙 Cit Chat</h1><p>● Çevrimiçi - V12 Akıllı Cit</p></div>
-<div id="sayfa"><div id="sohbet"><div class="mesaj cit">Merhaba kral! Ben Cit. Artık araştırabiliyorum da! 👑 Bir şey sor, Gönder'e bas sohbet edelim, Araştır'a bas bilgi bulayım.</div></div></div>
+
+<div id="ust">
+  <h1>
+    🌙 Cit Chat
+  </h1>
+  <p>
+    ● Çevrimiçi - V12 Akıllı Cit
+  </p>
+</div>
+
+<div id="sayfa">
+  <div id="sohbet">
+    <div class="mesaj cit">
+      Merhaba kral! Ben Cit.
+      Artık araştırabiliyorum da! 👑
+      Bir şey sor, Gönder'e bas sohbet edelim,
+      Araştır'a bas bilgi bulayım.
+    </div>
+  </div>
+</div>
+
 <div id="alt">
-<input id="girdi" placeholder="Cit'a bir sey sor...">
-<button onclick="citArastir()" style="width:100%;background:#20808d;color:white;border:none;padding:12px;border-radius:10px;font-weight:bold;cursor:pointer;font-size:15px">🔍 Cit Araştırsın</button>
-<div class="butonSatir">
-<button onclick="gonder()" style="background:#FF6D00">Gönder ➤</button>
-<button onclick="temizle()" style="background:#9E9E9E">Temizle</button>
-<button onclick="silAll()" style="background:#D32F2F">Sil</button>
+  <input
+    id="girdi"
+    placeholder="Cit'a bir sey sor..."
+  >
+  <button
+    onclick="citArastir()"
+    style="width:100%;background:#20808d;color:white;border:none;padding:12px;border-radius:10px;font-weight:bold;cursor:pointer;font-size:15px"
+  >
+    🔍 Cit Araştırsın
+  </button>
+  <div class="butonSatir">
+    <button
+      onclick="gonder()"
+      style="background:#FF6D00"
+    >
+      Gönder ➤
+    </button>
+    <button
+      onclick="temizle()"
+      style="background:#9E9E9E"
+    >
+      Temizle
+    </button>
+    <button
+      onclick="silAll()"
+      style="background:#D32F2F"
+    >
+      Sil
+    </button>
+  </div>
 </div>
-</div>
+
 <script>
-function gonder(){
-  var g=document.getElementById("girdi"); var soru=g.value.trim(); if(!soru) return;
-  ekle(soru,"kullanici"); g.value=""; ekle("Cit yazıyor...","cit");
-  var son=document.querySelectorAll(".cit"); var s=son[son.length-1];
-  fetch("https://text.pollinations.ai/openai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:[{role:"system",content:"Sen Cit, samimi ve eğlenceli bir asistansın. Türkçe konuş."},{role:"user",content:soru}],model:"openai"})})
-  .then(r=>r.json()).then(d=>{ s.innerText=d.choices[0].message.content; })
-  .catch(e=>{ s.innerText="İnternet hatası kral, tekrar dene!"; });
+
+function gonder() {
+  var g = document.getElementById("girdi");
+  var soru = g.value.trim();
+  if (!soru) {
+    return;
+  }
+  ekle(soru, "kullanici");
+  g.value = "";
+  ekle("Cit yazıyor...", "cit");
+  var mesajlar = document.querySelectorAll(".cit");
+  var son = mesajlar[mesajlar.length - 1];
+
+  fetch("https://text.pollinations.ai/openai", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      messages: [
+        {
+          role: "system",
+          content: "Sen Cit, samimi ve eğlenceli bir asistansın. Türkçe konuş."
+        },
+        {
+          role: "user",
+          content: soru
+        }
+      ],
+      model: "openai"
+    })
+  })
+  .then(function(r) {
+    return r.json();
+  })
+  .then(function(d) {
+    son.innerText = d.choices[0].message.content;
+  })
+  .catch(function(e) {
+    son.innerText = "İnternet hatası kral, tekrar dene!";
+  });
 }
 
-async function citArastir(){
-  var g=document.getElementById("girdi"); var soru=g.value.trim();
-  if(!soru){ alert("Önce bir şey yaz kral!"); return; }
-  ekle(soru,"kullanici"); g.value="";
-  ekle("🔍 Araştırıyorum kral, kaynaklara bakıyorum...","cit");
-  var son=document.querySelectorAll(".cit"); var s=son[son.length-1];
-  try{
-    // 1. Wikipedia'dan dene - en doğru kaynak
-    let wiki = await fetch("
+async function citArastir() {
+  var g = document.getElementById("girdi");
+  var soru = g.value.trim();
+  if (!soru) {
+    alert("Önce bir şey yaz kral!");
+    return;
+  }
+  ekle(soru, "kullanici");
+  g.value = "";
+  ekle("🔍 Araştırıyorum kral, kaynaklara bakıyorum...", "cit");
+  var mesajlar = document.querySelectorAll(".cit");
+  var son = mesajlar[mesajlar.length - 1];
+
+  try {
+    let wiki = await fetch(
+      "https://tr.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(soru)
+    ).then(function(r) {
+      return r.json();
+    });
+
+    if (wiki && wiki.extract) {
+      son.innerHTML = "Bulduk kral! 👑<br><br>" + wiki.title + "<br><br>" + wiki.extract + "<br><br>";
+      var a = document.createElement("div");
+      a.className = "kaynak";
+      a.innerHTML = '📚 Kaynak: <a href="' + wiki.content_urls.desktop.page + '" target="_blank">Wikipedia - ' + wiki.title + '</a>';
+      son.appendChild(a);
+      return;
+    }
+    throw new Error("wiki yok");
+  } catch (e) {
+    try {
+      let r = await fetch("https://text.pollinations.ai/openai", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: "system",
+              content: "Sen Cit. Kullanıcıya güncel ve doğru bilgi ver. Bilmediğin şeyi uydurma."
+            },
+            {
+              role: "user",
+              content: "Araştır ve doğru bilgi ver: " + soru
+            }
+          ],
+          model: "openai"
+        })
+      });
+      let d = await r.json();
+      son.innerText = d.choices[0].message.content + "\n\n📚 Kaynak: Wikipedia ve güncel bilgilerden derlendi.";
+    } catch (err) {
+      son.innerText = "Araştırırken hata oldu kral, tekrar dene!";
+    }
+  }
+}
+
+function ekle(yazi, tip) {
+  var d = document.createElement("div");
+  d.className = "mesaj " + tip;
+  d.innerText = yazi;
+  document.getElementById("sohbet").appendChild(d);
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+function temizle() {
+  document.getElementById("sohbet").innerHTML = "";
+}
+
+function silAll() {
+  document.getElementById("sohbet").innerHTML = '<div class="mesaj cit">Temizlendi kral! 👑</div>';
+}
+
+document.getElementById("girdi").addEventListener("keypress", function(e) {
+  if (e.key === "Enter") {
+    gonder();
+  }
+});
+
+</script>
+
+</body>
+</html>
