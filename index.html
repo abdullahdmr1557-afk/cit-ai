@@ -4,7 +4,7 @@
 <div id="game" class="box" style="display:none"></div>
 <div id="chat"></div>
 <div id="box"><input id="inp" placeholder="Mesaj yaz... arna, çark, milyoner, besle yaz!"><button class="btn" onclick="toggleRec()">🎤</button><button class="btn" onclick="send()">➤</button></div>
-<p style="text-align:center;font-size:12px">V7 ULTIMATE • 🎤 basılı tutma, 1 kere bas konuş, tekrar bas bitir</p>
+<p style="text-align:center;font-size:12px">V7 ULTIMATE • Güncellemeler çok yakında gelecek</p>
 <script>
 var coin=0,puan=0,cur='chat',rec=null,chunks=[],isRec=false,petL=1,petH=50,rx=130,ro=[],ri=null,rs=0;
 function upd(){document.getElementById('coin').innerText=coin;document.getElementById('puan').innerText=puan}
@@ -30,7 +30,9 @@ if(k.includes('coin')||k.includes('puan')){bot('🪙 Coin: '+coin+' • Puan: '+
 if(k.includes('selam')||k.includes('merhaba')){bot('Selam! Hoş geldin! 🐦');return}
 if(k.includes('film')){bot('🎬 Önerim: Recep İvedik 1 - Kahkaha garantili!');return}
 if(k.includes('şarkı')||k.includes('sarki')){bot('🎵 Semicenk - Geçiyor Zaman');return}
-bot('Vay be anlat biraz daha! 🐦')}
+if(k.includes('güncelleme')){bot('Güncellemeler çok yakında gelecek! 🐦');return}
+var replies=['Anladığımdan emin değilim, biraz daha açar mısın? 🐦','Çok üzgünüm anlayamıyorum... Tekrar söyler misin?','Anladığımdan emin değilim... Güncellemeler çok yakında gelecek!'];
+bot(replies[Math.floor(Math.random()*replies.length)])}
 document.getElementById('inp').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
-add('Selam! Ben Çıt 🐦 V7 ULTIMATE! 🏎️ Araba • 🎡 Çark • 💰 Milyoner • 🐦 Besle • 🎤 Ses Kaydı hepsi var! Dene: araba yaz!',false);
+add('Selam! Ben Çıt 🐦 V7 ULTIMATE! 🏎️ Araba • 🎡 Çark • 💰 Milyoner • 🐦 Besle • 🎤 Ses Kaydı hepsi var! Güncellemeler çok yakında gelecek!',false);
 </script></body></html>
