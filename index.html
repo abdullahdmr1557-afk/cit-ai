@@ -18,7 +18,9 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111}
 .hero h1 em{font-style:normal;color:#ff7a00}
 .hero p{font-size:20px;color:#666;margin-top:8px;line-height:1.4}
 .hero .tag{color:#ff7a00;font-weight:800;font-size:22px;margin-top:6px}
-.card{width:100%;background:#fff;border:2px solid #111;border-radius:20px;padding:16px;margin-top:22px;box-shadow:6px 6px 0 #111;text-align:left}
+.coinBox{background:linear-gradient(135deg,#ffcc00,#ff9a00);border-radius:14px;padding:12px 14px;margin-top:14px;width:100%;display:flex;justify-content:space-between;align-items:center;color:#111}
+.coinBox b{font-size:18px}.coinBox span{font-size:13px;font-weight:700}
+.card{width:100%;background:#fff;border:2px solid #111;border-radius:20px;padding:16px;margin-top:16px;box-shadow:6px 6px 0 #111;text-align:left}
 .card label{font-weight:800;font-size:14px}
 .card input{width:100%;padding:14px;border:2px solid #ddd;border-radius:12px;font-size:17px;margin-top:8px;outline:none}
 .card input:focus{border-color:#ff7a00}
@@ -29,14 +31,12 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111}
 .features{display:flex;gap:10px;margin-top:18px;width:100%}
 .feat{flex:1;background:#f8f8f8;border-radius:14px;padding:12px;text-align:center}
 .feat div{font-size:24px}.feat p{font-size:12px;font-weight:700;margin-top:4px}
-.coinBox{background:linear-gradient(135deg,#ffcc00,#ff9a00);border-radius:14px;padding:12px;margin-top:14px;width:100%;display:flex;justify-content:space-between;align-items:center;color:#111}
-.coinBox b{font-size:18px}.coinBox span{font-size:13px;font-weight:700}
 .footer{padding:14px;text-align:center;font-size:12px;color:#999}
 #chatScreen{display:none;flex-direction:column;min-height:100vh}
 .chatHeader{padding:14px 16px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px;position:sticky;top:0;background:#fff;z-index:5}
 .avatar{width:44px;height:44px;background:#ff7a00;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff}
 .chatHeader h3{font-size:17px}.chatHeader span{font-size:12px;color:#22c55e;font-weight:700}
-.coinBar{background:#fff8d6;padding:11px 14px;text-align:center;font-weight:900;border-bottom:2px solid #ffcc00;font-size:15px;position:sticky;top:72px;z-index:5}
+.coinBar{background:#fff8d6;padding:11px;text-align:center;font-weight:900;border-bottom:2px solid #ffcc00;font-size:15px;position:sticky;top:72px;z-index:5}
 .coinBar small{display:block;font-size:11px;font-weight:600;color:#777}
 .messages{flex:1;padding:16px;display:flex;flex-direction:column;gap:10px;background:#fffaf5}
 .msg{max-width:80%;padding:11px 14px;border-radius:16px;font-size:15px;line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,.06)}
@@ -67,10 +67,71 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111}
 <div class="small">Devam ederek <b>Kullanım Koşulları</b>'nı kabul etmiş olursun.<br>Her mesaj <b>+5 Çıtcoin</b> kazandırır. Mesajların 24 saat sonra silinir.</div>
 </div>
 <div class="features">
-<div class="feat"><div>🪙</div><p>Çıtcoin Kazan</p></div>
+<div class="feat"><div>🪙</div><p>Çıtcoin<br>Kazan</p></div>
 <div class="feat"><div>🔥</div><p>Anonim</p></div>
 <div class="feat"><div>⚡</div><p>Çok Hızlı</p></div>
 <div class="feat"><div>🛡️</div><p>Güvenli</p></div>
 </div>
 </div>
-<div class="footer">Çıt Chat © 2026 - Türkiye'den sevgilerle 🇹🇷</
+<div class="footer">Çıt Chat © 2026 - Türkiye'den sevgilerle 🇹🇷</div>
+</div>
+
+<div class="wrap" id="chatScreen">
+<div class="chatHeader">
+<div class="avatar">🐦</div>
+<div style="flex:1"><h3>Genel Sohbet</h3><span>● Çevrimiçi - Herkes burada</span></div>
+<div style="font-size:22px">🔔</div>
+</div>
+<div class="coinBar">🪙 <span id="citcoin">0</span> Çıtcoin <small>Her mesaj +5 Çıtcoin • Günde ilk giriş +20 Çıtcoin</small></div>
+<div class="messages" id="mesajlar">
+<div class="welcome">Hoş geldin <b id="hosgeldinAd">Kral</b>! 👋<br>Giriş bonusu olarak <b>+20 Çıtcoin</b> kazandın! 🪙</div>
+<div class="msg other">Selam! Çıt Chat'e hoş geldin 🐦<small>Çıt Bot • şimdi</small></div>
+</div>
+<div class="inputBar">
+<input id="msgInput" placeholder="Mesaj yaz...">
+<button id="sendBtn">➤</button>
+</div>
+</div>
+
+<script>
+var coinEl = document.getElementById('citcoin');
+var coins = 0;
+function coinEkle(miktar){ coins = coins + miktar; coinEl.textContent = coins; }
+var baslaBtn = document.getElementById('baslaBtn');
+baslaBtn.addEventListener('click', function(){
+var ad = document.getElementById('kullaniciAdi').value.trim();
+if(!ad){ alert('Önce adını yaz kral!'); return; }
+document.getElementById('loginScreen').style.display = 'none';
+var chat = document.getElementById('chatScreen');
+chat.style.display = 'flex';
+document.getElementById('hosgeldinAd').textContent = ad;
+coinEkle(20);
+});
+var sendBtn = document.getElementById('sendBtn');
+function gonder(){
+var input = document.getElementById('msgInput');
+var t = input.value.trim();
+if(!t) return;
+var d = document.createElement('div');
+d.className = 'msg me';
+d.innerHTML = t + '<small>Sen • şimdi</small>';
+document.getElementById('mesajlar').appendChild(d);
+input.value = '';
+coinEkle(5);
+input.focus();
+setTimeout(function(){
+var cevaplar = ['Aynen kral 😂','Çok iyi ya 🔥','Valla mı? 😅','Çıt Chat çok sardı! 🐦'];
+var r = cevaplar[Math.floor(Math.random()*cevaplar.length)];
+var b = document.createElement('div');
+b.className = 'msg other';
+b.innerHTML = r + '<small>Çıt Bot • şimdi</small>';
+document.getElementById('mesajlar').appendChild(b);
+window.scrollTo(0, document.body.scrollHeight);
+}, 900);
+}
+sendBtn.addEventListener('click', gonder);
+document.getElementById('msgInput').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ gonder(); } });
+document.getElementById('kullaniciAdi').addEventListener('keydown', function(e){ if(e.key === 'Enter'){ baslaBtn.click(); } });
+</script>
+</body>
+</html>
