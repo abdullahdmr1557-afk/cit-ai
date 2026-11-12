@@ -3,512 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>
-  Çıt Chat
-</title>
+<title>Çıt Chat - Konuş, Çıtla, Kazan!</title>
 <style>
-
-* {
-  box-sizing: border-box;
-  font-family: Arial;
-}
-
-body {
-  margin: 0;
-  background: #FFF8E1;
-}
-
-/* GİRİŞ EKRANI */
-
-#girisEkrani {
-  min-height: 100vh;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  text-align: center;
-}
-
-.logoKutu {
-  width: 140px;
-  height: 140px;
-  background: #FF7A00;
-  border-radius: 35px;
-  border-bottom-right-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 80px;
-  position: relative;
-}
-
-.logoKutu:after {
-  content: "";
-  position: absolute;
-  bottom: -12px;
-  right: 25px;
-  width: 30px;
-  height: 30px;
-  background: #FF7A00;
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-}
-
-#girisEkrani h1 {
-  font-size: 48px;
-  margin: 20px 0 5px 0;
-  color: #111;
-}
-
-.slogan {
-  color: #FF7A00;
-  font-weight: bold;
-  font-size: 22px;
-  margin: 0;
-}
-
-.altYazi {
-  color: #333;
-  font-size: 14px;
-  margin: 15px 0 25px 0;
-  line-height: 1.5;
-}
-
-#girisEkrani input {
-  width: 100%;
-  max-width: 340px;
-  padding: 15px;
-  border: 2px solid #111;
-  border-radius: 12px;
-  font-size: 16px;
-  outline: none;
-}
-
-#baslaBtn {
-  width: 100%;
-  max-width: 340px;
-  background: #FF7A00;
-  color: white;
-  border: none;
-  padding: 16px;
-  border-radius: 12px;
-  font-size: 22px;
-  font-weight: bold;
-  margin-top: 15px;
-  cursor: pointer;
-}
-
-.kosul {
-  font-size: 13px;
-  margin-top: 20px;
-  color: #333;
-}
-
-.kosul b {
-  color: #FF7A00;
-}
-
-/* SOHBET LİSTESİ */
-
-#listeEkrani {
-  display: none;
-  background: white;
-  min-height: 100vh;
-  padding-bottom: 90px;
-}
-
-#listeUst {
-  padding: 16px 16px 5px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#listeUst h1 {
-  margin: 0;
-  font-size: 32px;
-  font-weight: 800;
-}
-
-#listeUst .ikonlar {
-  font-size: 24px;
-  display: flex;
-  gap: 14px;
-}
-
-#araKutu {
-  margin: 12px 16px;
-  background: #F1F1F1;
-  border-radius: 14px;
-  padding: 12px 14px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  color: #999;
-}
-
-#araKutu input {
-  border: none;
-  background: none;
-  outline: none;
-  font-size: 16px;
-  flex: 1;
-}
-
-.kisi {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  cursor: pointer;
-}
-
-.kisi:active {
-  background: #FFF3E6;
-}
-
-.kisi .avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  flex-shrink: 0;
-  background: #FFE0B2;
-}
-
-.kisi .orta {
-  flex: 1;
-  min-width: 0;
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 10px;
-}
-
-.kisi .orta b {
-  display: block;
-  font-size: 17px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.kisi .orta span {
-  color: #555;
-  font-size: 13px;
-  display: block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.kisi .sag {
-  text-align: right;
-  font-size: 12px;
-  color: #999;
-  flex-shrink: 0;
-}
-
-.rozet {
-  background: #22C55E;
-  color: white;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-  margin-left: auto;
-  margin-top: 4px;
-}
-
-#kusButon {
-  position: fixed;
-  bottom: 20px;
-  right: 18px;
-  width: 68px;
-  height: 68px;
-  background: #FF7A00;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36px;
-  border: 3px solid white;
-  box-shadow: 0 8px 20px rgba(255,122,0,0.5);
-  cursor: pointer;
-  z-index: 10;
-}
-
-#arti {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 30px;
-  height: 30px;
-  background: #111;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: bold;
-  border: 2px solid white;
-  line-height: 1;
-}
-
-/* CHAT EKRANI */
-
-#chatEkrani {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #FFF8E1;
-  flex-direction: column;
-  z-index: 20;
-}
-
-#chatUst {
-  background: #111;
-  color: white;
-  padding: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
-}
-
-#chatUst .miniLogo {
-  width: 48px;
-  height: 48px;
-  background: #FF7A00;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 26px;
-  flex-shrink: 0;
-}
-
-#chatUst .isimKutu {
-  flex: 1;
-}
-
-#chatUst .isimKutu b {
-  font-size: 22px;
-  display: block;
-}
-
-#chatUst .isimKutu span {
-  font-size: 11px;
-  color: #FFB26B;
-}
-
-#chatUst button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-#chatAlan {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.mesaj {
-  padding: 12px 14px;
-  border-radius: 16px;
-  max-width: 80%;
-  font-size: 17px;
-  line-height: 1.4;
-  white-space: pre-wrap;
-  font-weight: bold;
-}
-
-.mesaj small {
-  display: block;
-  font-size: 11px;
-  font-weight: normal;
-  margin-top: 6px;
-}
-
-.gelen {
-  background: #111;
-  color: white;
-  border-bottom-left-radius: 4px;
-}
-
-.gelen small {
-  color: #FFB26B;
-}
-
-.giden {
-  background: #FF7A00;
-  color: white;
-  margin-left: auto;
-  border-bottom-right-radius: 4px;
-}
-
-.giden small {
-  text-align: right;
-  color: white;
-}
-
-#chatAlt {
-  padding: 8px 10px 4px 10px;
-}
-
-#girdiKutu {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  padding: 6px 6px 6px 12px;
-  gap: 8px;
-}
-
-#girdiKutu input {
-  flex: 1;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  padding: 10px 0;
-}
-
-#girdiKutu button {
-  border: none;
-  background: none;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-#gonderBtn {
-  background: #FF7A00 !important;
-  color: white;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  font-size: 20px !important;
-}
-
-#uyari {
-  text-align: center;
-  font-size: 11px;
-  color: #FF7A00;
-  padding: 6px;
-  font-weight: bold;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#fff;color:#111}
+.wrap{max-width:460px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.top{padding:16px;display:flex;justify-content:space-between;align-items:center}
+.logo-mini{font-size:26px;font-weight:900}
+.logo-mini span{color:#ff7a00}
+.pill{background:#fff2e6;color:#ff7a00;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:700}
+.hero{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
+.bird{font-size:110px;line-height:1;filter:drop-shadow(0 10px 20px rgba(255,122,0,.3))}
+.hero h1{font-size:52px;letter-spacing:-1px;margin-top:10px}
+.hero h1 em{font-style:normal;color:#ff7a00}
+.hero p{font-size:20px;color:#666;margin-top:8px;line-height:1.4}
+.hero .tag{color:#ff7a00;font-weight:800;font-size:22px;margin-top:6px}
+.card{width:100%;background:#fff;border:2px solid #111;border-radius:20px;padding:16px;margin-top:22px;box-shadow:6px 6px 0 #111;text-align:left}
+.card label{font-weight:800;font-size:14px}
+.card input{width:100%;padding:14px;border:2px solid #ddd;border-radius:12px;font-size:17px;margin-top:8px;outline:none}
+.card input:focus{border-color:#ff7a00}
+.btn{width:100%;padding:15px;background:#ff7a00;color:#fff;border:none;border-radius:14px;font-size:20px;font-weight:900;margin-top:12px;cursor:pointer;box-shadow:0 4px 0 #d95f00}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #d95f00}
+.small{font-size:13px;color:#888;margin-top:12px;line-height:1.5;text-align:center}
+.small b{color:#111}
+.features{display:flex;gap:10px;margin-top:18px;width:100%}
+.feat{flex:1;background:#f8f8f8;border-radius:14px;padding:12px;text-align:center}
+.feat div{font-size:24px}.feat p{font-size:12px;font-weight:700;margin-top:4px}
+.coinBox{background:linear-gradient(135deg,#ffcc00,#ff9a00);border-radius:14px;padding:12px;margin-top:14px;width:100%;display:flex;justify-content:space-between;align-items:center;color:#111}
+.coinBox b{font-size:18px}.coinBox span{font-size:13px;font-weight:700}
+.footer{padding:14px;text-align:center;font-size:12px;color:#999}
+#chatScreen{display:none;flex-direction:column;min-height:100vh}
+.chatHeader{padding:14px 16px;border-bottom:1px solid #eee;display:flex;align-items:center;gap:10px;position:sticky;top:0;background:#fff;z-index:5}
+.avatar{width:44px;height:44px;background:#ff7a00;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff}
+.chatHeader h3{font-size:17px}.chatHeader span{font-size:12px;color:#22c55e;font-weight:700}
+.coinBar{background:#fff8d6;padding:11px 14px;text-align:center;font-weight:900;border-bottom:2px solid #ffcc00;font-size:15px;position:sticky;top:72px;z-index:5}
+.coinBar small{display:block;font-size:11px;font-weight:600;color:#777}
+.messages{flex:1;padding:16px;display:flex;flex-direction:column;gap:10px;background:#fffaf5}
+.msg{max-width:80%;padding:11px 14px;border-radius:16px;font-size:15px;line-height:1.4;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.msg.other{background:#fff;border:1px solid #eee;align-self:flex-start;border-bottom-left-radius:4px}
+.msg.me{background:#ff7a00;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg small{display:block;font-size:11px;opacity:.7;margin-top:4px}
+.inputBar{padding:12px;border-top:1px solid #eee;display:flex;gap:8px;background:#fff;position:sticky;bottom:0}
+.inputBar input{flex:1;padding:13px;border:2px solid #eee;border-radius:999px;font-size:15px;outline:none}
+.inputBar button{background:#ff7a00;color:#fff;border:none;width:52px;height:52px;border-radius:50%;font-size:22px;cursor:pointer}
+.welcome{background:#111;color:#fff;padding:14px;border-radius:14px;text-align:center;font-size:14px}
+.welcome b{color:#ffcc00}
 </style>
 </head>
 <body>
 
-<!-- GİRİŞ -->
-<div id="girisEkrani">
-  <div class="logoKutu">
-    🐦‍⬛
-  </div>
-  <h1>
-    Çıt Chat
-  </h1>
-  <p class="slogan">
-    Konuş, çıtla, silinsin!
-  </p>
-  <p class="altYazi">
-    Şifresiz. Mesajların okununca otomatik silinir.
-  </p>
-  <input
-    id="kullaniciAdi"
-    placeholder="👤  Kullanıcı adın"
-  >
-  <button
-    id="baslaBtn"
-    onclick="basla()"
-  >
-    Başla
-  </button>
-  <p class="kosul">
-    Devam ederek <b>Kullanım Koşulları</b> ve
-    <br>
-    <b>Gizlilik Politikası</b>'nı kabul etmiş olursun.
-  </p>
+<div class="wrap" id="loginScreen">
+<div class="top"><div class="logo-mini">🐦 Çıt<span>Chat</span></div><div class="pill">● 1.240 çevrimiçi</div></div>
+<div class="hero">
+<div class="bird">🐦</div>
+<h1>Çıt <em>Chat</em></h1>
+<p>Konuş, çıtla, silinsin!</p>
+<div class="tag">Sohbet burada başlar ✦</div>
+<div class="coinBox"><div><b>🪙 Çıtcoin</b><br><span>Mesaj at, kazan!</span></div><div style="font-size:28px">🪙</div></div>
+<div class="card">
+<label>Kullanıcı Adın</label>
+<input id="kullaniciAdi" placeholder="örn: Abdullah" maxlength="20">
+<button class="btn" id="baslaBtn">Başla →</button>
+<div class="small">Devam ederek <b>Kullanım Koşulları</b>'nı kabul etmiş olursun.<br>Her mesaj <b>+5 Çıtcoin</b> kazandırır. Mesajların 24 saat sonra silinir.</div>
 </div>
-
-<!-- LİSTE -->
-<div id="listeEkrani">
-  <div id="listeUst">
-    <h1>
-      Sohbetler
-    </h1>
-    <div class="ikonlar">
-      <span>
-        🔍
-      </span>
-      <span>
-        ⋮
-      </span>
-    </div>
-  </div>
-  <div id="araKutu">
-    <span>
-      🔍
-    </span>
-    <input
-      id="araInput"
-      placeholder="Ara"
-      oninput="filtrele()"
-    >
-  </div>
-  <div id="liste">
-  </div>
-  <div
-    id="kusButon"
-    onclick="yeniKisi()"
-  >
-    🐦‍⬛
-    <div
-      id="arti"
-      onclick="yeniKisi(); event.stopPropagation()"
-    >
-      ＋
-    </div>
-  </div>
+<div class="features">
+<div class="feat"><div>🪙</div><p>Çıtcoin Kazan</p></div>
+<div class="feat"><div>🔥</div><p>Anonim</p></div>
+<div class="feat"><div>⚡</div><p>Çok Hızlı</p></div>
+<div class="feat"><div>🛡️</div><p>Güvenli</p></div>
 </div>
-
-<!-- CHAT -->
-<div id="chatEkrani">
-  <div id="chatUst">
-    <button onclick="geri()">
-      ‹
-    </button>
-    <div class="miniLogo">
-      🐦‍⬛
-    </div>
-    <div class="isimKutu">
-      <b id="chatIsim">
-        Ayşe Yılmaz
-      </b>
-      <span>
-        Çevrimiçi • Mesajlar 60s sonra silinir
-      </span>
-    </div>
-    <span style="font-size:22px">
-      📞
-    </span>
-    <span style="font-size:22
+</div>
+<div class="footer">Çıt Chat © 2026 - Türkiye'den sevgilerle 🇹🇷</
