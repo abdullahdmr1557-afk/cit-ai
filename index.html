@@ -1,38 +1,33 @@
-<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Çıt Chat V7 ULTIMATE</title><style>body{margin:0;font-family:Arial;background:#ffe8c9}header{background:#111;color:#fff;padding:12px;display:flex;gap:10px;align-items:center}header img{width:48px;height:48px;border-radius:50%;border:3px solid #ff7a00;background:#fff}.btn{background:#ff7a00;color:#fff;border:none;padding:12px;border-radius:20px;font-weight:bold;margin:4px}.box{background:#fff;margin:10px;border-radius:16px;padding:14px;text-align:center}#chat{padding:12px;display:flex;flex-direction:column;gap:10px}.m{padding:11px;border-radius:16px;font-weight:bold;max-width:85%}.u{background:#ff7a00;color:#fff;align-self:flex-end}.b{background:#111;color:#fff;align-self:flex-start}#box{display:flex;padding:10px;gap:6px}#inp{flex:1;padding:12px;border-radius:20px;border:2px solid #111}canvas{background:#111;border-radius:12px;margin:10px auto;display:block}.wheel{width:160px;height:160px;border-radius:50%;background:conic-gradient(#ff7a00 0 60deg,#4CAF50 60deg 120deg,#2196F3 120deg 180deg,#9C27B0 180deg 240deg,#FFC107 240deg 300deg,#FF3B30 300deg 360deg);margin:12px auto;display:flex;align-items:center;justify-content:center;font-size:40px;border:5px solid #111;transition:transform 2s}</style></head><body>
-<header><img src="cit.png"><div style="flex:1"><b>Çıt Chat V7 ULTIMATE</b><br>🪙 <span id="coin">0</span> • Puan: <span id="puan">0</span></div><button class="btn" onclick="coin+=20;upd();alert('🎁 +20 Coin!')">🎁</button></header>
-<div class="box"><b>🎮 OYUN MERKEZİ</b><br><button class="btn" onclick="show('race')">🏎️ Araba</button><button class="btn" onclick="show('wheel')">🎡 Çark</button><button class="btn" onclick="show('mil')">💰 Milyoner</button><button class="btn" onclick="show('pet')">🐦 Besle</button><button class="btn" onclick="show('chat')">💬 Sohbet</button></div>
-<div id="game" class="box" style="display:none"></div>
-<div id="chat"></div>
-<div id="box"><input id="inp" placeholder="Mesaj yaz... arna, çark, milyoner, besle yaz!"><button class="btn" onclick="toggleRec()">🎤</button><button class="btn" onclick="send()">➤</button></div>
-<p style="text-align:center;font-size:12px">V7 ULTIMATE • Güncellemeler çok yakında gelecek</p>
-<script>
-var coin=0,puan=0,cur='chat',rec=null,chunks=[],isRec=false,petL=1,petH=50,rx=130,ro=[],ri=null,rs=0;
-function upd(){document.getElementById('coin').innerText=coin;document.getElementById('puan').innerText=puan}
-function add(t,me){var d=document.createElement('div');d.className='m '+(me?'u':'b');d.innerText=t;document.getElementById('chat').appendChild(d)}
-function bot(t){setTimeout(()=>add(t,false),600)}
-function show(w){cur=w;var g=document.getElementById('game');g.style.display='block';
-if(w=='chat'){g.style.display='none';return}
-if(w=='race'){g.innerHTML='<h3>🏎️ ARABA</h3><canvas id="rc" width="300" height="300"></canvas><p id="rs">Skor: 0</p><button class="btn" onclick="rx=Math.max(10,rx-30)">⬅️</button><button class="btn" onclick="rx=Math.min(250,rx+30)">➡️</button><br><button class="btn" onclick="startRace()">▶ Başlat</button>'}
-if(w=='wheel'){g.innerHTML='<h3>🎡 ÇARK</h3><div class="wheel" id="wh">🎡</div><button class="btn" onclick="spin()">🎡 ÇEVİR!</button><p id="wr">Şansını dene!</p>'}
-if(w=='mil'){g.innerHTML='<h3>💰 MİLYONER</h3><p>Türkiye\'nin başkenti?</p><button class="btn" onclick="coin+=50;puan+=20;upd();alert(\'DOĞRU! +50 Coin!\')">Ankara ✅</button><br><button class="btn" onclick="alert(\'Yanlış!\')">İstanbul</button><button class="btn" onclick="alert(\'Yanlış!\')">İzmir</button>'}
-if(w=='pet'){g.innerHTML='<h3>🐦 ÇIT BESLE</h3><div style="font-size:70px" id="pe">🐣</div><p>Seviye: <span id="pl">'+petL+'</span> • Açlık: <span id="ph">'+petH+'</span></p><button class="btn" onclick="feed()">🍎 Besle +10 Coin</button>'}
-}
-function spin(){var w=document.getElementById('wh');w.style.transform='rotate('+(Math.floor(Math.random()*360)+720)+'deg)';setTimeout(()=>{var p=[10,20,5,50,0,100][Math.floor(Math.random()*6)];coin+=p;upd();document.getElementById('wr').innerText=p==0?'Boş geldi!':'Kazandın: +'+p+' Coin!'},2100)}
-function feed(){petH=Math.min(100,petH+20);if(petH>=80){petL++;petH=20}coin+=10;upd();document.getElementById('pe').innerText=petL>=3?'🦅':petL>=2?'🐦':'🐣';document.getElementById('pl').innerText=petL;document.getElementById('ph').innerText=petH;alert('Çıt doydu! Seviye '+petL)}
-function startRace(){var cv=document.getElementById('rc');if(!cv)return;var c=cv.getContext('2d');rx=130;ro=[];rs=0;clearInterval(ri);ri=setInterval(()=>{if(Math.random()<0.2)ro.push({x:Math.floor(Math.random()*5)*55+10,y:-20});ro.forEach(o=>o.y+=8);ro=ro.filter(o=>o.y<320);var crash=false;ro.forEach(o=>{if(o.y>240&&o.y<300&&Math.abs(o.x-rx)<35)crash=true});if(crash){clearInterval(ri);coin+=rs;upd();alert('KAZA! Skor: '+rs);return}rs++;c.fillStyle='#333';c.fillRect(0,0,300,300);c.fillStyle='#ff7a00';c.fillRect(rx,240,40,50);c.fillStyle='#FF3B30';ro.forEach(o=>c.fillRect(o.x,o.y,40,50));document.getElementById('rs').innerText='Skor: '+rs},100)}
-function toggleRec(){if(isRec){rec.stop();isRec=false;return}navigator.mediaDevices.getUserMedia({audio:true}).then(s=>{rec=new MediaRecorder(s);chunks=[];isRec=true;alert('🔴 Kaydediliyor! Bitirmek için tekrar 🎤 bas!');rec.ondataavailable=e=>chunks.push(e.data);rec.onstop=()=>{var url=URL.createObjectURL(new Blob(chunks,{type:'audio/webm'}));add('🎤 Sesli Mesajın!',true);var a=document.createElement('audio');a.controls=true;a.src=url;document.getElementById('chat').appendChild(a);coin+=5;upd();bot('Sesin harika! +5 Coin! 🎤')};rec.start()}).catch(()=>alert('Mikrofon izni lazım!'))}
-function send(){var i=document.getElementById('inp');var t=i.value.trim();if(!t)return;add(t,true);i.value='';var k=t.toLowerCase();
-if(k.includes('araba')||k.includes('yarış')){bot('🏎️ Araba açılıyor!');setTimeout(()=>show('race'),700);return}
-if(k.includes('çark')||k.includes('cark')){bot('🎡 Çark açılıyor!');setTimeout(()=>show('wheel'),700);return}
-if(k.includes('milyoner')){bot('💰 Milyoner açılıyor!');setTimeout(()=>show('mil'),700);return}
-if(k.includes('besle')){bot('🐦 Besleme açılıyor!');setTimeout(()=>show('pet'),700);return}
-if(k.includes('coin')||k.includes('puan')){bot('🪙 Coin: '+coin+' • Puan: '+puan);return}
-if(k.includes('selam')||k.includes('merhaba')){bot('Merhaba size nasıl yardımcı olabilirim? 🐦');return}
-if(k.includes('film')){bot('🎬 Önerim: Recep İvedik 1 - Kahkaha garantili!');return}
-if(k.includes('şarkı')||k.includes('sarki')){bot('🎵 Semicenk - Geçiyor Zaman');return}
-if(k.includes('güncelleme')){bot('Güncellemeler çok yakında gelecek! 🐦');return}
-var replies=['Anladığımdan emin değilim, biraz daha açar mısın? 🐦','Çok üzgünüm anlayamıyorum... Tekrar söyler misin?','Anladığımdan emin değilim... Güncellemeler çok yakında gelecek!'];
-bot(replies[Math.floor(Math.random()*replies.length)])}
-document.getElementById('inp').addEventListener('keydown',e=>{if(e.key==='Enter')send()});
-add('Merhaba size nasıl yardımcı olabilirim',false);
+<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Çıt Chat</title><style>body{margin:0;font-family:Arial;background:#ffe8c9}header{background:#111;color:#fff;padding:10px;display:flex;gap:10px;align-items:center}header img{width:50px;height:50px;border-radius:50%;border:3px solid #ff7a00;background:#fff}.btn{background:#ff7a00;color:#fff;border:none;padding:12px;border-radius:20px;font-weight:bold;margin:4px}.box{background:#fff;margin:10px;border-radius:16px;padding:14px;text-align:center}#chat{padding:12px;display:flex;flex-direction:column;gap:10px;min-height:400px}.m{padding:11px 14px;border-radius:16px;font-weight:bold;max-width:85%;font-size:15px}.u{background:#ff7a00;color:#fff;align-self:flex-end}.b{background:#111;color:#fff;align-self:flex-start}.small{font-size:11px;opacity:.8;margin-top:4px}#box{display:flex;padding:10px;gap:6px;position:fixed;bottom:0;left:0;right:0;background:#ffe8c9}#inp{flex:1;padding:13px;border-radius:25px;border:2px solid #111}input[type=text]{padding:12px;border-radius:15px;border:2px solid #111;width:80%}.friend{background:#fff;margin:8px;border-radius:16px;padding:12px;display:flex;gap:10px;align-items:center;cursor:pointer}.friend img{width:48px;height:48px;border-radius:50%;border:3px solid #ff7a00}.topbar{background:#111;color:#fff;padding:14px;display:flex;justify-content:space-between;align-items:center}.fab{background:#ff7a00;color:#fff;border:none;width:55px;height:55px;border-radius:50%;font-size:28px;position:fixed;bottom:20px;right:20px;box-shadow:0 4px 10px rgba(0,0,0,.3)}</style></head><body>
+
+<div id="home">
+<div class="topbar"><b style="font-size:20px">🐦 Çıt Chat</b><span>🔍 ⋮</span></div>
+<div style="padding:10px"><b>Adın:</b> <input id="myname" type="text" placeholder="Adını yaz" style="width:60%"></div>
+<div id="friends"></div>
+<button class="fab" onclick="addFriend()">+</button>
+<p style="text-align:center;font-size:11px;color:#888">Tüm mesajlar 60 sn sonra silinir 🔒</p>
+</div>
+
+<div id="app" style="display:none">
+<header><button class="btn" onclick="back()">←</button><img src="cit.png"><div style="flex:1"><b id="chatName">Sohbet</b><br><span style="font-size:12px;color:#ff7a00" id="chatSub">Çevrimiçi • Mesajlar 60sn sonra silinir</span></div><button class="btn">📞</button></header>
+<div id="chat"></div><div style="height:80px"></div>
+<div id="box"><input id="inp" placeholder="Mesaj yaz..."><button class="btn" onclick="sendReal()">➤</button></div>
+</div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import {getDatabase,ref,push,onChildAdded,remove} from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+const firebaseConfig={apiKey:"BURAYA_APIKEY",authDomain:"cit-chat.firebaseapp.com",databaseURL:"https://cit-chat-default-rtdb.firebaseio.com",projectId:"cit-chat",storageBucket:"cit-chat.appspot.com",messagingSenderId:"123456",appId:"1:123:web:abc"};
+let db,myName="",room="",isBot=false,currentFriend="";
+let friends=JSON.parse(localStorage.getItem('cit_friends')||'[]');
+window.renderFriends=()=>{let f=document.getElementById('friends');if(friends.length==0){f.innerHTML=`<div style="text-align:center;padding:40px 20px;color:#888"><div style="font-size:60px">🐦</div><h3>Henüz kimse yok</h3><p>Alttaki <b>+</b> tuşuna basıp<br>istediğin kadar kişi ekleyebilirsin!</p></div>`;return}let html=`<div style="padding:8px"><b>👥 Kişiler (${friends.length})</b></div>`;html+=friends.map((x,i)=>`<div class="friend" onclick="openFriend('${x.name}','${x.room}')"><img src="cit.png"><div style="flex:1"><b>${x.name}</b><br><span style="font-size:12px;color:#888">Oda: ${x.room} • Dokun, konuş!</span></div><span onclick="event.stopPropagation();delFriend(${i})">🗑️</span></div>`).join('');html+=`<div class="friend" onclick="openBot()"><img src="cit.png"><div style="flex:1"><b>🤖 Çıt (Yapay Zeka)</b><br><span style="font-size:12px;color:#888">Merhaba size nasıl yardımcı olabilirim</span></div></div>`;f.innerHTML=html};
+renderFriends();
+window.addFriend=()=>{let n=prompt('Kişinin adı ne?');if(!n)return;let r=prompt(n+' ile ortak Oda Kodu ne olsun? İkiniz de aynı kodu kullanın:');if(!r)return;friends.push({name:n,room:r.toUpperCase()});localStorage.setItem('cit_friends',JSON.stringify(friends));renderFriends();alert(n+' eklendi! ✅')};
+window.delFriend=(i)=>{if(confirm(friends[i].name+' silinsin mi?')){friends.splice(i,1);localStorage.setItem('cit_friends',JSON.stringify(friends));renderFriends()}};
+window.openFriend=(n,r)=>{myName=document.getElementById('myname').value.trim();if(!myName){alert('Önce en üstte Adını yaz!');return}currentFriend=n;room=r;isBot=false;document.getElementById('home').style.display='none';document.getElementById('app').style.display='block';document.getElementById('chatName').innerText=n;document.getElementById('chat').innerHTML='';try{const app=initializeApp(firebaseConfig);db=getDatabase(app);let rf=ref(db,'rooms/'+room);onChildAdded(rf,snap=>{let d=snap.val();if(d.sender!==myName)addMsg(d.text,false,d.sender,snap.key)});}catch(e){}};
+window.openBot=()=>{isBot=true;document.getElementById('home').style.display='none';document.getElementById('app').style.display='block';document.getElementById('chatName').innerText='Çıt';document.getElementById('chat').innerHTML='';addMsg('Merhaba size nasıl yardımcı olabilirim',false)};
+window.back=()=>{document.getElementById('app').style.display='none';document.getElementById('home').style.display='block';isBot=false};
+window.addMsg=(t,me,sender,key)=>{let c=document.getElementById('chat');let d=document.createElement('div');d.className='m '+(me?'u':'b');d.innerHTML=t+`<div class="small">${sender?sender+' • ':''}<span style="color:#ff7a00">⏱ 60 sn sonra silinecek</span></div>`;c.appendChild(d);c.scrollTop=c.scrollHeight;if(key){setTimeout(()=>{d.remove();remove(ref(db,'rooms/'+room+'/'+key))},60000)}};
+window.sendReal=()=>{let i=document.getElementById('inp');let t=i.value.trim();if(!t)return;if(isBot){addMsg(t,true);i.value='';setTimeout(()=>{let k=t.toLowerCase();if(k.includes('selam')||k.includes('merhaba'))addMsg('Merhaba size nasıl yardımcı olabilirim',false);else if(k.includes('güncelleme'))addMsg('Güncellemeler çok yakında gelecek!',false);else{let r=['Anladığımdan emin değilim, biraz daha açar mısın? 🐦','Çok üzgünüm anlayamıyorum... Tekrar söyler misin?','Anladığımdan emin değilim... Güncellemeler çok yakında gelecek!'];addMsg(r[Math.floor(Math.random()*r.length)],false)}},600);return}addMsg(t,true,'Sen');try{push(ref(db,'rooms/'+room),{text:t,sender:myName,time:Date.now()})}catch(e){}i.value=''};
+document.getElementById('inp').addEventListener('keydown',e=>{if(e.key==='Enter')sendReal()});
 </script></body></html>
