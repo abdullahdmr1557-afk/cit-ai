@@ -1,38 +1,103 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cit Chat</title>
-<style>
-body{margin:0;font-family:Arial;background:#FFEFD5}
-#welcome{min-height:100vh;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-#welcome img{width:140px;height:140px;border-radius:50%;object-fit:cover;border:4px solid #ff7a00}
-#welcome h1{font-size:42px;margin:10px 0 0}
-.slogan{color:#ff7a00;font-weight:bold;font-size:22px}
-#welcome input{width:90%;max-width:350px;padding:15px;border-radius:14px;border:2px solid black;font-size:16px;margin-top:20px}
-#welcome button{width:90%;max-width:350px;background:#ff7a00;color:white;border:none;padding:16px;border-radius:14px;font-size:22px;font-weight:bold;margin-top:14px}
-#home{display:none}
-.topbar{background:black;color:white;padding:12px;display:flex;justify-content:space-between}
-.fabCit{position:fixed;bottom:20px;left:18px;width:72px;height:72px;border-radius:50%;border:4px solid white;overflow:hidden;padding:0}
-.fabCit img{width:100%;height:100%;object-fit:cover}
-.fabPlus{position:fixed;bottom:20px;right:18px;width:68px;height:68px;background:#ff7a00;border-radius:50%;border:none;color:white;font-size:36px}
-.chat-item{display:flex;gap:12px;padding:12px;background:white;margin:10px 16px;border-radius:16px}
-.avatar{width:54px;height:54px;border-radius:50%;background:#ff7a00;display:flex;align-items:center;justify-content:center;font-size:28px}
-#chatPage{display:none}
-header{background:black;color:white;padding:10px;display:flex;gap:10px;align-items:center}
-#chat{padding:12px;display:flex;flex-direction:column;gap:10px;padding-bottom:90px}
-.m{padding:11px 14px;border-radius:16px;font-weight:bold;max-width:85%}
-.u{background:#ff7a00;color:white;align-self:flex-end}
-.b{background:black;color:white;align-self:flex-start}
-#box{display:flex;padding:10px;gap:6px;position:fixed;bottom:0;left:0;right:0;background:white}
-#inp{flex:1;padding:13px;border-radius:25px;border:2px solid black}
-.btn{background:#ff7a00;color:white;border:none;padding:12px;border-radius:20px;font-weight:bold}
-</style>
+<title>Cit Chat V10</title>
 </head>
-<body>
+<body style="margin:0;font-family:Arial;background:#FFEFD5">
 
-<div id="welcome">
-<img src="cit.png">
-<h1>Cit Chat</h1>
-<div class="slogan">Konus, citla, silins
+<div id="sayfa1" style="min-height:100vh;background:white;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center">
+<div style="font-size:80px">🐦</div>
+<h1 style="font-size:42px;margin:5px">Cit Chat</h1>
+<div style="color:#ff7a00;font-weight:bold;font-size:22px">Konus, citla, silinsin!</div>
+<div style="color:green;font-weight:bold;margin-top:10px">V10 - CALISIYOR ✅</div>
+<input id="ad" placeholder="Adini yaz" style="width:90%;max-width:350px;padding:15px;border-radius:14px;border:2px solid black;font-size:16px;margin-top:20px">
+<button onclick="basla()" style="width:90%;max-width:350px;background:#ff7a00;color:white;border:none;padding:16px;border-radius:14px;font-size:22px;font-weight:bold;margin-top:14px">BASLA</button>
+</div>
+
+<div id="sayfa2" style="display:none">
+<div style="background:black;color:white;padding:12px;display:flex;justify-content:space-between"><b>Cit Chat</b><span id="isimGoster"></span></div>
+<div style="text-align:center;padding:40px;color:#888"><h2>Hosgeldin!</h2><p>Asagidaki Cit'a bas, konus!</p></div>
+<button onclick="citAc()" style="position:fixed;bottom:20px;left:18px;width:72px;height:72px;border-radius:50%;border:4px solid white;background:#ff7a00;font-size:40px">🐦</button>
+<button onclick="kisiEkle()" style="position:fixed;bottom:20px;right:18px;width:68px;height:68px;background:#ff7a00;border-radius:50%;border:none;color:white;font-size:36px">+</button>
+<div id="kisiler"></div>
+</div>
+
+<div id="sayfa3" style="display:none">
+<div style="background:black;color:white;padding:12px;display:flex;gap:10px;align-items:center"><button onclick="eveDon()" style="background:#ff7a00;color:white;border:none;padding:10px;border-radius:20px">Geri</button><b id="sohbetAdi">Cit AI</b></div>
+<div id="mesajlar" style="padding:12px;display:flex;flex-direction:column;gap:10px;padding-bottom:90px"></div>
+<div style="display:flex;padding:10px;gap:6px;position:fixed;bottom:0;left:0;right:0;background:white"><input id="mesaj" placeholder="Mesaj yaz..." style="flex:1;padding:13px;border-radius:25px;border:2px solid black"><button onclick="gonder()" style="background:#ff7a00;color:white;border:none;padding:12px;border-radius:20px">Gonder</button></div>
+</div>
+
+<script>
+var adim = "";
+var gecmis = [];
+function basla(){
+  var v = document.getElementById("ad").value;
+  if(!v){ alert("Adini yaz!"); return; }
+  adim = v;
+  document.getElementById("sayfa1").style.display = "none";
+  document.getElementById("sayfa2").style.display = "block";
+  document.getElementById("isimGoster").innerText = adim;
+}
+function eveDon(){
+  document.getElementById("sayfa3").style.display = "none";
+  document.getElementById("sayfa2").style.display = "block";
+}
+function citAc(){
+  document.getElementById("sayfa2").style.display = "none";
+  document.getElementById("sayfa3").style.display = "block";
+  document.getElementById("sohbetAdi").innerText = "Cit AI";
+  document.getElementById("mesajlar").innerHTML = "";
+  gecmis = [];
+  ekle("Merhaba " + adim + "! Ben Cit AI! Bana her seyi sor!", false);
+}
+function kisiEkle(){
+  var n = prompt("Kisinin adi?");
+  if(!n) return;
+  document.getElementById("kisiler").innerHTML += '<div style="display:flex;gap:12px;padding:12px;background:white;margin:10px 16px;border-radius:16px"><div style="font-size:30px">👤</div><b>'+n+'</b></div>';
+}
+function ekle(t, benim){
+  var c = document.getElementById("mesajlar");
+  var d = document.createElement("div");
+  d.style.padding = "11px 14px";
+  d.style.borderRadius = "16px";
+  d.style.fontWeight = "bold";
+  d.style.maxWidth = "85%";
+  d.style.background = benim ? "#ff7a00" : "black";
+  d.style.color = "white";
+  d.style.alignSelf = benim ? "flex-end" : "flex-start";
+  d.innerText = t;
+  c.appendChild(d);
+  window.scrollTo(0, document.body.scrollHeight);
+}
+async function gonder(){
+  var i = document.getElementById("mesaj");
+  var t = i.value;
+  if(!t) return;
+  ekle(t, true);
+  i.value = "";
+  gecmis.push({role:"user", content:t});
+  var yaziyor = document.createElement("div");
+  yaziyor.innerText = "Cit yaziyor...";
+  yaziyor.style.background = "black";
+  yaziyor.style.color = "white";
+  yaziyor.style.padding = "11px 14px";
+  yaziyor.style.borderRadius = "16px";
+  document.getElementById("mesajlar").appendChild(yaziyor);
+  try{
+    var res = await fetch("https://text.pollinations.ai/openai", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({model:"openai", messages:[{role:"system", content:"Sen Cit AIsin, neseli, samimi Turkce arkadas. Kisa cevap ver. Kullanici: "+adim}, ...gecmis.slice(-6)]})});
+    var data = await res.json();
+    var cevap = data.choices[0].message.content;
+    yaziyor.remove();
+    ekle(cevap, false);
+    gecmis.push({role:"assistant", content:cevap});
+  }catch(e){
+    yaziyor.remove();
+    ekle("Internet yavas, tekrar dene!", false);
+  }
+}
+</script>
+</body>
+</html>
