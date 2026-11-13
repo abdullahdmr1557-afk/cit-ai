@@ -1,30 +1,38 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Çıt Chat</title><style>body{margin:0;font-family:Arial;background:#FF7F00}#login{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:20px}.box{background:#fff;padding:20px;border-radius:20px;width:100%;max-width:320px}input{width:100%;padding:15px;border:1px solid #ddd;border-radius:12px;box-sizing:border-box}button{width:100%;padding:15px;background:#000;color:#fff;border:none;border-radius:12px;margin-top:10px;font-size:17px;font-weight:800}#list,#chat,#magaza,#canta{display:none}#list,#magaza,#canta{background:#fff;min-height:100vh}.item{display:flex;gap:10px;padding:15px;border-bottom:1px solid #eee;align-items:center}.shopItem{background:#FFF8E1;margin:10px;padding:12px;border-radius:15px;display:flex;gap:10px;align-items:center}.shopItem button{width:90px;margin:0;background:#FF7F00;font-size:14px;padding:10px}.kat{padding:15px 15px 0;font-size:18px;font-weight:800}#chat{flex-direction:column;height:100vh;background:#FFF8E1}.msgs{flex:1;overflow:auto;padding:10px}.msg{padding:10px;border-radius:12px;margin:5px 0;max-width:85%;white-space:pre-wrap}.me{background:#FF7F00;color:#fff;margin-left:auto}.other{background:#fff}.bar{display:flex;gap:5px;padding:10px;background:#fff}.bar input{flex:1}.bar button{width:50px}
-.profilKutu{margin:15px;padding:20px;border-radius:20px;text-align:center;color:#fff;position:relative;overflow:hidden;background:linear-gradient(45deg,#FF7F00,#FFD700);transition:all .5s}
-.profilKutu.ates{background:linear-gradient(180deg,#000,#7a0000,#ff4500,#ffaa00);animation:yan .8s infinite alternate}
-@keyframes yan{from{box-shadow:0 0 20px #ff4500}to{box-shadow:0 0 50px #f00,0 0 80px #ffaa00}}
-.profilKutu.buz{background:linear-gradient(180deg,#00BFFF,#00FFFF,#fff);color:#004;animation:buz 1.2s infinite alternate}
-@keyframes buz{from{box-shadow:0 0 20px #00BFFF}to{box-shadow:0 0 50px #00FFFF}}
-.profilKutu.gokkusagi{background:linear-gradient(90deg,red,orange,yellow,green,blue,purple,red);background-size:300% 100%;animation:rainbow 2s linear infinite}
-@keyframes rainbow{from{background-position:0%}to{background-position:300%}}
-.profilKutu.elmas{background:linear-gradient(45deg,#fff,#00FFFF,#fff,#FFD700);background-size:200% 200%;animation:parilti 1s infinite alternate;color:#333}
-@keyframes parilti{from{box-shadow:0 0 20px #fff}to{box-shadow:0 0 60px #00FFFF,0 0 90px #FFD700}}
-.profilKutu.kral{background:linear-gradient(45deg,#FFD700,#FFF176,#FF9800);color:#333;animation:kral 1s infinite alternate}
-@keyframes kral{from{box-shadow:0 0 20px gold}to{box-shadow:0 0 50px gold,0 0 80px yellow}}
-.profilKutu.sihir{background:linear-gradient(45deg,#4A148C,#9C27B0,#E040FB);animation:sihir 1.5s infinite alternate}
-@keyframes sihir{from{box-shadow:0 0 20px purple}to{box-shadow:0 0 60px #E040FB}}
-.profilKutu.kovboy{background:linear-gradient(45deg,#5D4037,#8D6E63,#FF9800);animation:kovboy .6s infinite alternate}
-@keyframes kovboy{from{transform:scale(1)}to{transform:scale(1.02)}}
-.profilKutu.roket{background:linear-gradient(180deg,#000,#1A237E,#00B0FF);animation:roket 0.5s infinite alternate}
-@keyframes roket{from{box-shadow:0 0 20px #00B0FF}to{box-shadow:0 0 60px #00B0FF,0 0 90px white}}
-.profilKutu.kedi{background:linear-gradient(45deg,#FF80AB,#FF4081);animation:kedi 1s infinite alternate}
-@keyframes kedi{from{box-shadow:0 0 20px pink}to{box-shadow:0 0 50px #FF4081}}
-.profilKutu.kopek{background:linear-gradient(45deg,#8D6E63,#FF9800);animation:kopek .8s infinite alternate}
-@keyframes kopek{from{box-shadow:0 0 20px orange}to{box-shadow:0 0 50px #FF9800}}
-.profilKutu.ejderha{background:linear-gradient(45deg,#1B5E20,#00E676,#FF5722);animation:ejder 0.7s infinite alternate}
-@keyframes ejder{from{box-shadow:0 0 20px green}to{box-shadow:0 0 60px #00E676,0 0 90px red}}
-.profilKutu.gozluk{background:linear-gradient(45deg,#212121,#616161,#00E5FF);animation:gozluk 1s infinite alternate}
-@keyframes gozluk{from{box-shadow:0 0 20px #00E5FF}to{box-shadow:0 0 60px #00E5FF}}
-.profilKutu.kupa{background:linear-gradient(45deg,#FFD700,#FFFDE7,#FFD700);color:#333;animation:kupa 0.8s infinite alternate}
-@keyframes kupa{from{box-shadow:0 0 20px gold}to{box-shadow:0 0 70px gold}}
-.alev{position:absolute;bottom:0;font-size:26px;animation:uc 1.5s infinite;opacity:.9}
-@keyframes uc{0%{transform:translateY(20px) scale(.5);opacity:0}50%{opacity:1}100
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cit Chat - Coin Kazan, Tak, Hava At!</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#FF7F00;color:#fff;text-align:center}
+header{padding:15px;font-size:22px;font-weight:bold}
+.box{background:#fff;color:#111;padding:20px;border-radius:22px;margin:15px;box-shadow:0 10px 25px rgba(0,0,0,.2)}
+button{padding:13px 18px;background:#000;color:#fff;border:none;border-radius:14px;margin:6px;font-size:16px;font-weight:bold}
+button.yeşil{background:#00C853}
+button.turuncu{background:#FF7F00}
+input,select{padding:14px;width:92%;border-radius:12px;border:1px solid #ddd;font-size:16px;margin:6px 0}
+.kutu{background:#fff;color:#111;margin:10px;padding:14px;border-radius:16px;text-align:left}
+.sayfa{display:none}
+.efekt{font-size:64px;animation:z .7s infinite alternate}
+@keyframes z{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.25) rotate(3deg)}}
+.etiket{background:#FFE0B2;padding:4px 8px;border-radius:10px;font-size:12px}
+.puan{font-size:28px;font-weight:bold}
+.kucuk{font-size:13px;color:#666}
+.mesaj{background:#FFF3E0;padding:10px;border-radius:12px;margin:6px;text-align:left;color:#111}
+</style>
+</head>
+<body>
+<header>🐦 CİT CHAT</header>
+
+<!-- GİRİŞ -->
+<div id="s1">
+<div style="font-size:90px">🐦</div>
+<h1>Cit Chat'e Hoşgeldin!</h1>
+<p>Coin kazan, mağazadan al, tak, hava at!</p>
+<div class="box">
+<input id="ad" placeholder="Adın ne? Örn: Abdullah">
+<select id="cins">
+<option>🐦 Kuş</option>
+<option>
