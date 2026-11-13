@@ -1,38 +1,74 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cit Chat - Coin Kazan, Tak, Hava At!</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#FF7F00;color:#fff;text-align:center}
-header{padding:15px;font-size:22px;font-weight:bold}
-.box{background:#fff;color:#111;padding:20px;border-radius:22px;margin:15px;box-shadow:0 10px 25px rgba(0,0,0,.2)}
-button{padding:13px 18px;background:#000;color:#fff;border:none;border-radius:14px;margin:6px;font-size:16px;font-weight:bold}
-button.yeşil{background:#00C853}
-button.turuncu{background:#FF7F00}
-input,select{padding:14px;width:92%;border-radius:12px;border:1px solid #ddd;font-size:16px;margin:6px 0}
-.kutu{background:#fff;color:#111;margin:10px;padding:14px;border-radius:16px;text-align:left}
-.sayfa{display:none}
-.efekt{font-size:64px;animation:z .7s infinite alternate}
-@keyframes z{from{transform:scale(1) rotate(-3deg)}to{transform:scale(1.25) rotate(3deg)}}
-.etiket{background:#FFE0B2;padding:4px 8px;border-radius:10px;font-size:12px}
-.puan{font-size:28px;font-weight:bold}
-.kucuk{font-size:13px;color:#666}
-.mesaj{background:#FFF3E0;padding:10px;border-radius:12px;margin:6px;text-align:left;color:#111}
-</style>
-</head>
-<body>
-<header>🐦 CİT CHAT</header>
-
-<!-- GİRİŞ -->
-<div id="s1">
-<div style="font-size:90px">🐦</div>
-<h1>Cit Chat'e Hoşgeldin!</h1>
-<p>Coin kazan, mağazadan al, tak, hava at!</p>
-<div class="box">
-<input id="ad" placeholder="Adın ne? Örn: Abdullah">
-<select id="cins">
-<option>🐦 Kuş</option>
-<option>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Çıt Chat</title><style>body{margin:0;font-family:Arial;background:#FF7F00}#login{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:20px}.box{background:#fff;padding:20px;border-radius:20px;width:100%;max-width:320px}input{width:100%;padding:15px;border:1px solid #ddd;border-radius:12px;box-sizing:border-box}button{width:100%;padding:15px;background:#000;color:#fff;border:none;border-radius:12px;margin-top:10px;font-size:17px;font-weight:800}#list,#chat,#magaza,#canta{display:none}#list,#magaza,#canta{background:#fff;min-height:100vh}.item{display:flex;gap:10px;padding:15px;border-bottom:1px solid #eee;align-items:center}.shopItem{background:#FFF8E1;margin:10px;padding:12px;border-radius:15px;display:flex;gap:10px;align-items:center}.shopItem button{width:90px;margin:0;background:#FF7F00;font-size:14px;padding:10px}.kat{padding:15px 15px 0;font-size:18px;font-weight:800}#chat{flex-direction:column;height:100vh;background:#FFF8E1}.msgs{flex:1;overflow:auto;padding:10px}.msg{padding:10px;border-radius:12px;margin:5px 0;max-width:85%;white-space:pre-wrap}.me{background:#FF7F00;color:#fff;margin-left:auto}.other{background:#fff}.bar{display:flex;gap:5px;padding:10px;background:#fff}.bar input{flex:1}.bar button{width:50px}
+.profilKutu{margin:15px;padding:20px;border-radius:20px;text-align:center;color:#fff;position:relative;overflow:hidden;background:linear-gradient(45deg,#FF7F00,#FFD700);transition:all .5s}
+.profilKutu.ates{background:linear-gradient(180deg,#000,#7a0000,#ff4500,#ffaa00);animation:yan .8s infinite alternate}
+@keyframes yan{from{box-shadow:0 0 20px #ff4500}to{box-shadow:0 0 50px #f00,0 0 80px #ffaa00}}
+.profilKutu.buz{background:linear-gradient(180deg,#00BFFF,#00FFFF,#fff);color:#004;animation:buz 1.2s infinite alternate}
+@keyframes buz{from{box-shadow:0 0 20px #00BFFF}to{box-shadow:0 0 50px #00FFFF}}
+.profilKutu.gokkusagi{background:linear-gradient(90deg,red,orange,yellow,green,blue,purple,red);background-size:300% 100%;animation:rainbow 2s linear infinite}
+@keyframes rainbow{from{background-position:0%}to{background-position:300%}}
+.profilKutu.elmas{background:linear-gradient(45deg,#fff,#00FFFF,#fff,#FFD700);background-size:200% 200%;animation:parilti 1s infinite alternate;color:#333}
+@keyframes parilti{from{box-shadow:0 0 20px #fff}to{box-shadow:0 0 60px #00FFFF,0 0 90px #FFD700}}
+.profilKutu.kral{background:linear-gradient(45deg,#FFD700,#FFF176,#FF9800);color:#333;animation:kral 1s infinite alternate}
+@keyframes kral{from{box-shadow:0 0 20px gold}to{box-shadow:0 0 50px gold,0 0 80px yellow}}
+.profilKutu.sihir{background:linear-gradient(45deg,#4A148C,#9C27B0,#E040FB);animation:sihir 1.5s infinite alternate}
+@keyframes sihir{from{box-shadow:0 0 20px purple}to{box-shadow:0 0 60px #E040FB}}
+.profilKutu.kovboy{background:linear-gradient(45deg,#5D4037,#8D6E63,#FF9800);animation:kovboy .6s infinite alternate}
+@keyframes kovboy{from{transform:scale(1)}to{transform:scale(1.02)}}
+.profilKutu.roket{background:linear-gradient(180deg,#000,#1A237E,#00B0FF);animation:roket 0.5s infinite alternate}
+@keyframes roket{from{box-shadow:0 0 20px #00B0FF}to{box-shadow:0 0 60px #00B0FF,0 0 90px white}}
+.profilKutu.kedi{background:linear-gradient(45deg,#FF80AB,#FF4081);animation:kedi 1s infinite alternate}
+@keyframes kedi{from{box-shadow:0 0 20px pink}to{box-shadow:0 0 50px #FF4081}}
+.profilKutu.kopek{background:linear-gradient(45deg,#8D6E63,#FF9800);animation:kopek .8s infinite alternate}
+@keyframes kopek{from{box-shadow:0 0 20px orange}to{box-shadow:0 0 50px #FF9800}}
+.profilKutu.ejderha{background:linear-gradient(45deg,#1B5E20,#00E676,#FF5722);animation:ejder 0.7s infinite alternate}
+@keyframes ejder{from{box-shadow:0 0 20px green}to{box-shadow:0 0 60px #00E676,0 0 90px red}}
+.profilKutu.gozluk{background:linear-gradient(45deg,#212121,#616161,#00E5FF);animation:gozluk 1s infinite alternate}
+@keyframes gozluk{from{box-shadow:0 0 20px #00E5FF}to{box-shadow:0 0 60px #00E5FF}}
+.profilKutu.kupa{background:linear-gradient(45deg,#FFD700,#FFFDE7,#FFD700);color:#333;animation:kupa 0.8s infinite alternate}
+@keyframes kupa{from{box-shadow:0 0 20px gold}to{box-shadow:0 0 70px gold}}
+.alev{position:absolute;bottom:0;font-size:26px;animation:uc 1.5s infinite;opacity:.9}
+@keyframes uc{0%{transform:translateY(20px) scale(.5);opacity:0}50%{opacity:1}100%{transform:translateY(-100px) scale(1.4);opacity:0}}
+.kar{position:absolute;top:0;font-size:20px;animation:dus 2s infinite}
+@keyframes dus{0%{transform:translateY(-10px);opacity:0}50%{opacity:1}100%{transform:translateY(100px);opacity:0}}
+.ucan{position:absolute;font-size:24px;animation:ucan 2s infinite}
+@keyframes ucan{0%{transform:translateX(-20px) translateY(20px);opacity:0}50%{opacity:1}100%{transform:translateX(250px) translateY(-20px);opacity:0}}
+.zipla{animation:zipla .6s infinite alternate !important}
+@keyframes zipla{from{transform:translateY(0)}to{transform:translateY(-10px)}}
+.donen{animation:donen 2s linear infinite !important}
+@keyframes donen{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style></head><body>
+<div id="login"><div style="font-size:100px">🐦</div><h1 style="font-size:50px;margin:0">Çıt Chat</h1><p>Arkadaşlarınla konuş, coin kazan!</p><div style="background:rgba(0,0,0,.3);padding:8px 15px;border-radius:20px">🟢 Şu an <b>1.240</b> kişi çevrimiçi</div><div class="box"><input id="ad" placeholder="Adın ne?"><button onclick="basla()">🚀 Sohbete Başla</button><p style="font-size:12px;color:#888">🪙 Her mesaj +5 Coin • ✨ Hepsi Animasyonlu!</p></div></div>
+<div id="list"><div class="profilKutu" id="profilKutu"><div id="efektAlani"></div><div id="avatar" style="font-size:70px;position:relative">🐦</div><h2 id="profilAd" style="margin:5px;position:relative">Kral</h2><p id="takan" style="margin:0;position:relative">Taktığın: Yok</p><p style="margin:5px;position:relative">🪙 Coinin: <b id="coin2">0</b></p></div><div style="padding:0 15px;display:flex;gap:8px"><button onclick="magazaAc()" style="background:#FF7F00;flex:1">🛒 Mağaza</button><button onclick="cantaAc()" style="background:#000;flex:1">🎒 Çantam</button></div><div class="item" onclick="ac()"><span style="font-size:30px">🐦</span><div><b>Çıt AI 🧠</b><br><small>Çevrimiçi • Artık çok zekiyim!</small></div></div><div class="item" onclick="ac()"><span style="font-size:30px">🌍</span><div><b>Dünya Sohbeti 🌍</b><br><small>1.240 kişi burada!</small></div></div></div>
+<div id="canta"><h1 style="padding:15px">🎒 Çantam</h1><p style="padding:0 15px">Tak'a bas, hepsinin animasyonunu gör!</p><div id="cantaListe"></div><button onclick="cantaKapat()" style="margin:15px">← Geri Dön</button></div>
+<div id="magaza"><h1 style="padding:15px">🛒 Çıt Mağaza ✨ HEPSİ ANİMASYONLU!</h1><p style="padding:0 15px">🪙 Coinin: <b id="coin3">0</b></p><div class="kat">🧢 ŞAPKALAR - Hepsi zıplar / parlar!</div><div class="shopItem"><span style="font-size:35px">🧢</span><div style="flex:1"><b>Çıt Şapkası</b><br><small>Takınca zıplar!</small></div><button onclick="satinal('🧢 Çıt Şapkası',50,'🧢')">🪙50 Al</button></div><div class="shopItem"><span style="font-size:35px">👑</span><div style="flex:1"><b>Kral Tacı</b><br><small>Altın gibi parlar + yıldız uçar!</small></div><button onclick="satinal('👑 Kral Tacı',100,'👑')">🪙100 Al</button></div><div class="shopItem"><span style="font-size:35px">🎩</span><div style="flex:1"><b>Sihirbaz Şapkası</b><br><small>Mor büyü, yıldızlar uçar!</small></div><button onclick="satinal('🎩 Sihirbaz Şapkası',150,'🎩')">🪙150 Al</button></div><div class="shopItem"><span style="font-size:35px">🤠</span><div style="flex:1"><b>Kovboy Şapkası</b><br><small>Kahverengi, sallanır!</small></div><button onclick="satinal('🤠 Kovboy Şapkası',120,'🤠')">🪙120 Al</button></div><div class="kat">😎 GÖZLÜK - Işık saçar!</div><div class="shopItem"><span style="font-size:35px">😎</span><div style="flex:1"><b>Havalı Gözlük</b><br><small>Mavi ışık saçar!</small></div><button onclick="satinal('😎 Havalı Gözlük',75,'😎')">🪙75 Al</button></div><div class="shopItem"><span style="font-size:35px">🤓</span><div style="flex:1"><b>Zeki Gözlük</b><br><small>Kitaplar uçar!</small></div><button onclick="satinal('🤓 Zeki Gözlük',90,'🤓')">🪙90 Al</button></div><div class="kat">✨ EFEKTLER</div><div class="shopItem"><span style="font-size:35px">🔥</span><div style="flex:1"><b>Ateş Efekti</b><br><small>Alevler çıkar!</small></div><button onclick="satinal('🔥 Ateş Efekti',200,'🔥')">🪙200 Al</button></div><div class="shopItem"><span style="font-size:35px">❄️</span><div style="flex:1"><b>Buz Efekti</b><br><small>Kar yağar!</small></div><button onclick="satinal('❄️ Buz Efekti',180,'❄️')">🪙180 Al</button></div><div class="shopItem"><span style="font-size:35px">🌈</span><div style="flex:1"><b>Gökkuşağı</b><br><small>Renkler kayar!</small></div><button onclick="satinal('🌈 Gökkuşağı',250,'🌈')">🪙250 Al</button></div><div class="shopItem"><span style="font-size:35px">💎</span><div style="flex:1"><b>Elmas Parıltı</b><br><small>Elmaslar uçar!</small></div><button onclick="satinal('💎 Elmas Parıltı',500,'💎')">🪙500 Al</button></div><div class="kat">🐾 DOSTLAR - Hepsi hareketli!</div><div class="shopItem"><span style="font-size:35px">🐱</span><div style="flex:1"><b>Minik Kedi</b><br><small>Pembe parlar, kalpler uçar!</small></div><button onclick="satinal('🐱 Minik Kedi',300,'🐱')">🪙300 Al</button></div><div class="shopItem"><span style="font-size:35px">🐶</span><div style="flex:1"><b>Minik Köpek</b><br><small>Kemikler uçar!</small></div><button onclick="satinal('🐶 Minik Köpek',300,'🐶')">🪙300 Al</button></div><div class="shopItem"><span style="font-size:35px">🐉</span><div style="flex:1"><b>Ejderha</b><br><small>Yeşil-kırmızı yanar, ateş üfler!</small></div><button onclick="satinal('🐉 Ejderha',1000,'🐉')">🪙1000 Al</button></div><div class="shopItem"><span style="font-size:35px">🚀</span><div style="flex:1"><b>Roket</b><br><small>Uzay mavisi, yıldızlar uçar!</small></div><button onclick="satinal('🚀 Roket',600,'🚀')">🪙600 Al</button></div><div class="shopItem"><span style="font-size:35px">🏆</span><div style="flex:1"><b>Şampiyon Kupası</b><br><small>Altın parlar, konfeti uçar!</small></div><button onclick="satinal('🏆 Şampiyon Kupası',350,'🏆')">🪙350 Al</button></div><button onclick="magazaKapat()" style="margin:15px;background:#000">← Geri Dön</button></div>
+<div id="chat"><div style="background:#fff;padding:12px;display:flex;gap:10px;align-items:center"><span onclick="geri()" style="font-size:24px">←</span><b>Çıt AI 🧠</b><span id="coin" style="margin-left:auto;background:#FFF3CD;padding:5px 10px;border-radius:20px">🪙 0</span></div><div class="msgs" id="msgs"></div><div class="bar"><input id="mesaj" placeholder="Bana her şeyi sor..."><button onclick="gonder()">➤</button></div></div>
+<script>
+var adim="",coin=0,envanter=[],takilan="Yok",takilanEmoji="🐦";
+var alfabe="A,B,C,Ç,D,E,F,G,Ğ,H,I,İ,J,K,L,M,N,O,Ö,P,R,S,Ş,T,U,Ü,V,Y,Z".split(",");
+function guncelle(){document.getElementById('coin').innerText='🪙 '+coin;document.getElementById('coin2').innerText=coin;document.getElementById('coin3').innerText=coin;document.getElementById('profilAd').innerText=adim+" "+takilanEmoji;document.getElementById('takan').innerText="Taktığın: "+takilan;}
+function basla(){var v=document.getElementById('ad').value;if(v==""){alert("Adını yaz kral!");return}adim=v;document.getElementById('login').style.display='none';document.getElementById('list').style.display='block';guncelle();}
+function ac(){document.getElementById('list').style.display='none';document.getElementById('chat').style.display='flex';document.getElementById('msgs').innerHTML='<div class="msg other">Selam '+adim+'! 🐦🧠\nTaktığın: '+takilan+'\n🪙 Coinin: '+coin+'</div>';}
+function geri(){document.getElementById('chat').style.display='none';document.getElementById('list').style.display='block';}
+function magazaAc(){document.getElementById('list').style.display='none';document.getElementById('magaza').style.display='block';guncelle();}
+function magazaKapat(){document.getElementById('magaza').style.display='none';document.getElementById('list').style.display='block';}
+function cantaAc(){document.getElementById('list').style.display='none';document.getElementById('canta').style.display='block';var l=document.getElementById('cantaListe');if(envanter.length==0){l.innerHTML='<p style="padding:15px">Çantan boş kral 😢 Mağazadan bir şey al!</p>';}else{l.innerHTML="";envanter.forEach(function(esya,idx){l.innerHTML+='<div class="shopItem"><span style="font-size:35px">'+esya.emoji+'</span><div style="flex:1"><b>'+esya.isim+'</b><br><small>'+(takilan==esya.isim?"✅ Şu an takıyorsun!":"Takmak için bas")+'</small></div><button onclick="tak('+idx+')">Tak 👆</button></div>';});}}
+function cantaKapat(){document.getElementById('canta').style.display='none';document.getElementById('list').style.display='block';}
+function tak(idx){var e=envanter[idx];takilan=e.isim;takilanEmoji=e.emoji;var av=document.getElementById('avatar');av.innerText=e.emoji+" 🐦";av.className="";var pk=document.getElementById('profilKutu');var ea=document.getElementById('efektAlani');pk.className="profilKutu";ea.innerHTML="";if(e.isim.includes("Ateş")){pk.classList.add("ates");ea.innerHTML='<span class="alev" style="left:10%">🔥</span><span class="alev" style="left:35%;animation-delay:.3s">🔥</span><span class="alev" style="left:60%;animation-delay:.6s">🔥</span><span class="alev" style="left:85%;animation-delay:.9s">✨</span>';}
+else if(e.isim.includes("Buz")){pk.classList.add("buz");ea.innerHTML='<span class="kar" style="left:15%">❄️</span><span class="kar" style="left:45%;animation-delay:.5s">❄️</span><span class="kar" style="left:75%;animation-delay:1s">❄️</span><span class="kar" style="left:30%;animation-delay:.7s">🧊</span>';}
+else if(e.isim.includes("Gökkuşağı")){pk.classList.add("gokkusagi");ea.innerHTML='<span class="ucan" style="top:10px">🌈</span><span class="ucan" style="top:30px;animation-delay:.5s">✨</span>';}
+else if(e.isim.includes("Elmas")){pk.classList.add("elmas");ea.innerHTML='<span class="alev" style="left:20%">💎</span><span class="alev" style="left:70%;animation-delay:.5s">✨</span><span class="alev" style="left:45%;animation-delay:.2s">💎</span>';}
+else if(e.isim.includes("Kral")){pk.classList.add("kral");av.classList.add("zipla");ea.innerHTML='<span class="alev" style="left:20%">⭐</span><span class="alev" style="left:70%;animation-delay:.4s">👑</span><span class="alev" style="left:45%;animation-delay:.7s">✨</span>';}
+else if(e.isim.includes("Sihirbaz")){pk.classList.add("sihir");ea.innerHTML='<span class="ucan" style="top:10px">✨</span><span class="ucan" style="top:30px;animation-delay:.4s">🌟</span><span class="ucan" style="top:50px;animation-delay:.8s">🪄</span>';}
+else if(e.isim.includes("Kovboy")){pk.classList.add("kovboy");ea.innerHTML='<span class="ucan" style="top:10px">🤠</span><span class="ucan" style="top:40px;animation-delay:.5s">⭐</span>';}
+else if(e.isim.includes("Çıt Şapkası")){pk.classList.add("kovboy");av.classList.add("zipla");ea.innerHTML='<span class="ucan" style="top:10px">🧢</span>';}
+else if(e.isim.includes("Havalı Gözlük")){pk.classList.add("gozluk");av.classList.add("zipla");ea.innerHTML='<span class="ucan" style="top:10px">😎</span><span class="ucan" style="top:30px;animation-delay:.4s">✨</span>';}
+else if(e.isim.includes("Zeki Gözlük")){pk.classList.add("gozluk");ea.innerHTML='<span class="ucan" style="top:10px">📚</span><span class="ucan" style="top:30px;animation-delay:.4s">🧠</span><span class="ucan" style="top:50px;animation-delay:.8s">💡</span>';}
+else if(e.isim.includes("Minik Kedi")){pk.classList.add("kedi");av.classList.add("zipla");ea.innerHTML='<span class="alev" style="left:20%">❤️</span><span class="alev" style="left:60%;animation-delay:.4s">🐱</span><span class="alev" style="left:40%;animation-delay:.7s">💖</span>';}
+else if(e.isim.includes("Minik Köpek")){pk.classList.add("kopek");av.classList.add("zipla");ea.innerHTML='<span class="alev" style="left:20%">🦴</span><span class="alev" style="left:60%;animation-delay:.4s">🐶</span><span class="alev" style="left:40%;animation-delay:.7s">❤️</span>';}
+else if(e.isim.includes("Ejderha")){pk.classList.add("ejderha");ea.innerHTML='<span class="alev" style="left:10%">🔥</span><span class="alev" style="left:35%;animation-delay:.3s">🐉</span><span class="alev" style="left:60%;animation-delay:.6s">🔥</span><span class="alev" style="left:85%;animation-delay:.9s">💥</span>';}
+else if(e.isim.includes("Roket")){pk.classList.add("roket");ea.innerHTML='<span class="alev" style="left:20%">🚀</span><span class="alev" style="left:60%;animation-delay:.4s">⭐</span><span class="alev" style="left:40%;animation-delay:.7s">🌟</span>';}
+else if(e.isim.includes("Kupası")){pk.classList.add("kupa");av.classList.add("donen");ea.innerHTML='<span class="kar" style="left:20%">🎉</span><span class="kar" style="left:60%;animation-delay:.4s">🏆</span><span class="kar" style="left:40%;animation-delay:.7s">🎊</span>';}
+guncelle();alert("Taktın kral! 🎉\n"+e.isim+"\nBak profiline, nasıl havalı! ✨");cantaAc();}
+function satinal(isim,fiyat,emoji){if(coin<fiyat){alert("Coinin yetmiyor kral! 😢\nCoinin: "+coin+" Lazım: "+fiyat);return}coin-=fiyat;envanter.push({isim:isim,emoji:emoji});guncelle();alert("Hayırlı olsun! 🎉 "+isim+" aldın!\nŞimdi 🎒 Çantam'a girip TAK'a bas!");}
+async function gonder(){var i=document.getElementById('mesaj');var t=i.value.trim();if(t=="")return;var m=document.getElementById('msgs');m.innerHTML+='<div class="msg me">'+t+'</div>';i.value="";coin+=5;guncelle();var s=t.toLowerCase();var cevap="";if(s.includes("mal")||s.includes("salak")){cevap="Yok be kral, artık mal değilim 😤";}else if(s.includes("kimsin")){cevap="Ben Çıt AI'yım 🐦🧠";}else if(s.includes("selam")||s.includes("merhaba")||s=="sa"){cevap="Selam "+adim+"! 👑 Taktığın: "+takilan;}else if(s.includes("coin")||s.includes("şapka")||s.includes("mağaza")||s.includes("magaza")||s.includes("çanta")){cevap="🪙 Coinin: "+coin+"\n🎒 Çantan: "+(envanter.length==0?"Boş":envanter.map(x=>x.isim).join(" "))+"\n👑 Taktığın: "+takilan;}else if(s.includes("fıkra")){cevap="Temel: En sevdiğim kuş Çıt! 😂";}else if(s.length==1){var h=s.toUpperCase();var idx=alfabe.indexOf(h);if(idx>=0){cevap="🔤 "+h+" harfi alfabemizin "+(idx+1)+". harfidir!";}}else if(s.match(/(\d+)\s*[\+\-\*x\/]\s*(\d+)/)){try{var sonuc=eval(s.match(/(\d+)\s*[\+\-\*x\/]\s*(\d+)/)[0].replace("x","*"));cevap="🧮 "+t+" = "+sonuc;}catch(e){}}if(cevap!=""){m.innerHTML+='<div class="msg other">'+cevap+'</div>';m.scrollTop=99999;return;}var y=document.createElement('div');y.className='msg other';y.innerText="İnternette arıyorum... 🌐🔍";m.appendChild(y);m.scrollTop=99999;try{var temiz=t.replace(/nedir\?|kimdir\?|nedir|kimdir/g,"").trim();if(temiz=="")temiz=t;var q=encodeURIComponent(temiz);var r=await fetch('https://tr.wikipedia.org/w/api.php?action=query&list=search&srsearch='+q+'&format=json&origin=*&srlimit=1');var j=await r.json();if(j.query && j.query.search.length>0){var baslik=j.query.search[0].title;var r2=await fetch('https://tr.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(baslik));var j2=await r2.json();if(j2.extract){y.innerText="🌐 İnternetten buldum:\n\n"+j2.extract;return;}}y.innerText="Bulamadım kral 🐦";}catch(e){y.innerText="İnternet hatası 🌐";}}
+</script></body></html>
