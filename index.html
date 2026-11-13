@@ -58,4 +58,11 @@ return null;
 }
 </script>
 </body>
-</html>
+<script>
+document.querySelector('.box button').onclick = function(){
+let v = document.getElementById('ad').value.trim();
+if(!v){alert("Önce adını yaz kral!");return}
+document.getElementById('login').style.display='none';
+document.getElementById('list').style.display='block';
+}
+</script></html>
