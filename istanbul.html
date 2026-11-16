@@ -2,40 +2,60 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>İstanbul GTA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>İstanbul GTA - Gerçek Arabalar</title>
 <style>
-body { margin:0; font-family:Arial; background:#111; color:white; overflow:hidden; }
-#ust { background:#000; padding:10px; display:flex; justify-content:space-between; border-bottom:3px solid #ffcc00; font-size:14px; }
-#harita { width:100%; height:55vh; background:#2e7d32; position:relative; overflow:hidden; }
-.yol { position:absolute; background:#333; }
-.yol-yatay { width:100%; height:60px; left:0; }
-.yol-dikey { width:60px; height:100%; top:0; }
-#araba { position:absolute; font-size:45px; z-index:10; left:130px; top:110px; }
-#panel { background:#222; padding:10px; text-align:center; position:fixed; bottom:0; left:0; right:0; z-index:99; }
-.buton { background:#ffcc00; border:none; padding:15px 18px; margin:4px; border-radius:12px; font-size:20px; font-weight:bold; }
-.buton-kirmizi { background:#ff4444; color:white; }
-.buton-mavi { background:#00b0ff; color:white; }
-.buton-yesil { background:#00e676; }
-#mesaj { margin:5px; font-size:15px; }
+body{margin:0;background:#000;color:#fff;font-family:Arial;overflow:hidden}
+#ust{background:#000;padding:10px;display:flex;justify-content:space-between;border-bottom:3px solid gold}
+#harita{width:100%;height:58vh;position:relative;overflow:hidden;background:url('https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&q=80') center/cover}
+#araba{position:absolute;width:90px;z-index:20;left:140px;top:200px;border-radius:10px;border:2px solid white;box-shadow:0 0 15px black}
+#polisImg{position:absolute;width:90px;z-index:15;display:none;border-radius:10px;border:2px solid red}
+.trafikImg{position:absolute;width:80px;z-index:10;border-radius:8px}
+.kart{position:absolute;width:100px;background:rgba(0,0,0,.75);border-radius:10px;overflow:hidden;text-align:center;border:2px solid white}
+.kart img{width:100%;height:60px;object-fit:cover;display:block}
+.kart b{font-size:11px;display:block;padding:3px}
+#panel{background:#222;padding:8px;text-align:center;position:fixed;bottom:0;left:0;right:0}
+#joy{width:110px;height:110px;background:rgba(255,255,255,.2);border-radius:50%;margin:4px auto;position:relative;border:3px solid #fff}
+#top{width:48px;height:48px;background:#ffcc00;border-radius:50%;position:absolute;left:31px;top:31px}
+.b{padding:10px 11px;margin:3px;border:none;border-radius:10px;font-weight:bold;font-size:14px}
+.garaj{display:flex;justify-content:center;gap:5px;margin:4px 0}
+.garaj button{background:#333;color:#fff;border:2px solid #555;border-radius:10px;padding:4px}
+.garaj img{width:70px;height:42px;object-fit:cover;border-radius:6px;display:block}
+.garaj b{font-size:11px}
 </style>
 </head>
 <body>
-<div id="ust">
-<b>🚗 İSTANBUL GTA</b>
-<span>🪙 <b id="coin">0</b></span>
-<span>⭐ <b id="yildiz">0</b></span>
-<span>🚗 <b id="arabaAd">Egea</b></span>
-</div>
+<div id="ust"><b>🚗 İSTANBUL GTA</b><span>🪙 <b id="coin">0</b></span><span>⭐ <b id="yildiz">0</b></span><span id="arabaAd">Egea</span></div>
 <div id="harita">
-<div class="yol yol-yatay" style="top:100px;"></div>
-<div class="yol yol-yatay" style="top:300px;"></div>
-<div class="yol yol-dikey" style="left:100px;"></div>
-<div class="yol yol-dikey" style="left:300px;"></div>
-<div style="position:absolute; top:20px; left:20px; font-size:28px;">🕌 Sultanahmet</div>
-<div style="position:absolute; top:180px; left:200px; font-size:28px;">🌉 Boğaz Köprüsü</div>
-<div style="position:absolute; top:350px; left:30px; font-size:28px;">🚌 İETT</div>
-<div id="araba">🚗</div>
-<div style="position:absolute; left:230px; top:310px; font-size:40px;" onclick="arabaCal('Doblo')">🚐</div>
-<div style="position:absolute; left:130px; top:310px; font-size:40px;" onclick="iettBin()">🚌</div>
-<div style="position:absolute; left:320px; top:110px; font-size:40px;" onclick="arabaCal('
+<div class="kart" style="left:8px;top:8px"><img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=300&q=80"><b>Sultanahmet</b></div>
+<div class="kart" style="left:220px;top:8px"><img src="https://images.unsplash.com/photo-1527838832700-5059252407fa?w=300&q=80"><b>Galata</b></div>
+<div class="kart" style="left:8px;top:180px"><img src="https://images.unsplash.com/photo-1560095633-84e048a54e2f?w=300&q=80"><b>Kadıköy</b></div>
+<img id="araba" src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&q=80">
+<img id="polisImg" src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&q=80">
+<img class="trafikImg" id="t1" src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&q=80">
+<img class="trafikImg" id="t2" src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=400&q=80">
+</div>
+<div id="panel">
+<div id="mesaj">Garajdan arabanı seç! Gerçek arabalar!</div>
+<div class="garaj">
+<button onclick="arabaDegis('Egea','https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400&q=80')"><img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=200&q=80"><b>FIAT EGEA</b></button>
+<button onclick="arabaDegis('Doblo','https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=400&q=80')"><img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=200&q=80"><b>FİAT DOBLO</b></button>
+<button onclick="arabaDegis('BMW M4','https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400&q=80')"><img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=200&q=80"><b>BMW M4</b></button>
+<button onclick="arabaDegis('Tofaş','https://images.unsplash.com/photo-1502877338535-766e1452684a?w=400&q=80')"><img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?w=200&q=80"><b>TOFAŞ ŞAHİN</b></button>
+</div>
+<div id="joy"><div id="top"></div></div>
+<button class="b" style="background:#00e676" onclick="drift()">💨 DRİFT +20</button>
+<button class="b" style="background:#ff4444;color:#fff" onclick="polisCagir()">🚓 POLİS</button>
+<button class="b" onclick="location.href='index.html'">← Geri</button>
+</div>
+<script>
+let x=140,y=200,dx=0,dy=0,coin=0,yildiz=0,px=-100,py=-100,polisAktif=false;
+let t1={x:30,y:120,vy:2},t2={x:280,y:80,vy:3};
+let joy=document.getElementById('joy'),topEl=document.getElementById('top'),suruk=false;
+function jH(e){let r=joy.getBoundingClientRect();let cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left-55;let cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top-55;cx=Math.max(-35,Math.min(35,cx));cy=Math.max(-35,Math.min(35,cy));topEl.style.left=(31+cx)+'px';topEl.style.top=(31+cy)+'px';dx=cx/10;dy=cy/10}
+joy.addEventListener('touchstart',e=>{suruk=true;jH(e)});joy.addEventListener('touchmove',e=>{if(suruk)jH(e);e.preventDefault()});joy.addEventListener('touchend',()=>{suruk=false;dx=0;dy=0;topEl.style.left='31px';topEl.style.top='31px'});
+function arabaDegis(isim,link){document.getElementById('araba').src=link;document.getElementById('arabaAd').innerText=isim;document.getElementById('mesaj').innerText=isim+' seçtin! Hayırlı olsun!';}
+function drift(){coin+=20;document.getElementById('mesaj').innerText='💨 DRİFT! +20 Coin!';guncelle()}
+function polisCagir(){polisAktif=true;yildiz=1;document.getElementById('polisImg').style.display='block';document.getElementById('mesaj').innerText='🚓 POLİS PEŞİNDE! KAÇ!';guncelle()}
+function guncelle(){document.getElementById('coin').innerText=coin;document.getElementById('yildiz').innerText=yildiz}
+function oyun(){x+=dx*2.5;y+=dy*2.5;if(x<0)x=0;if(x>280)x=280;if(y<0)y=0;if(y>320)y=320;let a=document.getElementById('araba');a.style.left=x+'px';a.style.top=y+'px';t1.y+=t1.vy;if(t1.y>400)t1.y=-
