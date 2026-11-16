@@ -1,29 +1,30 @@
-istanbul.html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>İstanbul GTA</title>
 <style>
 body { margin:0; font-family:Arial; background:#111; color:white; overflow:hidden; }
-#ust { background:#000; padding:10px; display:flex; justify-content:space-between; border-bottom:3px solid #ffcc00; }
-#harita { width:100%; height:calc(100vh - 180px); background:#2e7d32; position:relative; overflow:hidden; }
+#ust { background:#000; padding:10px; display:flex; justify-content:space-between; border-bottom:3px solid #ffcc00; font-size:14px; }
+#harita { width:100%; height:55vh; background:#2e7d32; position:relative; overflow:hidden; }
 .yol { position:absolute; background:#333; }
 .yol-yatay { width:100%; height:60px; left:0; }
 .yol-dikey { width:60px; height:100%; top:0; }
-#araba { position:absolute; font-size:45px; transition:all 0.2s; z-index:10; }
-#panel { background:#222; padding:10px; text-align:center; }
-.buton { background:#ffcc00; border:none; padding:12px 15px; margin:5px; border-radius:10px; font-size:16px; font-weight:bold; }
+#araba { position:absolute; font-size:45px; z-index:10; left:130px; top:110px; }
+#panel { background:#222; padding:10px; text-align:center; position:fixed; bottom:0; left:0; right:0; z-index:99; }
+.buton { background:#ffcc00; border:none; padding:15px 18px; margin:4px; border-radius:12px; font-size:20px; font-weight:bold; }
 .buton-kirmizi { background:#ff4444; color:white; }
 .buton-mavi { background:#00b0ff; color:white; }
 .buton-yesil { background:#00e676; }
+#mesaj { margin:5px; font-size:15px; }
 </style>
 </head>
 <body>
 <div id="ust">
 <b>🚗 İSTANBUL GTA</b>
-<span>🪙 Coin: <b id="coin">0</b></span>
-<span>⭐ Yıldız: <b id="yildiz">0</b></span>
+<span>🪙 <b id="coin">0</b></span>
+<span>⭐ <b id="yildiz">0</b></span>
 <span>🚗 <b id="arabaAd">Egea</b></span>
 </div>
 <div id="harita">
@@ -31,84 +32,10 @@ body { margin:0; font-family:Arial; background:#111; color:white; overflow:hidde
 <div class="yol yol-yatay" style="top:300px;"></div>
 <div class="yol yol-dikey" style="left:100px;"></div>
 <div class="yol yol-dikey" style="left:300px;"></div>
-<div style="position:absolute; top:20px; left:20px; font-size:30px;">🕌 Sultanahmet</div>
-<div style="position:absolute; top:180px; left:200px; font-size:30px;">🌉 Boğaz Köprüsü</div>
-<div style="position:absolute; top:350px; left:30px; font-size:30px;">🚌 İETT Durağı</div>
-<div id="araba" style="left:130px; top:110px;">🚗</div>
+<div style="position:absolute; top:20px; left:20px; font-size:28px;">🕌 Sultanahmet</div>
+<div style="position:absolute; top:180px; left:200px; font-size:28px;">🌉 Boğaz Köprüsü</div>
+<div style="position:absolute; top:350px; left:30px; font-size:28px;">🚌 İETT</div>
+<div id="araba">🚗</div>
 <div style="position:absolute; left:230px; top:310px; font-size:40px;" onclick="arabaCal('Doblo')">🚐</div>
 <div style="position:absolute; left:130px; top:310px; font-size:40px;" onclick="iettBin()">🚌</div>
-<div style="position:absolute; left:320px; top:110px; font-size:40px;" onclick="arabaCal('BMW')">🏎️</div>
-</div>
-<div id="panel">
-<p id="mesaj">Egea ile geziyorsun. Ok tuşları ile sür!</p>
-<button class="buton" onclick="hareket('sol')">⬅️</button>
-<button class="buton" onclick="hareket('yukari')">⬆️</button>
-<button class="buton" onclick="hareket('asagi')">⬇️</button>
-<button class="buton" onclick="hareket('sag')">➡️</button>
-<br>
-<button class="buton buton-yesil" onclick="driftYap()">💨 DRİFT +20</button>
-<button class="buton buton-mavi" onclick="kornaCal()">📯 KORNA</button>
-<button class="buton buton-kirmizi" onclick="polisKovala()">🚓 POLİS</button>
-<br>
-<button class="buton" onclick="window.location.href='index.html'">← Çıt Chat'e Dön</button>
-</div>
-<script>
-let x = 130;
-let y = 110;
-let coin = parseInt(localStorage.getItem('citCoin') || '0');
-let yildiz = 0;
-let arabaIsim = 'Egea';
-function guncelle() {
-http://document.getElementById('coin').innerText = coin;
-http://document.getElementById('yildiz').innerText = yildiz;
-http://document.getElementById('arabaAd').innerText = arabaIsim;
-http://document.getElementById('araba').style.left = x + 'px';
-http://document.getElementById('araba').style.top = y + 'px';
-http://localStorage.setItem('citCoin', coin);
-}
-function hareket(yon) {
-if (yon === 'sol') x -= 20;
-if (yon === 'sag') x += 20;
-if (yon === 'yukari') y -= 20;
-if (yon === 'asagi') y += 20;
-if (x < 0) x = 0;
-if (y < 0) y = 0;
-coin += 1;
-guncelle();
-}
-function driftYap() {
-coin += 20;
-http://document.getElementById('mesaj').innerText = '💨 DRİFT YAPTIN! +20 Coin!';
-guncelle();
-}
-function kornaCal() {
-http://document.getElementById('mesaj').innerText = '📯 BİİİİP! İstanbullular sana bakıyor!';
-}
-function arabaCal(yeniAraba) {
-arabaIsim = yeniAraba;
-yildiz += 1;
-if (yeniAraba === 'Doblo') http://document.getElementById('araba').innerText = '🚐';
-if (yeniAraba === 'BMW') http://document.getElementById('araba').innerText = '🏎️';
-http://document.getElementById('mesaj').innerText = yeniAraba + ' çaldın! ⭐ Polis peşinde!';
-guncelle();
-}
-function iettBin() {
-coin += 10;
-http://document.getElementById('mesaj').innerText = '🚌 İETT ye bindin! +10 Coin! Beşiktaş - Taksim gidiyorsun!';
-guncelle();
-}
-function polisKovala() {
-yildiz += 1;
-http://document.getElementById('mesaj').innerText = '🚓 POLİS PEŞİNDE! Kaç! ⭐ Yıldızın arttı!';
-guncelle();
-}
-http://document.addEventListener('keydown', function(e) {
-if (e.key === 'ArrowLeft') hareket('sol');
-if (e.key === 'ArrowRight') hareket('sag');
-if (e.key === 'ArrowUp') hareket('yukari');
-if (e.key === 'ArrowDown') hareket('asagi');
-});
-guncelle();
-</script>
-</body>
-</html>
+<div style="position:absolute; left:320px; top:110px; font-size:40px;" onclick="arabaCal('
